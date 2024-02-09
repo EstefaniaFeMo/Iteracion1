@@ -17,204 +17,192 @@
 /**
    Private functions
 */
-
-Status game_load_spaces(Game *game, char *filename);
-
+/**
+ * @brief It adds a new space in the last position available of the array and increases the number of spaces by one
+ * @author Estefanía Fenoy Montes
+ *
+ * @param game a pointer to the struct, Game and it uses it to add a new space in the array game->spaces
+ * @param space a pointer to the space that will be added
+ * @return status==OK, if the function has worked correctly
+ * @return status==ERROR, if a mistken has happened
+ */
 Status game_add_space(Game *game, Space *space);
 
+/**
+ * @brief It gives the ID of the position of the given parameter
+ * @author Estefanía Fenoy Montes
+ *
+ * @param game a pointer to the struct, Game and it uses it to get access to the game->spaces IDs
+ * @param position the position we want to get the id
+ * @return the ID of the space at the position given.
+ */
 Id game_get_space_id_at(Game *game, int position);
 
 /**
    Game interface implementation
 */
-
-Status game_create(Game *game) {
+/** game_create creates the game and initializes it
+ */
+Status game_create(Game *game)
+{
   int i;
-
-  for (i = 0; i < MAX_SPACES; i++) {
+  /* Loop to initialize all the spaces of game*/
+  for (i = 0; i < MAX_SPACES; i++)
+  {
     game->spaces[i] = NULL;
   }
-
+  /*The information of the struct game is initialized*/
   game->n_spaces = 0;
   game->player_location = NO_ID;
   game->object_location = NO_ID;
   game->last_cmd = NO_CMD;
   game->finished = FALSE;
-
+  /*Indicate that the function has worked correctly*/
   return OK;
 }
 
-Status game_create_from_file(Game *game, char *filename) {
-  if (game_create(game) == ERROR) {
-    return ERROR;
-  }
-
-  if (game_load_spaces(game, filename) == ERROR) {
-    return ERROR;
-  }
-
-  /* The player and the object are located in the first space */
-  game_set_player_location(game, game_get_space_id_at(game, 0));
-  game_set_object_location(game, game_get_space_id_at(game, 0));
-
-  return OK;
-}
-
-Status game_destroy(Game *game) {
+/** game_destroy frees the spaces that have been created and set them as NULL
+ */
+Status game_destroy(Game *game)
+{
   int i = 0;
-
-  for (i = 0; i < game->n_spaces; i++) {
+  /*Loop to free the spaces and set them as NULL*/
+  for (i = 0; i < game->n_spaces; i++)
+  {
     space_destroy(game->spaces[i]);
   }
-
+  /*Indicate that the function has worked correctly*/
   return OK;
 }
 
-Space *game_get_space(Game *game, Id id) {
+/** game_get_space returns the space of the given ID
+ */
+Space *game_get_space(Game *game, Id id)
+{
   int i = 0;
-
-  if (id == NO_ID) {
+  /* Error control */
+  if (id == NO_ID)
+  {
     return NULL;
   }
-
-  for (i = 0; i < game->n_spaces; i++) {
-    if (id == space_get_id(game->spaces[i])) {
+  /*Loop to check the space which matches with the given ID*/
+  for (i = 0; i < game->n_spaces; i++)
+  {
+    if (id == space_get_id(game->spaces[i]))
+    {
       return game->spaces[i];
     }
   }
-
+  /*If the ID is not equal to any space, return NULL*/
   return NULL;
 }
-
+/*game_get_player_location returns the value of the variable player_location of the current game*/
 Id game_get_player_location(Game *game) { return game->player_location; }
 
-Status game_set_player_location(Game *game, Id id) {
-  if (id == NO_ID) {
+/*game_set_player_location sets the value of the variable player_location with the given ID.*/
+Status game_set_player_location(Game *game, Id id)
+{
+  /* Error control */
+  if (id == NO_ID)
+  {
     return ERROR;
   }
 
   game->player_location = id;
 
+  /*Indicate that the function has worked correctly*/
   return OK;
 }
 
+/*game_get_object_location returns the value of the variable object_location of the current game*/
 Id game_get_object_location(Game *game) { return game->object_location; }
 
-Status game_set_object_location(Game *game, Id id) {
-  if (id == NO_ID) {
+/*game_set_object_location sets the value of the variable object_location with the given ID.*/
+Status game_set_object_location(Game *game, Id id)
+{
+  /* Error control */
+  if (id == NO_ID)
+  {
     return ERROR;
   }
 
   game->object_location = id;
+  /*Indication that in the location there is an object*/
   space_set_object(game_get_space(game, id), TRUE);
+
+  /*Indicate that the function has worked correctly*/
   return OK;
 }
 
+/*game_get_last_command returns the last command executed*/
 Command game_get_last_command(Game *game) { return game->last_cmd; }
 
-Status game_set_last_command(Game *game, Command command) {
+/*game_set_last_command sets the command given as the last one*/
+Status game_set_last_command(Game *game, Command command)
+{
   game->last_cmd = command;
-
+  /*Indicate that the function has worked correctly*/
   return OK;
 }
 
+/*game_get_finished returns if the game has finished or not*/
 Bool game_get_finished(Game *game) { return game->finished; }
 
-Status game_set_finished(Game *game, Bool finished) {
+/*game_set_finished sets the state of the game as finished*/
+Status game_set_finished(Game *game, Bool finished)
+{
   game->finished = finished;
-
+  /*Indicate that the function has worked correctly*/
   return OK;
 }
 
-void game_print(Game *game) {
+/*game_print prints the current game session*/
+void game_print(Game *game)
+{
   int i = 0;
-
+  /*Print a header*/
   printf("\n\n-------------\n\n");
 
+  /*Print all the spaces with a loop*/
   printf("=> Spaces: \n");
-  for (i = 0; i < game->n_spaces; i++) {
+  for (i = 0; i < game->n_spaces; i++)
+  {
     space_print(game->spaces[i]);
   }
-
+  /*Print the object location*/
   printf("=> Object location: %d\n", (int)game->object_location);
+  /*Print the player location*/
   printf("=> Player location: %d\n", (int)game->player_location);
 }
 
 /**
    Implementation of private functions
 */
-
-Status game_load_spaces(Game *game, char *filename) {
-  FILE *file = NULL;
-  char line[WORD_SIZE] = "";
-  char name[WORD_SIZE] = "";
-  char *toks = NULL;
-  Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
-  Space *space = NULL;
-  Status status = OK;
-
-  if (!filename) {
+/*game_add_space adds a new space in the game->spaces array */
+Status game_add_space(Game *game, Space *space)
+{
+  /*Error control*/
+  if ((space == NULL) || (game->n_spaces >= MAX_SPACES))
+  {
     return ERROR;
   }
-
-  file = fopen(filename, "r");
-  if (file == NULL) {
-    return ERROR;
-  }
-
-  while (fgets(line, WORD_SIZE, file)) {
-    if (strncmp("#s:", line, 3) == 0) {
-      toks = strtok(line + 3, "|");
-      id = atol(toks);
-      toks = strtok(NULL, "|");
-      strcpy(name, toks);
-      toks = strtok(NULL, "|");
-      north = atol(toks);
-      toks = strtok(NULL, "|");
-      east = atol(toks);
-      toks = strtok(NULL, "|");
-      south = atol(toks);
-      toks = strtok(NULL, "|");
-      west = atol(toks);
-#ifdef DEBUG
-      printf("Leido: %ld|%s|%ld|%ld|%ld|%ld\n", id, name, north, east, south, west);
-#endif
-      space = space_create(id);
-      if (space != NULL) {
-        space_set_name(space, name);
-        space_set_north(space, north);
-        space_set_east(space, east);
-        space_set_south(space, south);
-        space_set_west(space, west);
-        game_add_space(game, space);
-      }
-    }
-  }
-
-  if (ferror(file)) {
-    status = ERROR;
-  }
-
-  fclose(file);
-
-  return status;
-}
-
-Status game_add_space(Game *game, Space *space) {
-  if ((space == NULL) || (game->n_spaces >= MAX_SPACES)) {
-    return ERROR;
-  }
-
+  /*Add the new space in the last position of the array*/
   game->spaces[game->n_spaces] = space;
+  /*Increase by 1 the number of spaces*/
   game->n_spaces++;
 
+  /*Indicate that the function has worked correctly*/
   return OK;
 }
 
-Id game_get_space_id_at(Game *game, int position) {
-  if (position < 0 || position >= game->n_spaces) {
+/*game_get_space_id_at returns the id of a position*/
+Id game_get_space_id_at(Game *game, int position)
+{
+  /*Error control*/
+  if (position < 0 || position >= game->n_spaces)
+  {
     return NO_ID;
   }
-
+  /*Call the getter of id for the given position*/
   return space_get_id(game->spaces[position]);
 }

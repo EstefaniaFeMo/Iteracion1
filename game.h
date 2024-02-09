@@ -1,10 +1,10 @@
 /**
- * @brief It defines the game interface
+ * @brief It defines the game interface 
  *
  * @file game.h
- * @author Profesores PPROG
+ * @author Estefanía Fenoy Montes
  * @version 3.5
- * @date 26-01-2024
+ * @date 06-02-2024
  * @copyright GNU Public License
  */
 
@@ -73,7 +73,7 @@ Status game_create_from_file(Game *game, char *filename);
 Status game_actions_update(Game *game, Command cmd);
 
 /**
- * @brief It frees the spaces that have been created and set them as NULL
+ * @brief 
  * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct: Game, which contains the information of the current game session
