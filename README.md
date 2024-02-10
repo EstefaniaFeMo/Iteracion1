@@ -7,3 +7,5 @@ He documentado las funciones de game.h
 - Modificado Game
 - Terminado Game_Reader
 
+## 10-02-2024
+- Creados object.c y object.h, con las fucniones create, destroy, get, set y print (Documentados)
