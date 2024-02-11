@@ -26,20 +26,36 @@
 #define HEIGHT_HLP 2
 #define HEIGHT_FDB 3
 
-struct _Graphic_engine {
+/**
+ * @brief Graphic_engine
+ *
+ * This struct defines five pointers which type is Area, resulting the five posible areas of the game
+ */
+struct _Graphic_engine
+{
   Area *map, *descript, *banner, *help, *feedback;
 };
 
-Graphic_engine *graphic_engine_create() {
+/**
+ * @brief It reserves di¡ynamic memeory for the structure called Graphic_engine if it hasn't been previously done
+ *  it also reserves dynamic memory for the variables contained in it such as map, descript, banner, help and feedback
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ *
+ * @return  ge, a strcuture and it's members
+ */
+Graphic_engine *graphic_engine_create()
+{
   static Graphic_engine *ge = NULL;
 
-  if (ge) {
+  if (ge)
+  {
     return ge;
   }
 
   screen_init(HEIGHT_MAP + HEIGHT_BAN + HEIGHT_HLP + HEIGHT_FDB + 4, WIDTH_MAP + WIDTH_DES + 3);
   ge = (Graphic_engine *)malloc(sizeof(Graphic_engine));
-  if (ge == NULL) {
+  if (ge == NULL)
+  {
     return NULL;
   }
 
@@ -52,8 +68,17 @@ Graphic_engine *graphic_engine_create() {
   return ge;
 }
 
-void graphic_engine_destroy(Graphic_engine *ge) {
-  if (!ge) return;
+/**
+ * @brief It checks if the dynamic memory reserve has been done correctly, and if not, destroys al the areas
+ *  and frees the memory of the structure
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ *
+ * @param ge it points to a structure called Graphic_engine
+ */
+void graphic_engine_destroy(Graphic_engine *ge)
+{
+  if (!ge)
+    return;
 
   screen_area_destroy(ge->map);
   screen_area_destroy(ge->descript);
@@ -65,7 +90,17 @@ void graphic_engine_destroy(Graphic_engine *ge) {
   free(ge);
 }
 
-void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
+/**
+ * @brief It paints all the areas after having cleared the area and having checked if the player was
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ *
+ * @param game it points to a structure called Game y and uses it to define the space that a function will afterwards add
+ * @param filename a pointer to the file
+ * @return status= OK if everything has worked out correctly
+ * @return status= ERROR if something has failed
+ */
+void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
+{
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, obj_loc = NO_ID;
   Space *space_act = NULL;
   char obj = '\0';
@@ -75,7 +110,8 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
   /* Paint the in the map area */
   screen_area_clear(ge->map);
-  if ((id_act = game_get_player_location(game)) != NO_ID) {
+  if ((id_act = game_get_player_location(game)) != NO_ID)
+  {
     space_act = game_get_space(game, id_act);
     id_back = space_get_north(space_act);
     id_next = space_get_south(space_act);
@@ -85,7 +121,8 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     else
       obj = ' ';
 
-    if (id_back != NO_ID) {
+    if (id_back != NO_ID)
+    {
       sprintf(str, "  |         %2d|", (int)id_back);
       screen_area_puts(ge->map, str);
       sprintf(str, "  |     %c     |", obj);
@@ -101,7 +138,8 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     else
       obj = ' ';
 
-    if (id_act != NO_ID) {
+    if (id_act != NO_ID)
+    {
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
       sprintf(str, "  | m0^     %2d|", (int)id_act);
@@ -117,7 +155,8 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
     else
       obj = ' ';
 
-    if (id_next != NO_ID) {
+    if (id_next != NO_ID)
+    {
       sprintf(str, "        v");
       screen_area_puts(ge->map, str);
       sprintf(str, "  +-----------+");
@@ -131,7 +170,8 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game) {
 
   /* Paint in the description area */
   screen_area_clear(ge->descript);
-  if ((obj_loc = game_get_object_location(game)) != NO_ID) {
+  if ((obj_loc = game_get_object_location(game)) != NO_ID)
+  {
     sprintf(str, "  Object location:%d", (int)obj_loc);
     screen_area_puts(ge->descript, str);
   }

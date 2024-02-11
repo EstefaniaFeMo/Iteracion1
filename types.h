@@ -2,7 +2,7 @@
  * @brief It defines common types for the whole project
  *
  * @file types.h
- * @author Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes, Carmen Gómez Escobar
  * @version 3.5
  * @date 04-02-2024
  * @copyright GNU Public License
@@ -27,17 +27,23 @@
 typedef long Id;
 
 /**
- * @brief Boolean types
+ * @brief Bool
+ *
+ * This struct defines the two boolean values, TRUE or FALSE.
  */
 typedef enum { FALSE, TRUE } Bool;
 
 /**
- * @brief Status values for functions
+ * @brief Status
+ *
+ * This struct defines the two status values, ERROR or OK.
  */
 typedef enum { ERROR, OK } Status;
 
 /**
- * @brief Cardinal directions (N,S,E,W)
+ * @brief Direction
+ *
+ * This struct defines the four values of directions, E, N, S, or W.
  */
 typedef enum { N, S, E, W } Direction;
 

@@ -9,7 +9,7 @@
  */
 
 #include "game.h"
-
+#include "object.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,7 +19,7 @@
 */
 /**
  * @brief It adds a new space in the last position available of the array and increases the number of spaces by one
- * @author Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes, Carmen Gómez Escobar
  *
  * @param game a pointer to the struct, Game and it uses it to add a new space in the array game->spaces
  * @param space a pointer to the space that will be added
@@ -30,7 +30,7 @@ Status game_add_space(Game *game, Space *space);
 
 /**
  * @brief It gives the ID of the position of the given parameter
- * @author Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes, Carmen Gómez Escobar
  *
  * @param game a pointer to the struct, Game and it uses it to get access to the game->spaces IDs
  * @param position the position we want to get the id
@@ -41,6 +41,8 @@ Id game_get_space_id_at(Game *game, int position);
 /**
    Game interface implementation
 */
+
+
 /** game_create creates the game and initializes it
  */
 Status game_create(Game *game)
