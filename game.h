@@ -22,13 +22,13 @@
 /**
  * @brief Game
  *
- * Esta estructura contiene toda la información relacionada con los datos del juego juego.
+ * This struct contains all the information related to the data of the game.
  */
 
 
 typedef struct _Game {
   Id player_location;/*!< Id que indica el lugar/ la locación del jugador*/
-  Id object_location;/*!< Id que indica el lugar/ la locación del ojeto */
+  Object *object;/*!< Information of the object */
   Space *spaces[MAX_SPACES];/*!< Array condiferentes espacios */
   int n_spaces; /*!< Numero de espacios*/
   Command last_cmd; /*!< Comando para modificar la locación: NO, salida, siguiente o atrás */

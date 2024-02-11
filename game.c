@@ -56,7 +56,7 @@ Status game_create(Game *game)
   /*The information of the struct game is initialized*/
   game->n_spaces = 0;
   game->player_location = NO_ID;
-  game->object_location = NO_ID;
+  game->object = NULL;
   game->last_cmd = NO_CMD;
   game->finished = FALSE;
   /*Indicate that the function has worked correctly*/

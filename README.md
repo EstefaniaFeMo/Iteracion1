@@ -9,3 +9,8 @@ He documentado las funciones de game.h
 
 ## 10-02-2024
 - Creados object.c y object.h, con las fucniones create, destroy, get, set y print (Documentados)
+
+## 11-02-2024
+- modificado makefile
+- modificado space el object e intento en game pero fallo al poner en el struct un puntero a Object 
+e intentar acceder a él.
