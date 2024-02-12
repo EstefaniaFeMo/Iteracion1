@@ -69,6 +69,24 @@ void game_actions_next(Game *game);
 void game_actions_back(Game *game);
 
 /**
+ * @brief It recives a pointer to Game in the case that the command that the function that calls this one is take,
+ * and checks if the player and the object are in the same location, and if they are, the player takes the object.
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct called Game.
+ */
+void game_actions_take(Game *game);
+
+/**
+ * @brief It recives a pointer to Game in the case that the command that the function that calls this one is drop,
+ * the function makes the player drop the object.
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct called Game.
+ */
+void game_actions_drop(Game *game);
+
+/**
    Game actions implementation
 */
 
