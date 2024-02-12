@@ -23,11 +23,8 @@ struct _Player
 {
     Id id;                    /*!< Id number of the player, it must be unique */
     char name[WORD_SIZE + 1]; /*!< Name of the player */
-    Id north;                 /*!< Id of the player at the north */
-    Id south;                 /*!< Id of the player at the south */
-    Id east;                  /*!< Id of the player at the east */
-    Id west;                  /*!< Id of the player at the west */
-    Bool object;              /*!< Whether the player has an object or not */
+    Id location;
+    Bool object; /*!< Whether the player has an object or not */
 };
 
 /**
@@ -54,10 +51,6 @@ Player *player_create(Id id)
     /* Initialization of an empty space*/
     newPlayer->id = id;
     newPlayer->name[0] = '\0';
-    newPlayer->north = NO_ID;
-    newPlayer->south = NO_ID;
-    newPlayer->east = NO_ID;
-    newPlayer->west = NO_ID;
     newPlayer->object = FALSE;
 
     return newPlayer;
@@ -144,7 +137,41 @@ const char *player_get_name(Player *player)
  *
  * @param player a pointer to the player that allows access to its name
  * @param id a long variable with the position
- * @return a string with the name of the player
+ * @return OK if everything worked, ERROR if something went wrong
+ */
+Status player_set_location(Player *player, Id id)
+{
+    if (!player || id == NO_ID)
+    {
+        return ERROR;
+    }
+    player->location = id;
+    return OK;
+}
+
+/**
+ * @brief It changes the localization of the player.
+ * @author Carmen Gómez Escobar
+ *
+ * @param player a pointer to the player that allows access to its name
+ * @return the id of the player
+ */
+Id player_get_location(Player *player)
+{
+    if (!player)
+    {
+        return NO_ID;
+    }
+    return player->location;
+}
+
+/**
+ * @brief It sets the new object carried by the player.
+ * @author Carmen Gómez Escobar
+ *
+ * @param player a pointer to the player that allows access to its name
+ * @param id a long variable with the position
+ * @return OK if everything worked, ERROR if something went wron
  */
 Status player_set_object(Player *player, Bool value)
 {
@@ -153,6 +180,7 @@ Status player_set_object(Player *player, Bool value)
         return ERROR;
     }
     player->object = value;
+
     return OK;
 }
 
@@ -161,7 +189,7 @@ Status player_set_object(Player *player, Bool value)
  * @author Carmen Gómez Escobar
  *
  * @param player a pointer to the player that allows access to its name
- * @return a string with the name of the player
+ * @return FALSE if there is no object, TRUE if there is an object
  */
 Bool player_get_object(Player *player)
 {
@@ -183,64 +211,18 @@ Bool player_get_object(Player *player)
  */
 Status player_print(Player *player)
 {
-    Id idaux = NO_ID;
-
     /* Error Control */
     if (!player)
     {
         return ERROR;
     }
 
-    /* 1. Print the id and the name of the player */
-    fprintf(stdout, "--> Space (Id: %ld; Name: %s)\n", player->id, player->name);
+    /* Print the id and the name of the player */
+    fprintf(stdout, "--> Player (Id: %ld; Name: %s)\n", player->id, player->name);
 
-    /* 2. For each direction, print its link */
-    idaux = player_get_north(player);
-    if (NO_ID != idaux)
-    {
-        fprintf(stdout, "---> North link: %ld.\n", idaux);
-    }
-    else
-    {
-        fprintf(stdout, "---> No north link.\n");
-    }
-    idaux = player_get_south(player);
-    if (NO_ID != idaux)
-    {
-        fprintf(stdout, "---> South link: %ld.\n", idaux);
-    }
-    else
-    {
-        fprintf(stdout, "---> No south link.\n");
-    }
-    idaux = player_get_east(player);
-    if (NO_ID != idaux)
-    {
-        fprintf(stdout, "---> East link: %ld.\n", idaux);
-    }
-    else
-    {
-        fprintf(stdout, "---> No east link.\n");
-    }
-    idaux = player_get_west(player);
-    if (NO_ID != idaux)
-    {
-        fprintf(stdout, "---> West link: %ld.\n", idaux);
-    }
-    else
-    {
-        fprintf(stdout, "---> No west link.\n");
-    }
+     /* Print the location and the name of the player */
+    fprintf(stdout, "--> Player (Location link: %ld)\n", player->location);
 
-    /* 3. Print if there is an object is with the player or not */
-    if (player_get_object(player))
-    {
-        fprintf(stdout, "---> Object in the space.\n");
-    }
-    else
-    {
-        fprintf(stdout, "---> No object in the space.\n");
-    }
-
+    /*Indication that the function has worked correctly*/
     return OK;
 }
