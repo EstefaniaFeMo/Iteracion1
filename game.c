@@ -56,7 +56,7 @@ Status game_create(Game *game)
   }
   /*The information of the struct game is initialized*/
   game->n_spaces = 0;
-  game->player_location = NO_ID;
+  game->player = NULL;
   game->object = NULL;
   game->last_cmd = NO_CMD;
   game->finished = FALSE;
@@ -80,8 +80,12 @@ Status game_create_from_file(Game *game, char *filename)
     return ERROR;
   }
 
+   /* Create a new player that is located in the first space */
+  if(player_create(0)==NULL){
+    return ERROR;
+  }
+
   /* The player and the object are located in the first space */
-  game_set_player_location(game, game_get_space_id_at(game, 0));
   game_set_object_location(game, game_get_space_id_at(game, 0));
 
   /*Indicate that the function has worked correctly*/
@@ -124,7 +128,15 @@ Space *game_get_space(Game *game, Id id)
   return NULL;
 }
 /*game_get_player_location returns the value of the variable player_location of the current game*/
-Id game_get_player_location(Game *game) { return game->player_location; }
+Id game_get_player_location(Game *game)
+{
+   
+  int player_id;
+
+  player_id = player_get_localization(game->player);
+
+  return player_id;
+}
 
 /*game_set_player_location sets the value of the variable player_location with the given ID.*/
 Status game_set_player_location(Game *game, Id id)
@@ -135,7 +147,7 @@ Status game_set_player_location(Game *game, Id id)
     return ERROR;
   }
 
-  game->player_location = id;
+  game->player = player_set_localization(game->player, id);
 
   /*Indicate that the function has worked correctly*/
   return OK;
@@ -210,7 +222,7 @@ void game_print(Game *game)
   /*Print the object location*/
   printf("=> Object location: %ld\n", game_get_object_location(game));
   /*Print the player location*/
-  printf("=> Player location: %d\n", (int)game->player_location);
+  printf("=> Player location: %d\n", (int)(player_get_location(game->player)));
 }
 
 /**
