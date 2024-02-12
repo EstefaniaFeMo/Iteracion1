@@ -74,7 +74,26 @@ const char *player_get_name(Player *player);
  *
  * @param player a pointer to the player that allows access to its name
  * @param id a long variable with the position
- * @return a string with the name of the player
+ * @return OK if everything worked, ERROR if something went wrong
+ */
+Status player_set_location(Player *player, Id id);
+
+/**
+ * @brief It changes the localization of the player.
+ * @author Carmen Gómez Escobar
+ *
+ * @param player a pointer to the player that allows access to its name
+ * @return the id of the player
+ */
+Id player_get_location(Player *player);
+
+/**
+ * @brief It sets the new object carried by the player.
+ * @author Carmen Gómez Escobar
+ *
+ * @param player a pointer to the player that allows access to its name
+ * @param id a long variable with the position
+ * @return OK if everything worked, ERROR if something went wron
  */
 Status player_set_object(Player *player, Bool value);
 
@@ -83,7 +102,7 @@ Status player_set_object(Player *player, Bool value);
  * @author Carmen Gómez Escobar
  *
  * @param player a pointer to the player that allows access to its name
- * @return a string with the name of the player
+ * @return FALSE if there is no object, TRUE if there is an object
  */
 Bool player_get_object(Player *player);
 
