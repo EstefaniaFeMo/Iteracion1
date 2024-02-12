@@ -30,7 +30,7 @@
 typedef struct _Game {
   Id player_location;/*!< Id que indica el lugar/ la locación del jugador*/
   Object *object;/*!< Information of the object */
-  Player *player;
+  Player *player;/*!< Information of the player */
   Space *spaces[MAX_SPACES];/*!< Array condiferentes espacios */
   int n_spaces; /*!< Numero de espacios*/
   Command last_cmd; /*!< Comando para modificar la locación: NO, salida, siguiente o atrás */
