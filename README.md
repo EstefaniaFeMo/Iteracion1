@@ -31,4 +31,5 @@ e intentar acceder a él.
 - **C** He modificado game.c para implamentar las funciones del módulo player.
 - **C** He documentado las funciones necesarias para implementar los comandos drop y take en game_actions.c (las funciones no están hechas, sólo escritas).
 
+- **E** Creada función drop
   ## 13-02-2024

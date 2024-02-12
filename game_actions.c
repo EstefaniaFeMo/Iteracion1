@@ -78,11 +78,11 @@ void game_actions_back(Game *game);
 void game_actions_take(Game *game);
 
 /**
- * @brief It recives a pointer to Game in the case that the command that the function that calls this one is drop,
- * the function makes the player drop the object.
+ * @brief In case there is an object that has been taken by the player, the object is dropped in the location of 
+ * the object.
  * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
- * @param game a pointer to the struct called Game.
+ * @param game a pointer to the struct called Game which contains the current information of the game session.
  */
 void game_actions_drop(Game *game);
 
@@ -132,14 +132,6 @@ Status game_actions_update(Game *game, Command cmd)
   default:
     break;
   }
-
-  return OK;
-}
-
-  default:
-    break;
-  }
-
   return OK;
 }
 
@@ -227,6 +219,15 @@ void game_actions_back(Game *game)
  */
 void game_actions_take(Game *game)
 {
+
+return;
+}
+/** game_actions_drop if the player has an object drops it in the current location of the playe*/
+void game_actions_drop(Game *game)
+{
+  if(player_get_object(game->player)){
+    game_set_object_location(game, game_get_player_location(game));
+  }
 
   return;
 }
