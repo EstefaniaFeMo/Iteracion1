@@ -28,7 +28,6 @@
 
 
 typedef struct _Game {
-  Id player_location;/*!< Id que indica el lugar/ la locación del jugador*/
   Object *object;/*!< Information of the object */
   Player *player;/*!< Information of the player */
   Space *spaces[MAX_SPACES];/*!< Array condiferentes espacios */
