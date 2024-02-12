@@ -17,3 +17,5 @@ e intentar acceder a él.
 ## 12-02-2024
 - Modificado gam_reader como corresponde, añadido a la estructura de game, puntero a player, añadidos comandos take y drop.
 - Hay q modificar sabiendo q no se puede acceder en la estructura de game a las estructuras de object y player, solo se puede acceder con primitivas.
+
+- Modificado la parte de object en el módulo Game y Space

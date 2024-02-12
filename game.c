@@ -9,6 +9,7 @@
  */
 
 #include "game.h"
+#include "game_reader.h"
 #include "object.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -74,7 +75,7 @@ Status game_create_from_file(Game *game, char *filename)
     return ERROR;
   }
   /* Error control */
-  if (game_load_spaces(game, filename) == ERROR)
+  if (game_reader_load_spaces(game, filename) == ERROR)
   {
     return ERROR;
   }
@@ -140,8 +141,16 @@ Status game_set_player_location(Game *game, Id id)
   return OK;
 }
 
-/*game_get_object_location returns the value of the variable object_location of the current game*/
-Id game_get_object_location(Game *game) { return game->object_location; }
+/*game_get_object_location returns the value of the ID location of the object in the current game*/
+Id game_get_object_location(Game *game) {
+  long i;
+  for(i=0; i<game->n_spaces; i++){
+    if(space_get_object(game->spaces[i])!=NO_ID){
+      return space_get_id(game->spaces[i]);
+    }
+  }
+   return NO_ID;
+}
 
 /*game_set_object_location sets the value of the variable object_location with the given ID.*/
 Status game_set_object_location(Game *game, Id id)
@@ -152,12 +161,15 @@ Status game_set_object_location(Game *game, Id id)
     return ERROR;
   }
 
-  game->object_location = id;
-  /*Indication that in the location there is an object*/
-  space_set_object(game_get_space(game, id), TRUE);
+  for(int i=0; i<game->n_spaces; i++){
+    if(space_get_id(game->spaces[i])==id){
+      space_set_object(game->spaces[i], object_get_id(game->object));
+  /*Indicate that the function has worked correctly*/      
+      return OK;
+    }
+  }
 
-  /*Indicate that the function has worked correctly*/
-  return OK;
+  return ERROR;
 }
 
 /*game_get_last_command returns the last command executed*/
@@ -196,7 +208,7 @@ void game_print(Game *game)
     space_print(game->spaces[i]);
   }
   /*Print the object location*/
-  printf("=> Object location: %d\n", (int)game->object_location);
+  printf("=> Object location: %ld\n", game_get_object_location(game));
   /*Print the player location*/
   printf("=> Player location: %d\n", (int)game->player_location);
 }
