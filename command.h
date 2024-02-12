@@ -37,6 +37,8 @@ typedef enum
     UNKNOWN,
     EXIT,
     NEXT,
+    TAKE,
+    DROP,
     BACK
 } Command;
 

@@ -10,22 +10,17 @@
 #ifndef GAMEREADER_H
 #define GAMEREADER_H
 
-#include "command.h"
-#include "space.h"
-#include "types.h"
 #include "game.h"
 
 /**
- * @brief It creates the game. If there were a problem, it would return ERROR. Then, it loads the spaces with the information
- * of the file passed as an argument to the function. If there were a problem, it would return ERROR. Next, the player and the
- * object are located in the first space
- * @author Estefanía Fenoy Montes, Carmen Gómez Escobar
+ * @brief It downloads the spaces defined in a file
+ * @author Estefanía Fenoy, Carmen Gómez Escobar
  *
- * @param game a pointer to the struct that initiales it
- * @param filename a pointer with the name of a file of text which will be read to download the spaces
- * @return status==OK, variable booleana que indica el correcto funcionamiento de la función.
- * @return status==ERROR, variable booleana que indica el erróneo funcionamiento de la función.
+ * @param game a pointer to the struct, Game and it uses it to define the space that makes the function to add it
+ * @param filename a pointer to the file of text that is passed as an argument to the function
+ * @return status==OK, if the function has worked correctly
+ * @return status==ERROR, if a mistken has happened
  */
-Status game_create_from_file(Game *game, char *filename);
+Status game_reader_load_spaces(Game *game, char *filename);
 
 #endif

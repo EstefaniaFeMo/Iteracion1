@@ -13,50 +13,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-/**
-   Private functions
-*/
-/**
- * @brief It downloads the spaces defined in a file
- * @author Estefanía Fenoy, Carmen Gómez Escobar
- *
- * @param game a pointer to the struct, Game and it uses it to define the space that makes the function to add it
- * @param filename a pointer to the file of text that is passed as an argument to the function
- * @return status==OK, if the function has worked correctly
- * @return status==ERROR, if a mistken has happened
- */
-Status game_load_spaces(Game *game, char *filename);
-
-/** game_create_from_file creates the game and loads the spaces from the file passed in the function as an
- * argument
- */
-Status game_create_from_file(Game *game, char *filename)
-{
-  /* Error control */
-  if (game_create(game) == ERROR)
-  {
-    return ERROR;
-  }
-  /* Error control */
-  if (game_load_spaces(game, filename) == ERROR)
-  {
-    return ERROR;
-  }
-
-  /* The player and the object are located in the first space */
-  game_set_player_location(game, game_get_space_id_at(game, 0));
-  game_set_object_location(game, game_get_space_id_at(game, 0));
-
-  /*Indicate that the function has worked correctly*/
-  return OK;
-}
-
-/**
-   Implementation of private function
-*/
-
-/*game_load_spaces downloads the spaces defined in a file*/
-Status game_load_spaces(Game *game, char *filename)
+/*game_reader_load_spaces downloads the spaces defined in a file*/
+Status game_reader_load_spaces(Game *game, char *filename)
 {
   /*Initialization of the variables*/
   FILE *file = NULL;

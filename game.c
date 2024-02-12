@@ -63,6 +63,30 @@ Status game_create(Game *game)
   return OK;
 }
 
+/** game_create_from_file creates the game and loads the spaces from the file passed in the function as an
+ * argument
+ */
+Status game_create_from_file(Game *game, char *filename)
+{
+  /* Error control */
+  if (game_create(game) == ERROR)
+  {
+    return ERROR;
+  }
+  /* Error control */
+  if (game_load_spaces(game, filename) == ERROR)
+  {
+    return ERROR;
+  }
+
+  /* The player and the object are located in the first space */
+  game_set_player_location(game, game_get_space_id_at(game, 0));
+  game_set_object_location(game, game_get_space_id_at(game, 0));
+
+  /*Indicate that the function has worked correctly*/
+  return OK;
+}
+
 /** game_destroy frees the spaces that have been created and set them as NULL
  */
 Status game_destroy(Game *game)

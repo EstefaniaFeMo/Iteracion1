@@ -15,6 +15,7 @@
 #include "space.h"
 #include "types.h"
 #include "object.h"
+#include "player.h"
 //Macro con el máximo de espacios posibles
 #define MAX_SPACES 100
 
@@ -29,6 +30,7 @@
 typedef struct _Game {
   Id player_location;/*!< Id que indica el lugar/ la locación del jugador*/
   Object *object;/*!< Information of the object */
+  Player *player;
   Space *spaces[MAX_SPACES];/*!< Array condiferentes espacios */
   int n_spaces; /*!< Numero de espacios*/
   Command last_cmd; /*!< Comando para modificar la locación: NO, salida, siguiente o atrás */
@@ -187,5 +189,17 @@ Status game_set_finished(Game *game, Bool finished);
  * @param game a pointer to the struct that contains the information of the current game session
  */
 void game_print(Game *game);
+
+/*Function that was private, make it public to have it in game_reader*/
+/**
+ * @brief It adds a new space in the last position available of the array and increases the number of spaces by one
+ * @author Estefanía Fenoy Montes, Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct, Game and it uses it to add a new space in the array game->spaces
+ * @param space a pointer to the space that will be added
+ * @return status==OK, if the function has worked correctly
+ * @return status==ERROR, if a mistken has happened
+ */
+Status game_add_space(Game *game, Space *space);
 
 #endif
