@@ -103,6 +103,21 @@ Status game_actions_update(Game *game, Command cmd)
     game_actions_back(game);
     break;
 
+   case DROP:
+    game_actions_drop(game);
+    break;
+
+  case TAKE:
+    game_actions_take(game);
+    break;
+
+  default:
+    break;
+  }
+
+  return OK;
+}
+
   default:
     break;
   }
@@ -181,6 +196,19 @@ void game_actions_back(Game *game)
   {
     game_set_player_location(game, current_id);
   }
+
+  return;
+}
+
+/**
+ * @brief It recives a pointer to Game in the case that the command that the function that calls this one is take,
+ * and checks if the player and the object are in the same location, and if they are, the player takes the object.
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct called Game.
+ */
+void game_actions_take(Game *game)
+{
 
   return;
 }
