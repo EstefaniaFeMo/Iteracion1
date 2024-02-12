@@ -222,7 +222,7 @@ void game_print(Game *game)
   /*Print the object location*/
   printf("=> Object location: %ld\n", game_get_object_location(game));
   /*Print the player location*/
-  printf("=> Player location: %d\n", (int)(player_get_location(game->player)));
+  printf("=> Player location: %ld\n", game_get_player_location(game));
 }
 
 /**

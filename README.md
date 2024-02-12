@@ -23,6 +23,7 @@ e intentar acceder a él.
 - Creados player.c y player.h, con las fucniones create, destroy, get, set, localization y print (Documentados)
 
 ## 12-02-2024
-- Modificado gam_reader como corresponde, añadido a la estructura de game, puntero a player, añadidos comandos take y drop.
+- Modificado game_reader como corresponde, añadido a la estructura de game, puntero a player, añadidos comandos take y drop.
 - Hay q modificar sabiendo q no se puede acceder en la estructura de game a las estructuras de object y player, solo se puede acceder con primitivas.
 - Modificado la funciones relacionadas con object en el módulo Game y Space.
+- He modificado ya las funciones de print la localización del player y el object en el módulo Game.
