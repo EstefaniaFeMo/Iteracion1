@@ -27,3 +27,8 @@ e intentar acceder a él.
 - Hay q modificar sabiendo q no se puede acceder en la estructura de game a las estructuras de object y player, solo se puede acceder con primitivas.
 - Modificado la funciones relacionadas con object en el módulo Game y Space.
 - He modificado ya las funciones de print la localización del player y el object en el módulo Game.
+
+- He modificado game.c para implamentar las funciones del módulo player.
+- He documentado las funciones necesarias para implementar los comandos drop y take en game_actions.c (las funciones no están hechas, sólo escritas).
+
+  ## 13-02-2024
