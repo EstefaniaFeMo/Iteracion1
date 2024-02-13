@@ -36,6 +36,9 @@ space.o: space.c space.h types.h
 object.o: object.c object.h types.h
 	$(CC) $(CFLAGS) -c $<
 
+player.o: player.c player.h types.h
+	$(CC) $(CFLAGS) -c $<
+
 #...............................................................................................#
 clean_objects:
 	@echo "Cleaning objects..."
