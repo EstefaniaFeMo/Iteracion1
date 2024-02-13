@@ -23,8 +23,8 @@ struct _Player
 {
     Id id;                    /*!< Id number of the player, it must be unique */
     char name[WORD_SIZE + 1]; /*!< Name of the player */
-    Id location;
-    Id object; /*!< Whether the player has an object or not */
+    Id location;              /*!< Id of the location in which the player is */
+    Id object;                /*!< Id of the object that player has */
 };
 
 /**
@@ -51,7 +51,7 @@ Player *player_create(Id id)
     /* Initialization of an empty space*/
     newPlayer->id = id;
     newPlayer->name[0] = '\0';
-    newPlayer->object = FALSE;
+    newPlayer->object = NO_ID;
 
     return newPlayer;
 }
@@ -173,13 +173,13 @@ Id player_get_location(Player *player)
  * @param id a long variable with the position
  * @return OK if everything worked, ERROR if something went wron
  */
-Status player_set_object(Player *player, Bool value)
+Status player_set_object(Player *player, Id object)
 {
     if (!player)
     {
         return ERROR;
     }
-    player->object = value;
+    player->object = object;
 
     return OK;
 }
@@ -189,7 +189,7 @@ Status player_set_object(Player *player, Bool value)
  * @author Carmen Gómez Escobar
  *
  * @param player a pointer to the player that allows access to its name
- * @return FALSE if there is no object, TRUE if there is an object
+ * @return the ID of the object that the player has
  */
 Id player_get_object(Player *player)
 {
@@ -220,7 +220,7 @@ Status player_print(Player *player)
     /* Print the id and the name of the player */
     fprintf(stdout, "--> Player (Id: %ld; Name: %s)\n", player->id, player->name);
 
-     /* Print the location and the name of the player */
+    /* Print the location and the name of the player */
     fprintf(stdout, "--> Player (Location link: %ld)\n", player->location);
 
     /*Indication that the function has worked correctly*/

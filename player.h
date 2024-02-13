@@ -95,7 +95,7 @@ Id player_get_location(Player *player);
  * @param id a long variable with the position
  * @return OK if everything worked, ERROR if something went wron
  */
-Status player_set_object(Player *player, Bool value);
+Status player_set_object(Player *player, Id object);
 
 /**
  * @brief It changes the position of the object in order to be with the player the player

@@ -20,6 +20,7 @@
 #define MAX_SPACES 100
 #define ID_PLAYER 0
 #define ID_OBJECT 0
+#define ERROR_SPACE -1
 
 
 /**
@@ -203,5 +204,15 @@ void game_print(Game *game);
  * @return status==ERROR, if a mistken has happened
  */
 Status game_add_space(Game *game, Space *space);
+
+/**
+ * @brief It obtains with a loop the location in which the space ID matches with the given ID
+ * @author Estefanía Fenoy Montes
+ *
+ * @param game a pointer to the struct, Game and it uses it to access the array game->spaces
+ * @param id an ID to get the number of the space with that ID
+ * @return the location of the space
+ */
+int game_get_space_position(Game *game, Id id);
 
 #endif

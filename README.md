@@ -1,4 +1,4 @@
-# PROYECTO ITERACION1 PPROG
+# PROYECTO ITERACION1 PPROG Stable Version
 ## 06-02-2024
 - **E** He documentado las funciones de game.h
 
@@ -33,3 +33,7 @@ e intentar acceder a él.
 
 - **E** Creada función drop
   ## 13-02-2024
+- **E** Añadido que se escriba PLAYER POSITION en el juego
+- **E** Añadido funcion para sacar la posicion de un espacio dando su id
+- **E** Corregido error que hacia que no funcionara el comando BACK
+- **E** Creados take y drop

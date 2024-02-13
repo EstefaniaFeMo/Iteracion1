@@ -78,7 +78,7 @@ void game_actions_back(Game *game);
 void game_actions_take(Game *game);
 
 /**
- * @brief In case there is an object that has been taken by the player, the object is dropped in the location of 
+ * @brief In case there is an object that has been taken by the player, the object is dropped in the location of
  * the object.
  * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
@@ -121,7 +121,7 @@ Status game_actions_update(Game *game, Command cmd)
     game_actions_back(game);
     break;
 
-   case DROP:
+  case DROP:
     game_actions_drop(game);
     break;
 
@@ -189,6 +189,7 @@ void game_actions_next(Game *game)
  *
  * @param game a pointer to the struct called Game.
  */
+
 void game_actions_back(Game *game)
 {
   Id current_id = NO_ID;
@@ -201,7 +202,7 @@ void game_actions_back(Game *game)
     return;
   }
 
-  current_id = space_get_north(game_get_space(game, game_get_player_location(game)));
+  current_id = space_get_north(game_get_space(game, space_id));
   if (current_id != NO_ID)
   {
     game_set_player_location(game, current_id);
@@ -219,15 +220,40 @@ void game_actions_back(Game *game)
  */
 void game_actions_take(Game *game)
 {
+  Id player_location = game_get_player_location(game);
 
-return;
+  int position = game_get_space_position(game, player_location);
+
+  Id object_id = object_get_id(game->object);
+  if (object_id == NO_ID)
+  {
+    return;
+  }
+
+  if (player_location == game_get_object_location(game))
+  {
+    player_set_object(game->player, object_id);
+    space_set_object(game->spaces[position], NO_ID);
+  }
+
+  return;
 }
 /** game_actions_drop if the player has an object drops it in the current location of the playe*/
 void game_actions_drop(Game *game)
 {
-  if(player_get_object(game->player)){
-    game_set_object_location(game, game_get_player_location(game));
+  Id player_location = game_get_player_location(game);
+  int position = game_get_space_position(game, player_location);
+
+  Id object_id = object_get_id(game->object);
+  if (object_id == NO_ID)
+  {
+    return;
   }
 
+  if (player_get_object(game->player) != NO_ID)
+  {
+    player_set_object(game->player, NO_ID);
+    space_set_object(game->spaces[position], object_id);
+  }
   return;
 }

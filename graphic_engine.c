@@ -176,6 +176,12 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
     screen_area_puts(ge->descript, str);
   }
 
+  if ((id_act = game_get_player_location(game)) != NO_ID)
+  {
+    sprintf(str, "  Player location:%d", (int)id_act);
+    screen_area_puts(ge->descript, str);
+  }
+
   /* Paint in the banner area */
   screen_area_puts(ge->banner, "    The anthill game ");
 
@@ -183,7 +189,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
   screen_area_clear(ge->help);
   sprintf(str, " The commands you can use are:");
   screen_area_puts(ge->help, str);
-  sprintf(str, "     next or n, back or b, exit or e");
+  sprintf(str, "     next or n, back or b, take or t, drop or d, exit or e");
   screen_area_puts(ge->help, str);
 
   /* Paint in the feedback area */

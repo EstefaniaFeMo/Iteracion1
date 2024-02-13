@@ -15,8 +15,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-
 /**
    Private functions
 */
@@ -44,7 +42,6 @@ Id game_get_space_id_at(Game *game, int position);
 /**
    Game interface implementation
 */
-
 
 /** game_create creates the game and initializes it
  */
@@ -131,7 +128,7 @@ Space *game_get_space(Game *game, Id id)
 /*game_get_player_location returns the value of the variable player_location of the current game*/
 Id game_get_player_location(Game *game)
 {
- return player_get_location(game->player);
+  return player_get_location(game->player);
 }
 
 /*game_set_player_location sets the value of the variable player_location with the given ID.*/
@@ -143,23 +140,26 @@ Status game_set_player_location(Game *game, Id id)
     return ERROR;
   }
 
-  if(player_set_location(game->player, id)==ERROR){
-      return ERROR;
+  if (player_set_location(game->player, id) == ERROR)
+  {
+    return ERROR;
   }
-
 
   return OK;
 }
 
 /*game_get_object_location returns the value of the ID location of the object in the current game*/
-Id game_get_object_location(Game *game) {
+Id game_get_object_location(Game *game)
+{
   long i;
-  for(i=0; i<game->n_spaces; i++){
-    if(space_get_object(game->spaces[i])!=NO_ID){
+  for (i = 0; i < game->n_spaces; i++)
+  {
+    if (space_get_object(game->spaces[i]) != NO_ID)
+    {
       return space_get_id(game->spaces[i]);
     }
   }
-   return NO_ID;
+  return NO_ID;
 }
 
 /*game_set_object_location sets the value of the variable object_location with the given ID.*/
@@ -170,8 +170,7 @@ Status game_set_object_location(Game *game, Id id)
   {
     return ERROR;
   }
-    space_set_object(game_get_space(game, id), object_get_id(game->object));
-
+  space_set_object(game_get_space(game, id), object_get_id(game->object));
 
   return ERROR;
 }
@@ -247,4 +246,18 @@ Id game_get_space_id_at(Game *game, int position)
   }
   /*Call the getter of id for the given position*/
   return space_get_id(game->spaces[position]);
+}
+
+/*game_get_space_position returns the position of the space from the given ID*/
+int game_get_space_position(Game *game, Id id)
+{
+  int i;
+  for (i = 0; i < game->n_spaces; i++)
+  {
+    if (space_get_id(game->spaces[i]) == id)
+    {
+      break;
+    }
+  }
+  return i;
 }
