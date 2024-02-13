@@ -17,8 +17,10 @@
 #include "object.h"
 #include "player.h"
 /*Macro con el máximo de espacios posibles*/
-#define MAX_SPACES 100
 
+#define MAX_SPACES 100
+#define ID_PLAYER 0
+#define ID_OBJECT 0
 
 /**
  * @brief Game
