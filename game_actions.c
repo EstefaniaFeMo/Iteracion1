@@ -71,7 +71,7 @@ void game_actions_back(Game *game);
 /**
  * @brief It recives a pointer to Game in the case that the command that the function that calls this one is take,
  * and checks if the player and the object are in the same location, and if they are, the player takes the object.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ * @author Estefania Fenoy Montes
  *
  * @param game a pointer to the struct called Game.
  */
@@ -80,7 +80,7 @@ void game_actions_take(Game *game);
 /**
  * @brief In case there is an object that has been taken by the player, the object is dropped in the location of
  * the object.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ * @author Estefania Fenoy Montes
  *
  * @param game a pointer to the struct called Game which contains the current information of the game session.
  */
@@ -211,13 +211,7 @@ void game_actions_back(Game *game)
   return;
 }
 
-/**
- * @brief It recives a pointer to Game in the case that the command that the function that calls this one is take,
- * and checks if the player and the object are in the same location, and if they are, the player takes the object.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
- *
- * @param game a pointer to the struct called Game.
- */
+/** game_actions_take if there is an object in the same space of player, the player takes that object */
 void game_actions_take(Game *game)
 {
   Id player_location = game_get_player_location(game);

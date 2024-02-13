@@ -170,15 +170,21 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 
   /* Paint in the description area */
   screen_area_clear(ge->descript);
-  if ((obj_loc = game_get_object_location(game)) != NO_ID)
+
+  if ((id_act = game_get_player_location(game)) != NO_ID)
+  {
+    sprintf(str, "  Player location:%d", (int)id_act);
+    screen_area_puts(ge->descript, str);
+  }
+
+    if ((obj_loc = game_get_object_location(game)) != NO_ID)
   {
     sprintf(str, "  Object location:%d", (int)obj_loc);
     screen_area_puts(ge->descript, str);
   }
 
-  if ((id_act = game_get_player_location(game)) != NO_ID)
-  {
-    sprintf(str, "  Player location:%d", (int)id_act);
+  if(player_get_object(game->player) != NO_ID){
+    sprintf(str, "  Player object: Yes"); /*In futures iterations perhaps there'll be changes to have the ID of the object since there'd be more objects*/
     screen_area_puts(ge->descript, str);
   }
 
