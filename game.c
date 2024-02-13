@@ -9,7 +9,6 @@
  */
 
 #include "game.h"
-#include "game_reader.h"
 #include "object.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,7 +42,6 @@ Id game_get_space_id_at(Game *game, int position);
    Game interface implementation
 */
 
-
 /** game_create creates the game and initializes it
  */
 Status game_create(Game *game)
@@ -54,6 +52,7 @@ Status game_create(Game *game)
   {
     game->spaces[i] = NULL;
   }
+
   /*The information of the struct game is initialized*/
   game->n_spaces = 0;
   game->player = NULL;
@@ -75,17 +74,13 @@ Status game_create_from_file(Game *game, char *filename)
     return ERROR;
   }
   /* Error control */
-  if (game_reader_load_spaces(game, filename) == ERROR)
+  if (game_load_spaces(game, filename) == ERROR)
   {
     return ERROR;
   }
 
-   /* Create a new player that is located in the first space */
-  if(player_create(0)==NULL){
-    return ERROR;
-  }
-
   /* The player and the object are located in the first space */
+  game_set_player_location(game, game_get_player_id_at(game, 0));
   game_set_object_location(game, game_get_space_id_at(game, 0));
 
   /*Indicate that the function has worked correctly*/
@@ -102,6 +97,7 @@ Status game_destroy(Game *game)
   {
     space_destroy(game->spaces[i]);
   }
+
   /*Indicate that the function has worked correctly*/
   return OK;
 }
@@ -130,8 +126,7 @@ Space *game_get_space(Game *game, Id id)
 /*game_get_player_location returns the value of the variable player_location of the current game*/
 Id game_get_player_location(Game *game)
 {
-   
-  long player_id;
+  Id player_id;
 
   player_id = player_get_localization(game->player);
 
@@ -146,14 +141,16 @@ Status game_set_player_location(Game *game, Id id)
   {
     return ERROR;
   }
-
-  player_set_localization(game->player, id);
+  /* Error control */
+  if(player_get_location(game->player)==ERROR){
+    return ERROR;
+  }
 
   /*Indicate that the function has worked correctly*/
   return OK;
 }
 
-/*game_get_object_location returns the value of the ID location of the object in the current game*/
+//*game_get_object_location returns the value of the ID location of the object in the current game*/
 Id game_get_object_location(Game *game) {
   long i;
   for(i=0; i<game->n_spaces; i++){
@@ -183,7 +180,6 @@ Status game_set_object_location(Game *game, Id id)
 
   return ERROR;
 }
-
 /*game_get_last_command returns the last command executed*/
 Command game_get_last_command(Game *game) { return game->last_cmd; }
 
@@ -220,9 +216,9 @@ void game_print(Game *game)
     space_print(game->spaces[i]);
   }
   /*Print the object location*/
-  printf("=> Object location: %ld\n", game_get_object_location(game));
+  printf("=> Object location: %d\n", (int)game_get_object_location(game));
   /*Print the player location*/
-  printf("=> Player location: %ld\n", game_get_player_location(game));
+  printf("=> Player location: %d\n", (int)player_get_location(game->player));
 }
 
 /**
