@@ -9,18 +9,20 @@
  */
 
 #include "game.h"
-#include "object.h"
-#include "player.h"
+#include "game_reader.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+
 
 /**
    Private functions
 */
 /**
  * @brief It adds a new space in the last position available of the array and increases the number of spaces by one
- * @author Estefanía Fenoy Montes, Carmen Gómez Escobar
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct, Game and it uses it to add a new space in the array game->spaces
  * @param space a pointer to the space that will be added
@@ -31,7 +33,7 @@ Status game_add_space(Game *game, Space *space);
 
 /**
  * @brief It gives the ID of the position of the given parameter
- * @author Estefanía Fenoy Montes, Carmen Gómez Escobar
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct, Game and it uses it to get access to the game->spaces IDs
  * @param position the position we want to get the id
@@ -43,6 +45,7 @@ Id game_get_space_id_at(Game *game, int position);
    Game interface implementation
 */
 
+
 /** game_create creates the game and initializes it
  */
 Status game_create(Game *game)
@@ -53,7 +56,6 @@ Status game_create(Game *game)
   {
     game->spaces[i] = NULL;
   }
-
   /*The information of the struct game is initialized*/
   game->n_spaces = 0;
   game->player = NULL;
@@ -80,9 +82,12 @@ Status game_create_from_file(Game *game, char *filename)
     return ERROR;
   }
 
+  game->player = player_create(ID_PLAYER);
+  game->object = object_create(ID_OBJECT);
+
   /* The player and the object are located in the first space */
   game_set_player_location(game, game_get_space_id_at(game, 0));
-  game_set_object_location(game, game_get_space_id_at(game, 0), object_get_id(game->object));
+  game_set_object_location(game, game_get_space_id_at(game, 0));
 
   /*Indicate that the function has worked correctly*/
   return OK;
@@ -98,7 +103,6 @@ Status game_destroy(Game *game)
   {
     space_destroy(game->spaces[i]);
   }
-
   /*Indicate that the function has worked correctly*/
   return OK;
 }
@@ -127,11 +131,7 @@ Space *game_get_space(Game *game, Id id)
 /*game_get_player_location returns the value of the variable player_location of the current game*/
 Id game_get_player_location(Game *game)
 {
-  Id player_id;
-
-  player_id = player_get_location(game->player);
-
-  return player_id;
+ return player_get_location(game->player);
 }
 
 /*game_set_player_location sets the value of the variable player_location with the given ID.*/
@@ -142,12 +142,12 @@ Status game_set_player_location(Game *game, Id id)
   {
     return ERROR;
   }
-  /* Error control */
-  if(player_get_location(game->player)==ERROR){
-    return ERROR;
+
+  if(player_set_location(game->player, id)==ERROR){
+      return ERROR;
   }
 
-  /*Indicate that the function has worked correctly*/
+
   return OK;
 }
 
@@ -163,24 +163,19 @@ Id game_get_object_location(Game *game) {
 }
 
 /*game_set_object_location sets the value of the variable object_location with the given ID.*/
-Status game_set_object_location(Game *game, Id space_id, Id object_id)
+Status game_set_object_location(Game *game, Id id)
 {
   /* Error control */
-  if (space_id == NO_ID)
+  if (id == NO_ID)
   {
     return ERROR;
   }
-  int i;
-  for(i=0; i<game->n_spaces; i++){
-    if(space_get_id(game->spaces[i])==space_id){
-      space_set_object(game->spaces[i], object_id);
-  /*Indicate that the function has worked correctly*/      
-      return OK;
-    }
-  }
+    space_set_object(game_get_space(game, id), object_get_id(game->object));
+
 
   return ERROR;
 }
+
 /*game_get_last_command returns the last command executed*/
 Command game_get_last_command(Game *game) { return game->last_cmd; }
 
@@ -199,7 +194,7 @@ Bool game_get_finished(Game *game) { return game->finished; }
 Status game_set_finished(Game *game, Bool finished)
 {
   game->finished = finished;
-  /*Indicate that the function has worked correctly*/
+
   return OK;
 }
 
@@ -217,9 +212,9 @@ void game_print(Game *game)
     space_print(game->spaces[i]);
   }
   /*Print the object location*/
-  printf("=> Object location: %d\n", (int)game_get_object_location(game));
+  printf("=> Object location: %ld\n", game_get_object_location(game));
   /*Print the player location*/
-  printf("=> Player location: %d\n", (int)player_get_location(game->player));
+  printf("=> Player location: %ld\n", game_get_player_location(game));
 }
 
 /**
