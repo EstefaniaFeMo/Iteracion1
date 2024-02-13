@@ -16,7 +16,7 @@
 #include "types.h"
 #include "object.h"
 #include "player.h"
-//Macro con el máximo de espacios posibles
+/*Macro con el máximo de espacios posibles*/
 #define MAX_SPACES 100
 
 
@@ -137,7 +137,7 @@ Id game_get_object_location(Game *game);
  * @return status==ERROR, if the ID is not declared.
  * @return status==OK, if the ID has been set correctly.
  */
-Status game_set_object_location(Game *game, Id id);
+Status game_set_object_location(Game *game, Id space_id, Id object_id);
 
 /**
  * @brief The function returns the last command executed of the current game

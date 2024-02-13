@@ -10,6 +10,7 @@
 
 #include "game.h"
 #include "object.h"
+#include "player.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -74,14 +75,14 @@ Status game_create_from_file(Game *game, char *filename)
     return ERROR;
   }
   /* Error control */
-  if (game_load_spaces(game, filename) == ERROR)
+  if (game_reader_load_spaces(game, filename) == ERROR)
   {
     return ERROR;
   }
 
   /* The player and the object are located in the first space */
-  game_set_player_location(game, game_get_player_id_at(game, 0));
-  game_set_object_location(game, game_get_space_id_at(game, 0));
+  game_set_player_location(game, game_get_space_id_at(game, 0));
+  game_set_object_location(game, game_get_space_id_at(game, 0), object_get_id(game->object));
 
   /*Indicate that the function has worked correctly*/
   return OK;
@@ -128,7 +129,7 @@ Id game_get_player_location(Game *game)
 {
   Id player_id;
 
-  player_id = player_get_localization(game->player);
+  player_id = player_get_location(game->player);
 
   return player_id;
 }
@@ -150,7 +151,7 @@ Status game_set_player_location(Game *game, Id id)
   return OK;
 }
 
-//*game_get_object_location returns the value of the ID location of the object in the current game*/
+/*game_get_object_location returns the value of the ID location of the object in the current game*/
 Id game_get_object_location(Game *game) {
   long i;
   for(i=0; i<game->n_spaces; i++){
@@ -162,17 +163,17 @@ Id game_get_object_location(Game *game) {
 }
 
 /*game_set_object_location sets the value of the variable object_location with the given ID.*/
-Status game_set_object_location(Game *game, Id id)
+Status game_set_object_location(Game *game, Id space_id, Id object_id)
 {
   /* Error control */
-  if (id == NO_ID)
+  if (space_id == NO_ID)
   {
     return ERROR;
   }
-
-  for(int i=0; i<game->n_spaces; i++){
-    if(space_get_id(game->spaces[i])==id){
-      space_set_object(game->spaces[i], object_get_id(game->object));
+  int i;
+  for(i=0; i<game->n_spaces; i++){
+    if(space_get_id(game->spaces[i])==space_id){
+      space_set_object(game->spaces[i], object_id);
   /*Indicate that the function has worked correctly*/      
       return OK;
     }

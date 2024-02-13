@@ -10,7 +10,7 @@ CLIB= -lscreen -L.
 
 all: anthill
 
-anthill: game_loop.o game.o game_actions.o command.o graphic_engine.o scape.o object.o
+anthill: game_loop.o game.o game_actions.o command.o graphic_engine.o space.o object.o
 	$(CC) -o $@ $^ $(CLIB)
 
 #...............................................................................................#

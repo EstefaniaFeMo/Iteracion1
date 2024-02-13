@@ -173,14 +173,15 @@ void game_actions_back(Game *game)
   return;
 }
 
-/** game_actions_take ecives a pointer to Game in the case that the command that the function that calls this one is take,
+/** game_actions_take recives a pointer to Game in the case that the command that the function that calls this one is take,
  * and checks if the player and the object are in the same location, and if they are, the player takes the object.*/
 void game_actions_take(Game *game)
 {
-  if(game_get_player_location(game->player)==game_get_object_location(game->object)){
-    player_get_object(game->player);
+  if(game_get_player_location(game)==game_get_object_location(game)){
+    player_set_object(game->player, TRUE);
+    game_set_object_location(game, game_get_player_location(game), NO_ID);
   }
-
+  
   return;
 }
 
@@ -188,7 +189,8 @@ void game_actions_take(Game *game)
 void game_actions_drop(Game *game)
 {
   if(player_get_object(game->player)){
-    game_set_object_location(game, game_get_player_location(game));
+    game_set_object_location(game, game_get_player_location(game), object_get_id(game->object));
+    player_set_object(game->player, FALSE);
   }
 
   return;

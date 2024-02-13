@@ -33,3 +33,7 @@ e intentar acceder a él.
 
 - **E** Creada función drop
   ## 13-02-2024
+
+- **V** Os he modificado el take y drop para que funcione, corrigiendo un error de argumentos donde pasabais game->player cuando no hacia falta, solo se necesitaba game. Y tambien os he cambiado el game_set_object_location añadiendo un argumento de id de objeto para poder establecer la casilla con la id de un objeto, o con NO_ID.
+- El take cuando coge un objeto establece que el jugador tiene un objeto, y establece la casilla en el que ha cogido el objeto como NO_ID.
+- El drop cuando suelta el objeto establece que el jugador ya no tiene objeto y establece la casilla con la id del objeto
