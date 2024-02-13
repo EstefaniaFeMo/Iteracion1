@@ -24,7 +24,7 @@ struct _Player
     Id id;                    /*!< Id number of the player, it must be unique */
     char name[WORD_SIZE + 1]; /*!< Name of the player */
     Id location;
-    Bool object; /*!< Whether the player has an object or not */
+    Id object; /*!< Whether the player has an object or not */
 };
 
 /**
@@ -191,11 +191,11 @@ Status player_set_object(Player *player, Bool value)
  * @param player a pointer to the player that allows access to its name
  * @return FALSE if there is no object, TRUE if there is an object
  */
-Bool player_get_object(Player *player)
+Id player_get_object(Player *player)
 {
     if (!player)
     {
-        return FALSE;
+        return NO_ID;
     }
     return player->object;
 }

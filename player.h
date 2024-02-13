@@ -54,7 +54,7 @@ Id player_get_id(Player *player);
  *
  * @param player a pointer to the player
  * @param name a string with the name of the player
- * @return OK, if everything went well
+ * @return OK, if everything went welBooll
  * @return ERROR, if it was some mistake
  */
 Status player_set_name(Player *player, char *name);
@@ -104,7 +104,7 @@ Status player_set_object(Player *player, Bool value);
  * @param player a pointer to the player that allows access to its name
  * @return FALSE if there is no object, TRUE if there is an object
  */
-Bool player_get_object(Player *player);
+Id player_get_object(Player *player);
 
 /**
  * @brief It prints the players ID and name

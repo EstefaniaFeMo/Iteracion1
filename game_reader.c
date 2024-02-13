@@ -9,6 +9,7 @@
  * @copyright GNU Public License
  */
 #include "game_reader.h"
+#include "space.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

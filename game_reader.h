@@ -11,6 +11,7 @@
 #define GAMEREADER_H
 
 #include "game.h"
+#include "types.h"
 
 /**
  * @brief It downloads the spaces defined in a file

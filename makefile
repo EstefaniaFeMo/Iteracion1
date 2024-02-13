@@ -10,27 +10,30 @@ CLIB= -lscreen -L.
 
 all: anthill
 
-anthill: game_loop.o game.o game_actions.o command.o graphic_engine.o space.o object.o
+anthill: game_loop.o game.o game_actions.o command.o graphic_engine.o space.o game_reader.o object.o player.o
 	$(CC) -o $@ $^ $(CLIB)
 
 #...............................................................................................#
 
-game_loop.o: game_loop.c command.h game.h space.h types.h game_actions.h graphic_engine.h
+game_loop.o: game_loop.c command.h game.h space.h types.h game_actions.h graphic_engine.h object.h player.h game_reader.h
 	$(CC) $(CFLAGS) -c $<
 
 command.o: command.c command.h
 	$(CC) $(CFLAGS) -c $<
 
-game.o: game.c game.h command.h space.h types.h
+game.o: game.c game.h game_reader.h command.h space.h types.h object.h player.h
 	$(CC) $(CFLAGS) -c $<
 
-game_actions.o: game_actions.c game_actions.h command.h game.h space.h types.h
+game_actions.o: game_actions.c game_actions.h command.h game.h space.h types.h object.h player.h game_reader.h
 	$(CC) $(CFLAGS) -c $<
 
-graphic_engine.o: graphic_engine.c graphic_engine.h game.h command.h space.h types.h libscreen.h
+graphic_engine.o: graphic_engine.c graphic_engine.h game.h command.h space.h types.h libscreen.h object.h player.h game_reader.h
 	$(CC) $(CFLAGS) -c $<
 
 space.o: space.c space.h types.h
+	$(CC) $(CFLAGS) -c $<
+
+game_reader.o: game_reader.c game_reader.h game.h types.h command.h space.h object.h player.h
 	$(CC) $(CFLAGS) -c $<
 
 object.o: object.c object.h types.h
@@ -49,5 +52,3 @@ clean_program:
 	@rm -f anthill
 
 clean: clean_objects clean_program
-
-	

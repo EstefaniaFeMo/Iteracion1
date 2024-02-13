@@ -21,56 +21,68 @@
 */
 
 /**
- * @brief It recives a pointer to Game in the case that the command that the function that calls this one is unknown,
- * and stops the game. 
- * @author Carmen Gómez Escobar.
+ * @brief Carga los espacios definidos en un fichero
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
- * @param game a pointer to the struct called Game and uses it as an argument in the called functions.
+ * @param game un puntero a una estructura, Game y la utiliza para definir el espacio que manda a la función que lo añade
+ * @param filename un puntero al fichero
+ * @return status= OK si todo ha funcionado correctamente
+ * @return status= ERROR si se ha producido algún fallo
  */
+
 void game_actions_unknown(Game *game);
 
 /**
- * @brief It recives a pointer to Game in the case that the command that the function that calls this one is exit,
- * and exits the game. 
- * @author Carmen Gómez Escobar.
+ * @brief Carga los espacios definidos en un fichero
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
- * @param game a pointer to the struct called Game and uses it as an argument in the called functions.
+ * @param game un puntero a una estructura, Game y la utiliza para definir el espacio que manda a la función que lo añade
+ * @param filename un puntero al fichero
+ * @return status= OK si todo ha funcionado correctamente
+ * @return status= ERROR si se ha producido algún fallo
  */
+
 void game_actions_exit(Game *game);
 
 /**
- * @brief It recives a pointer to Game in the case that the command that the function that calls this one is next,
- * and calls to a function that reads which is the sapce below and sends the player there. 
- * @author Carmen Gómez Escobar.
+ * @brief Carga los espacios definidos en un fichero
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
- * @param game a pointer to the struct called Game and uses it as an argument in the called functions.
+ * @param game un puntero a una estructura, Game y la utiliza para definir el espacio que manda a la función que lo añade
+ * @param filename un puntero al fichero
+ * @return status= OK si todo ha funcionado correctamente
+ * @return status= ERROR si se ha producido algún fallo
  */
+
 void game_actions_next(Game *game);
 
 /**
- * @brief It recives a pointer to Game in the case that the command that the function that calls this one is back,
- * and calls to a function that reads which is the sapce above and sends the player there. 
- * @author Carmen Gómez Escobar.
+ * @brief Carga los espacios definidos en un fichero
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
- * @param game a pointer to the struct called Game and uses it as an argument in the called functions.
+ * @param game un puntero a una estructura, Game y la utiliza para definir el espacio que manda a la función que lo añade
+ * @param filename un puntero al fichero
+ * @return status= OK si todo ha funcionado correctamente
+ * @return status= ERROR si se ha producido algún fallo
  */
+
 void game_actions_back(Game *game);
 
 /**
  * @brief It recives a pointer to Game in the case that the command that the function that calls this one is take,
  * and checks if the player and the object are in the same location, and if they are, the player takes the object.
- * @author Carmen Gómez Escobar.
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
- * @param game a pointer to the struct called Game and uses it as an argument in the called functions.
+ * @param game a pointer to the struct called Game.
  */
 void game_actions_take(Game *game);
 
 /**
- * @brief It recives a pointer to Game in the case that the command that the function that calls this one is drop,
- * and checks if the player has an object and drops it. 
- * @author Estefanía Fenoy Montes
+ * @brief In case there is an object that has been taken by the player, the object is dropped in the location of 
+ * the object.
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
- * @param game a pointer to the struct called Game and uses it as an argument in the called functions.
+ * @param game a pointer to the struct called Game which contains the current information of the game session.
  */
 void game_actions_drop(Game *game);
 
@@ -78,8 +90,15 @@ void game_actions_drop(Game *game);
    Game actions implementation
 */
 
-/** game_actions_update recives the new command and for each type of command, calls a new function. At the end it
- * will update the status. */
+/**
+ * @brief It recives the new command and for each type of command, calls a new function. At the end it
+ * will update the status
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar.
+ *
+ * @param game a pointer to the struct called Game and uses it as an argument in the called functions.
+ * @param cmd a variable type Command with the command.
+ * @return Status= OK sif everything has worked out
+ */
 Status game_actions_update(Game *game, Command cmd)
 {
   game_set_last_command(game, cmd);
@@ -102,7 +121,7 @@ Status game_actions_update(Game *game, Command cmd)
     game_actions_back(game);
     break;
 
-  case DROP:
+   case DROP:
     game_actions_drop(game);
     break;
 
@@ -113,7 +132,6 @@ Status game_actions_update(Game *game, Command cmd)
   default:
     break;
   }
-
   return OK;
 }
 
@@ -121,15 +139,29 @@ Status game_actions_update(Game *game, Command cmd)
    Calls implementation for each action
 */
 
-/** game_actions_unknown recives a pointer to Game in the case that the command that the function that calls this one is unknown. */
+/**
+ * @brief It recives a pointer to Game in the case that the command that the function that calls this one is unknown.
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct called Game.
+ */
 void game_actions_unknown(Game *game) {}
 
-/** game_actions_exit recives a pointer to Game in the case that the command that the function that calls this one is exit.
+/**
+ * @brief It recives a pointer to Game in the case that the command that the function that calls this one is exit.
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct called Game.
  */
 void game_actions_exit(Game *game) {}
 
-/** game_actions_next recives a pointer to Game in the case that the command that the function that calls this one is next,
- * and calls to a function that reads which is the sapce below and sends the player there. */
+/**
+ * @brief It recives a pointer to Game in the case that the command that the function that calls this one is next,
+ * and calls to a function that reads which is the sapce below and sends the player there.
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct called Game.
+ */
 void game_actions_next(Game *game)
 {
   Id current_id = NO_ID;
@@ -150,8 +182,13 @@ void game_actions_next(Game *game)
   return;
 }
 
-/** game_actions_back recives a pointer to Game in the case that the command that the function that calls this one is back,
- * and calls to a function that reads which is the sapce above and sends the player there. */
+/**
+ * @brief It recives a pointer to Game in the case that the command that the function that calls this one is back,
+ * and calls to a function that reads which is the sapce above and sends the player there.
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct called Game.
+ */
 void game_actions_back(Game *game)
 {
   Id current_id = NO_ID;
@@ -164,7 +201,7 @@ void game_actions_back(Game *game)
     return;
   }
 
-  current_id = space_get_north(game_get_space(game, space_id));
+  current_id = space_get_north(game_get_space(game, game_get_player_location(game)));
   if (current_id != NO_ID)
   {
     game_set_player_location(game, current_id);
@@ -173,24 +210,23 @@ void game_actions_back(Game *game)
   return;
 }
 
-/** game_actions_take recives a pointer to Game in the case that the command that the function that calls this one is take,
- * and checks if the player and the object are in the same location, and if they are, the player takes the object.*/
+/**
+ * @brief It recives a pointer to Game in the case that the command that the function that calls this one is take,
+ * and checks if the player and the object are in the same location, and if they are, the player takes the object.
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct called Game.
+ */
 void game_actions_take(Game *game)
 {
-  if(game_get_player_location(game)==game_get_object_location(game)){
-    player_set_object(game->player, TRUE);
-    game_set_object_location(game, game_get_player_location(game), NO_ID);
-  }
-  
-  return;
-}
 
+return;
+}
 /** game_actions_drop if the player has an object drops it in the current location of the playe*/
 void game_actions_drop(Game *game)
 {
   if(player_get_object(game->player)){
-    game_set_object_location(game, game_get_player_location(game), object_get_id(game->object));
-    player_set_object(game->player, FALSE);
+    game_set_object_location(game, game_get_player_location(game));
   }
 
   return;
