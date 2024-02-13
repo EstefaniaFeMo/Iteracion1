@@ -131,7 +131,7 @@ Space *game_get_space(Game *game, Id id)
 Id game_get_player_location(Game *game)
 {
    
-  int player_id;
+  long player_id;
 
   player_id = player_get_localization(game->player);
 
@@ -147,7 +147,7 @@ Status game_set_player_location(Game *game, Id id)
     return ERROR;
   }
 
-  game->player = player_set_localization(game->player, id);
+  player_set_localization(game->player, id);
 
   /*Indicate that the function has worked correctly*/
   return OK;
