@@ -2,7 +2,7 @@
  * @brief It implements the command interpreter
  *
  * @file command.c
- * @author Estefanía Fenoy Montes, Carmen Gómez Escobar
+ * @author Profesores PPROG, Carmen Gómez Escobar
  * @version 3.5
  * @date 26-01-2024
  * @copyright GNU Public License
@@ -18,12 +18,7 @@
 
 char *cmd_to_str[N_CMD][N_CMDT] = {{"", "No command"}, {"", "Unknown"}, {"e", "Exit"}, {"n", "Next"}, {"b", "Back"}, {"t", "Take"}, {"d", "Drop"}};
 
-/**
- * @brief  It reads a command recived from the user input and gives the asociated value defined in the Command struct.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
- *
- * @return  cmd, a Command variable whcich value is the asociated command to the word recived.
- */
+/** command_get_user_input reads a command recived from the user input and gives the asociated value defined in the Command struct. */
 Command command_get_user_input()
 {
   Command cmd = NO_CMD;
