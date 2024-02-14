@@ -3,7 +3,7 @@
  * for each command
  *
  * @file game.c
- * @author Estefanía Fenoy Montes, Carmen Gómez Escobar
+ * @author Profesores PPROG, Estefanía Fenoy Montes, Carmen Gómez Escobar
  * @version 06-02-2024
  * @copyright GNU Public License
  */
@@ -20,7 +20,7 @@
 */
 /**
  * @brief It adds a new space in the last position available of the array and increases the number of spaces by one
- * @author Estefanía Fenoy Montes
+ * @author Profesores PPROG, Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct, Game and it uses it to add a new space in the array game->spaces
  * @param space a pointer to the space that will be added
@@ -31,7 +31,7 @@ Status game_add_space(Game *game, Space *space);
 
 /**
  * @brief It gives the ID of the position of the given parameter
- * @author Estefanía Fenoy Montes
+ * @author Profesores PPROG, Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct, Game and it uses it to get access to the game->spaces IDs
  * @param position the position we want to get the id
@@ -63,8 +63,7 @@ Status game_create(Game *game)
   return OK;
 }
 
-/** game_create_from_file creates the game and loads the spaces from the file passed in the function as an
- * argument
+/** game_create_from_file creates the game and loads the spaces from the file passed in the function as an argument
  */
 Status game_create_from_file(Game *game, char *filename)
 {
@@ -125,13 +124,16 @@ Space *game_get_space(Game *game, Id id)
   /*If the ID is not equal to any space, return NULL*/
   return NULL;
 }
-/*game_get_player_location returns the value of the variable player_location of the current game*/
+
+/*game_get_player_location returns the value of the variable player_location of the current game
+*/
 Id game_get_player_location(Game *game)
 {
   return player_get_location(game->player);
 }
 
-/*game_set_player_location sets the value of the variable player_location with the given ID.*/
+/*game_set_player_location sets the value of the variable player_location with the given ID.
+*/
 Status game_set_player_location(Game *game, Id id)
 {
   /* Error control */
@@ -148,7 +150,8 @@ Status game_set_player_location(Game *game, Id id)
   return OK;
 }
 
-/*game_get_object_location returns the value of the ID location of the object in the current game*/
+/*game_get_object_location returns the value of the ID location of the object in the current game
+*/
 Id game_get_object_location(Game *game)
 {
   long i;
@@ -162,7 +165,8 @@ Id game_get_object_location(Game *game)
   return NO_ID;
 }
 
-/*game_set_object_location sets the value of the variable object_location with the given ID.*/
+/*game_set_object_location sets the value of the variable object_location with the given ID.
+*/
 Status game_set_object_location(Game *game, Id id)
 {
   /* Error control */
@@ -175,7 +179,8 @@ Status game_set_object_location(Game *game, Id id)
   return ERROR;
 }
 
-/*game_get_last_command returns the last command executed*/
+/*game_get_last_command returns the last command executed
+*/
 Command game_get_last_command(Game *game) { return game->last_cmd; }
 
 /*game_set_last_command sets the command given as the last one*/
@@ -197,7 +202,8 @@ Status game_set_finished(Game *game, Bool finished)
   return OK;
 }
 
-/*game_print prints the current game session*/
+/*game_print prints the current game session
+*/
 void game_print(Game *game)
 {
   int i = 0;
@@ -219,7 +225,9 @@ void game_print(Game *game)
 /**
    Implementation of private functions
 */
-/*game_add_space adds a new space in the game->spaces array */
+
+/*game_add_space adds a new space in the game->spaces array 
+*/
 Status game_add_space(Game *game, Space *space)
 {
   /*Error control*/
@@ -236,7 +244,8 @@ Status game_add_space(Game *game, Space *space)
   return OK;
 }
 
-/*game_get_space_id_at returns the id of a position*/
+/*game_get_space_id_at returns the id of a position
+*/
 Id game_get_space_id_at(Game *game, int position)
 {
   /*Error control*/
@@ -248,7 +257,8 @@ Id game_get_space_id_at(Game *game, int position)
   return space_get_id(game->spaces[position]);
 }
 
-/*game_get_space_position returns the position of the space from the given ID*/
+/*game_get_space_position returns the position of the space from the given ID
+*/
 int game_get_space_position(Game *game, Id id)
 {
   int i;
