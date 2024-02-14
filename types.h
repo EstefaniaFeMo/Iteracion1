@@ -2,7 +2,7 @@
  * @brief It defines common types for the whole project
  *
  * @file types.h
- * @author Estefanía Fenoy Montes, Carmen Gómez Escobar
+ * @author Profesores PPROG, Estefanía Fenoy Montes, Carmen Gómez Escobar
  * @version 3.5
  * @date 04-02-2024
  * @copyright GNU Public License
