@@ -27,7 +27,8 @@ struct _Player
     Id object;                /*!< Id of the object that player has */
 };
 
-/** player_create creates a new player, reserving dynamic memory and initializing its variables */
+/** player_create creates a new player, reserving dynamic memory and initializing its variables 
+*/
 Player *player_create(Id id)
 {
     Player *newPlayer = NULL;
@@ -50,7 +51,8 @@ Player *player_create(Id id)
     return newPlayer;
 }
 
-/** player_destroy, destroys a player and releases the reserved memory */
+/** player_destroy, destroys a player and releases the reserved memory 
+*/
 Status player_destroy(Player *player)
 {
     if (!player)
@@ -63,7 +65,8 @@ Status player_destroy(Player *player)
     return OK;
 }
 
-/** player_get_id, gets the id of the player */
+/** player_get_id, gets the id of the player 
+*/
 Id player_get_id(Player *player)
 {
     if (!player)
@@ -73,7 +76,8 @@ Id player_get_id(Player *player)
     return player->id;
 }
 
-/** player_set_name, sets the name of the player */
+/** player_set_name, sets the name of the player 
+*/
 Status player_set_name(Player *player, char *name)
 {
     if (!player || !name)
@@ -88,7 +92,8 @@ Status player_set_name(Player *player, char *name)
     return OK;
 }
 
-/** player_get_name, gets the name of the player */
+/** player_get_name, gets the name of the player 
+*/
 const char *player_get_name(Player *player)
 {
     if (!player)
@@ -98,7 +103,8 @@ const char *player_get_name(Player *player)
     return player->name;
 }
 
-/** player_set_location, sets the location of the player */
+/** player_set_location, sets the location of the player 
+*/
 Status player_set_location(Player *player, Id id)
 {
     if (!player || id == NO_ID)
@@ -109,7 +115,8 @@ Status player_set_location(Player *player, Id id)
     return OK;
 }
 
-/** player_get_location, gets the location of the player */
+/** player_get_location, gets the location of the player 
+*/
 Id player_get_location(Player *player)
 {
     if (!player)
@@ -118,7 +125,8 @@ Id player_get_location(Player *player)
     }
     return player->location;
 }
-/** player_set_object, sets the new object carried by the player */
+/** player_set_object, sets the new object carried by the player 
+*/
 Status player_set_object(Player *player, Id object)
 {
     if (!player)
@@ -130,7 +138,8 @@ Status player_set_object(Player *player, Id object)
     return OK;
 }
 
-/** player_get_object, gets the position of the object carried by the player */
+/** player_get_object, gets the position of the object carried by the player 
+*/
 Id player_get_object(Player *player)
 {
     if (!player)
@@ -140,7 +149,8 @@ Id player_get_object(Player *player)
     return player->object;
 }
 
-/** player_print, prints the id of the player */
+/** player_print, prints the id of the player 
+*/
 Status player_print(Player *player)
 {
     /* Error Control */
