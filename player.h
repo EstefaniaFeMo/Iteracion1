@@ -77,7 +77,7 @@ const char *player_get_name(Player *player);
 Status player_set_location(Player *player, Id id);
 
 /**
- * @brief It changes the localization of the player.
+ * @brief It gets the location of the player.
  * @author Carmen Gómez Escobar
  *
  * @param player a pointer to the player that allows access to its name
@@ -96,7 +96,7 @@ Id player_get_location(Player *player);
 Status player_set_object(Player *player, Id object);
 
 /**
- * @brief It changes the position of the object in order to be with the player the player
+ * @brief It gets the position of the object carried by the player
  * @author Carmen Gómez Escobar
  *
  * @param player a pointer to the player that allows access to its name
