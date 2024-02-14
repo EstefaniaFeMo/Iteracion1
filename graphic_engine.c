@@ -2,7 +2,7 @@
  * @brief It defines a textual graphic engine
  *
  * @file graphic_engine.c
- * @author Profesores PPROG
+ * @author Profesores PPROG, Carmen Gómez Escobar
  * @version 3.5
  * @date 26-01-2024
  * @copyright GNU Public License
@@ -36,12 +36,8 @@ struct _Graphic_engine
   Area *map, *descript, *banner, *help, *feedback;
 };
 
-/**
- * @brief It reserves di¡ynamic memeory for the structure called Graphic_engine if it hasn't been previously done
+/** graphic_engine_create reserves di¡ynamic memeory for the structure called Graphic_engine if it hasn't been previously done
  *  it also reserves dynamic memory for the variables contained in it such as map, descript, banner, help and feedback
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
- *
- * @return  ge, a strcuture and it's members
  */
 Graphic_engine *graphic_engine_create()
 {
@@ -68,12 +64,8 @@ Graphic_engine *graphic_engine_create()
   return ge;
 }
 
-/**
- * @brief It checks if the dynamic memory reserve has been done correctly, and if not, destroys al the areas
+/** graphic_engine_destroy checks if the dynamic memory reserve has been done correctly, and if not, destroys al the areas
  *  and frees the memory of the structure
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
- *
- * @param ge it points to a structure called Graphic_engine
  */
 void graphic_engine_destroy(Graphic_engine *ge)
 {
@@ -90,14 +82,7 @@ void graphic_engine_destroy(Graphic_engine *ge)
   free(ge);
 }
 
-/**
- * @brief It paints all the areas after having cleared the area and having checked if the player was
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
- *
- * @param game it points to a structure called Game y and uses it to define the space that a function will afterwards add
- * @param filename a pointer to the file
- * @return status= OK if everything has worked out correctly
- * @return status= ERROR if something has failed
+/** graphic_engine_paint_game paints all the areas after having cleared the area and having checked if the player was
  */
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 {
@@ -177,13 +162,14 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
     screen_area_puts(ge->descript, str);
   }
 
-    if ((obj_loc = game_get_object_location(game)) != NO_ID)
+  if ((obj_loc = game_get_object_location(game)) != NO_ID)
   {
     sprintf(str, "  Object location:%d", (int)obj_loc);
     screen_area_puts(ge->descript, str);
   }
 
-  if(player_get_object(game->player) != NO_ID){
+  if (player_get_object(game->player) != NO_ID)
+  {
     sprintf(str, "  Player object: Yes"); /*In futures iterations perhaps there'll be changes to have the ID of the object since there'd be more objects*/
     screen_area_puts(ge->descript, str);
   }
