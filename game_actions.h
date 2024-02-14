@@ -2,7 +2,7 @@
  * @brief It defines the game update through user actions
  *
  * @file game_actions.h
- * @author Estefanía Fenoy Montes, Carmen Gómez Esocbar
+ * @author Profesores PPROG, Estefanía Fenoy Montes, Carmen Gómez Esocbar
  * @version 3.5
  * @date 08-02-2024
  * @copyright GNU Public License
@@ -22,7 +22,7 @@
  *
  * @param game a pointer to the struct called Game and uses it as an argument in the called functions.
  * @param cmd a variable type Command with the command.
- * @return Status= OK sif everything has worked out
+ * @return OK sif everything has worked out, ERROR if there is some mistake
  */
 Status game_actions_update(Game *game, Command cmd);
 
