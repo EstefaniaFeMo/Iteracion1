@@ -21,25 +21,24 @@
 */
 
 /**
- * @brief recives a pointer to Game in the case that the command that the function that calls this one is unknown.
- * @author Profesores PPROG, Carmen Gómez Escobar
+ * @brief Carga los espacios definidos en un fichero
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
  */
 void game_actions_unknown(Game *game);
 
 /**
- * @brief recives a pointer to Game in the case that the command that the function that calls this one is exit.
- * @author Profesores PPROG, Carmen Gómez Escobar
+ * @brief Carga los espacios definidos en un fichero
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
  */
 void game_actions_exit(Game *game);
 
 /**
- * @brief recives a pointer to Game in the case that the command that the function that calls this one is next,
- * and calls to a function that reads which is the sapce below and sends the player there.
- * @author Profesores PPROG, Carmen Gómez Escobar
+ * @brief Carga los espacios definidos en un fichero
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
  */
@@ -47,9 +46,8 @@ void game_actions_exit(Game *game);
 void game_actions_next(Game *game);
 
 /**
- * @brief recives a pointer to Game in the case that the command that the function that calls this one is back,
- * and calls to a function that reads which is the sapce above and sends the player there.
- * @author Profesores PPROG, Carmen Gómez Escobar
+ * @brief Carga los espacios definidos en un fichero
+ * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
  */
@@ -177,8 +175,7 @@ void game_actions_back(Game *game)
   return;
 }
 
-/** game_actions_take if there is an object in the same space of player, the player takes that object
- */
+/** game_actions_take if there is an object in the same space of player, the player takes that object */
 void game_actions_take(Game *game)
 {
   Id player_location = game_get_player_location(game);
@@ -197,8 +194,7 @@ void game_actions_take(Game *game)
 
   return;
 }
-/** game_actions_drop if the player has an object drops it in the current location of the player
- */
+/** game_actions_drop if the player has an object drops it in the current location of the playe*/
 void game_actions_drop(Game *game)
 {
   Id player_location = game_get_player_location(game);

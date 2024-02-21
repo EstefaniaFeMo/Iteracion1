@@ -25,6 +25,7 @@ struct _Player
     char name[WORD_SIZE + 1]; /*!< Name of the player */
     Id location;              /*!< Id of the location in which the player is */
     Id object;                /*!< Id of the object that player has */
+    int health;               /*!< Number of point of life the player has */
 };
 
 /** player_create creates a new player, reserving dynamic memory and initializing its variables 
@@ -47,6 +48,7 @@ Player *player_create(Id id)
     newPlayer->id = id;
     newPlayer->name[0] = '\0';
     newPlayer->object = NO_ID;
+    newPlayer->health = PLAYER_HEALTH;
 
     return newPlayer;
 }

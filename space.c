@@ -2,7 +2,7 @@
  * @brief It implements the space module
  *
  * @file space.c
- * @author Profesores PPROG
+ * @author Profesores PPROG, Estefanía Fenoy Montes, Carmen Gómez Escobar
  * @version 3.5
  * @date 26-01-2024
  * @copyright GNU Public License

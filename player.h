@@ -11,6 +11,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#define PLAYER_HEALTH 5
+
 #include "types.h"
 
 /**
@@ -67,7 +69,7 @@ Status player_set_name(Player *player, char *name);
 const char *player_get_name(Player *player);
 
 /**
- * @brief It sets the new object carried by the player.
+ * @brief It sets the location of the player.
  * @author Carmen Gómez Escobar
  *
  * @param player a pointer to the player that allows access to its name
@@ -103,6 +105,25 @@ Status player_set_object(Player *player, Id object);
  * @return the id of the object
  */
 Id player_get_object(Player *player);
+
+/**
+ * @brief It sets the health of the player.
+ * @author Carmen Gómez Escobar
+ *
+ * @param player a pointer to the player that allows access to its name
+ * @param health the number of points of life a player has
+ * @return OK if everything worked, ERROR if something went wrong
+ */
+Status player_set_health(Player *player, int health);
+
+/**
+ * @brief It gets the health of the player.
+ * @author Carmen Gómez Escobar
+ *
+ * @param player a pointer to the player that allows access to its name
+ * @return the points of life of the player
+ */
+int player_get_health(Player *player);
 
 /**
  * @brief It prints the players ID and name

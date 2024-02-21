@@ -7,13 +7,13 @@
 - **E** Modificado Game
 - **E** Terminado Game_Reader
 
-- **E** He documentado las funciones de game_loop.c, command.h y command.c
+- **C** He documentado las funciones de game_loop.c, command.h y command.c
 
 ## 10-02-2024
 - **E** Creados object.c y object.h, con las fucniones create, destroy, get, set y print (Documentados)
 
-- **E** He documentado las funciones de game_actions.c, game_actions.h
-- **E** He creado el makefile
+- **C** He documentado las funciones de game_actions.c, game_actions.h
+- **C** He creado el makefile
 
 ## 11-02-2024
 - **E** modificado makefile
@@ -32,8 +32,25 @@ e intentar acceder a él.
 - **C** He documentado las funciones necesarias para implementar los comandos drop y take en game_actions.c (las funciones no están hechas, sólo escritas).
 
 - **E** Creada función drop
-  ## 13-02-2024
+
+## 13-02-2024
+- **B** Hemos dolucionado los problemas en la implementación de Player y Object a Game.
+  
 - **E** Añadido que se escriba PLAYER POSITION en el juego
 - **E** Añadido funcion para sacar la posicion de un espacio dando su id
 - **E** Corregido error que hacia que no funcionara el comando BACK
 - **E** Creados take y drop
+
+- **C** Creado los nuevos caminos de 6 y 4 en un fichero llamado anthill_camino.dat
+
+## 14-02-2024
+
+- **C** He revisado la documentación de todos los ficheros .c y .h, y modificado algunas documentaciones y detalles
+
+## 20-02-2024
+- **C** He empezado a implementar el módulo character que incluye character.c y character.h
+
+## 21-01-2024
+- **C** Terminado el módulo character y todas sus funciones
+- **C** Modificado el módulo player para que contenga sus puntos de vida
+  
