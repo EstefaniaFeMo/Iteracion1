@@ -46,4 +46,11 @@ e intentar acceder a él.
 ## 14-02-2024
 
 - **C** He revisado la documentación de todos los ficheros .c y .h, y modificado algunas documentaciones y detalles
-    
+
+## 20-02-2024
+- **C** He empezado a implementar el módulo character que incluye character.c y character.h
+
+## 21-01-2024
+- **C** Terminado el módulo character y todas sus funciones
+- **C** Modificado el módulo player para que contenga sus puntos de vida
+  
