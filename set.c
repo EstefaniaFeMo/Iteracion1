@@ -60,15 +60,59 @@ Status set_destroy(Set *set){
 
     return OK;
 }
+/** set_add includes in the array of IDs the given ID
+ */
 Status set_add(Set *set, Id id){
+    /* Error control */
     if(set==NULL){
         return ERROR;
     }
-    if(set->n_ids>=MAX_NUM_IDS){
+    /* Error control */
+    if(set->n_ids>=MAX_NUM_IDS || set->n_ids<0){
         return ERROR;
     }
-    set->ids[set->n_ids-1]= id;
+    set->ids[set->n_ids]= id;
     set->n_ids++;
     return OK;
 }
+/** set_del deleates in the array of IDs the ID given as a parameter
+ */
+Status set_del(Set *set, Id id){
+    int i, flag, j;
+    /* Error control */
+    if(set==NULL || set->n_ids>MAX_NUM_IDS || set->n_ids<=0){
+        return ERROR;
+    }
 
+    for(i=flag=0; i<set->n_ids; i++){
+        if(set->ids[i]==id){
+            flag=1;
+            break;
+        }
+    }
+    /* Error control that the given id is in the array */
+    if(!flag){
+        return ERROR;
+    }
+
+    for(j=i+1; j<set->n_ids; j++, i++){
+        set->ids[i]=set->ids[j];
+    }
+
+    set->ids[i]=NO_ID;
+    set->n_ids--;
+    return OK;
+}
+/** set_print prints all the information of the given set
+ */
+Status set_print(Set *set){
+    int i;
+    /* Error control */
+    if(set==NULL || set->n_ids>MAX_NUM_IDS || set->n_ids<=0){
+        return ERROR;
+    }
+    for(i=0; i<set->n_ids; i++){
+        fprintf(stdout, "Id %d de %d: %ld\n", i+1, set->n_ids, set->ids[i]);
+    }
+    return OK;
+}

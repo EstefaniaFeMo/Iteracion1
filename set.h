@@ -39,6 +39,36 @@ Set * set_create();
  */
 Status object_destroy(Set *set);
 
+/**
+ * @brief It adds in the array of IDs in the last position of it the given ID 
+ * when the parameters are appropiate and if the capacity of the array is not full.
+ * @author Estefanía Fenoy Montes
+ *
+ * @param set a pointer to the set which contains the array with Ids and in which the given ID will be added.
+ * @param id and ID with the identifier that will be added into the array.
+ * @return OK, if everything goes well or ERROR in case there was some mistake
+ */
+Status set_add(Set *set, Id id);
+
+/**
+ * @brief It deleates in the array of IDs  the given ID when the parameters are appropiate and if ID is part of the array.
+ * @author Estefanía Fenoy Montes
+ *
+ * @param set a pointer to the set which contains the array with Ids and in which the given ID will be deleated.
+ * @param id and ID with the identifier that will be desleated of the array.
+ * @return OK, if everything goes well or ERROR in case there was some mistake
+ */
+Status set_del(Set *set, Id id);
+
+/**
+ * @brief It prints all the set information
+ * @author Estefanía Fenoy Montes
+ *
+ * This fucntion shows in order the IDs of the array and the number of these.
+ * @param set a pointer to the set that will be printed
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status set_print(Set *set);
 
 
 
