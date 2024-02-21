@@ -3,7 +3,7 @@
  * for each command in order to read the possible spaces and elements of the game
  *
  * @file game_reader.c
- * @author Estefanía Fenoy Montes, Carmen Gómez Escobar
+ * @author Profesores PPROG, Estefanía Fenoy Montes
  * @version 3.5
  * @date 04-02-2024
  * @copyright GNU Public License
@@ -14,7 +14,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-/*game_reader_load_spaces downloads the spaces defined in a file*/
+/*game_reader_load_spaces downloads the spaces defined in a file
+*/
 Status game_reader_load_spaces(Game *game, char *filename)
 {
   /*Initialization of the variables*/

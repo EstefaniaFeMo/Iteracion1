@@ -2,16 +2,18 @@
  * @brief It implements the command interpreter interface
  *
  * @file command.h
- * @author Estefanía Fenoy Montes, Carmen Gómez Escobar
+ * @author Profesores PPROG, Carmen Gómez Escobar
  * @version 3.5
- * @date 26-01-2024
+ * @date 6-02-2024
  * @copyright GNU Public License
  */
 
 #ifndef COMMAND_H
 #define COMMAND_H
 
+/** The number of the command types*/
 #define N_CMDT 2
+/** The number of possible commands*/
 #define N_CMD 7
 
 /**
@@ -28,8 +30,8 @@ typedef enum
 /**
  * @brief Command
  *
- * This struct defines the possible values of the commands, NO_CMD, UNKNOWN, EXIT, NEXT
- * or BACK.
+ * This struct defines the possible values of the commands, NO_CMD, UNKNOWN, EXIT, NEXT, 
+ * BACK, TAKE, or DROP.
  */
 typedef enum
 {
@@ -44,7 +46,7 @@ typedef enum
 
 /**
  * @brief  It reads a command recived from the user input and gives the asociated value defined in the Command struct.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ * @author Profesores PPROG, Carmen Gómez Escobar
  *
  * @return  cmd, a Command variable whcich value is the asociated command to the word recived.
  */

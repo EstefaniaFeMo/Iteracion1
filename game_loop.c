@@ -2,9 +2,9 @@
  * @brief It defines the game loop
  *
  * @file game_loop.c
- * @author Profesores PPROG
+ * @author Profesores PPROG, Carmen Gómez Escobar
  * @version 3.5
- * @date 26-01-2024
+ * @date 07-02-2024
  * @copyright GNU Public License
  */
 
@@ -17,9 +17,9 @@
 #include "graphic_engine.h"
 
 /**
- * @brief It starts the game, this function chscks if the file has been read correctly and if the memory reserve of the pointer
+ * @brief It starts the game, this function checks if the file has been read correctly and if the memory reserve of the pointer
  *  gengine has been done and if everything worked, the game starts.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar.
+ * @author Profesores PPROG, Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
  * @param gengine a matix to the structure Graphic_engine.
@@ -32,7 +32,7 @@ int game_loop_init(Game *game, Graphic_engine **gengine, char *file_name);
 /**
  * @brief It is the loop that makes the game keep going until the exit command is recived by the user input or tha function that
  *  indicates that the game is finished returns a TRUE value.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar.
+ * @author Profesores PPROG, Carmen Gómez Escobar
  *
  * @param game a type Game variable.
  * @param gengine a pointer to Graphic_engine.
@@ -41,7 +41,7 @@ void game_loop_run(Game game, Graphic_engine *gengine);
 
 /**
  * @brief It is the function that ends the game, calling to the functions that destroy the spaces and the structures.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar.
+ * @author Profesores PPROG, Carmen Gómez Escobar
  *
  * @param game a type Game variable.
  * @param gengine a pointer to Graphic_engine.
@@ -49,15 +49,7 @@ void game_loop_run(Game game, Graphic_engine *gengine);
 void game_loop_cleanup(Game game, Graphic_engine *gengine);
 
 /**
- * @brief It is the main function, which starts checking if the command contains at least two elements, if not, it returns error.
- *  Then calls the function that starts the game, and if this one does not return 0, calls the function that starts the game loop.
- *  When it finishes, it calls the function that ends the game.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar.
- *
- * @param argv a char array that contains the position of the game, the first one if it is not started and the second one if it is..
- * @param argc the number of commands that have been read.
- * @return 1, if something went wrong.
- * @return 0, if everything has worked out.
+ * @brief It is the main function.
  */
 int main(int argc, char *argv[])
 {
@@ -79,16 +71,8 @@ int main(int argc, char *argv[])
   return 0;
 }
 
-/**
- * @brief It starts the game, this function chscks if the file has been read correctly and if the memory reserve of the pointer
+/** game_loop_init starts the game, this function checks if the file has been read correctly and if the memory reserve of the pointer
  *  gengine has been done and if everything worked, the game starts.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar.
- *
- * @param game a pointer to the struct called Game.
- * @param gengine a matix to the structure Graphic_engine.
- * @param file_name a pointer to the name of the file taht contains the spaces.
- * @return 1, if the file couldn't be open or if the dynamic memory reserved failed.
- * @return 0, if everythinf went fine.
  */
 int game_loop_init(Game *game, Graphic_engine **gengine, char *file_name)
 {
@@ -108,13 +92,8 @@ int game_loop_init(Game *game, Graphic_engine **gengine, char *file_name)
   return 0;
 }
 
-/**
- * @brief It is the loop that makes the game keep going until the exit command is recived by the user input or tha function that
+/** game_loop_run is the loop that makes the game keep going until the exit command is recived by the user input or tha function that
  *  indicates that the game is finished returns a TRUE value.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar.
- *
- * @param game a type Game variable.
- * @param gengine a pointer to Graphic_engine.
  */
 void game_loop_run(Game game, Graphic_engine *gengine)
 {
@@ -129,14 +108,12 @@ void game_loop_run(Game game, Graphic_engine *gengine)
 }
 
 /**
- * @brief It is the function that ends the game, calling to the functions that destroy the spaces and the structures.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar.
- *
- * @param game a type Game variable.
- * @param gengine a pointer to Graphic_engine.
+ *  game_loop_cleanup ends the game, calling to the functions that destroy the spaces and the structures.
  */
 void game_loop_cleanup(Game game, Graphic_engine *gengine)
 {
+  
   game_destroy(&game);
   graphic_engine_destroy(gengine);
+
 }

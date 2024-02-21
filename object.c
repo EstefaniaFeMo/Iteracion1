@@ -33,19 +33,19 @@ Object *object_create(Id id)
     /* Error control */
     if (id == NO_ID)
         return NULL;
-    /*Dynamic reserve of memory*/
+
     newObject = (Object *)malloc(sizeof(Object));
+    
     /* Error control of the reserve */
     if (newObject == NULL)
     {
         return NULL;
     }
 
-    /* Initialization of an empty object*/
+    
     newObject->id = id;
     newObject->name[0] = '\0';
 
-    /*Return the new object initializated*/
     return newObject;
 }
 
@@ -58,11 +58,11 @@ Status object_destroy(Object *object)
     {
         return ERROR;
     }
-    /* Free memory of the object*/
+
     free(object);
-    /*Initilizate object*/
+
     object = NULL;
-    /* Return status==OK when the memory is released*/
+
     return OK;
 }
 
@@ -93,7 +93,7 @@ Status object_set_name(Object *object, char *name)
         /* Error control */
         return ERROR;
     }
-    /*Indication that the name has been set correctly*/
+
     return OK;
 }
 
@@ -119,9 +119,8 @@ Status object_print(Object *object)
         return ERROR;
     }
 
-    /* Print the id and the name of the object */
+
     fprintf(stdout, "--> Object (Id: %ld; Name: %s)\n", object->id, object->name);
 
-    /*Indication that the function has worked correctly*/
     return OK;
 }

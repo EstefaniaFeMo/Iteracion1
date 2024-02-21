@@ -2,9 +2,9 @@
  * @brief It defines the game interface for the players control, decribing its location, name, identification and the carried object. It also creates and destroys players
  *
  * @file player.c
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ * @author Carmen Gómez Escobar
  * @version 3.5
- * @date 14-02-2024
+ * @date 10-02-2024
  * @copyright GNU Public License
  */
 
@@ -27,13 +27,8 @@ struct _Player
     Id object;                /*!< Id of the object that player has */
 };
 
-/**
- * @brief It creates a new player, reserving dynamic memory and initializing its variables
- * @author Carmen Gómez Escobar
- *
- * @param id the identification number of the player which is going to be created
- * @return a new player and its variables initialized
- */
+/** player_create creates a new player, reserving dynamic memory and initializing its variables 
+*/
 Player *player_create(Id id)
 {
     Player *newPlayer = NULL;
@@ -48,7 +43,7 @@ Player *player_create(Id id)
         return NULL;
     }
 
-    /* Initialization of an empty space*/
+    newPlayer->location = NO_ID;
     newPlayer->id = id;
     newPlayer->name[0] = '\0';
     newPlayer->object = NO_ID;
@@ -56,14 +51,8 @@ Player *player_create(Id id)
     return newPlayer;
 }
 
-/**
- * @brief It destroys a player and releases the reserved memory
- * @author Carmen Gómez Escobar
- *
- * @param player a pointer to the player that will be destroyed
- * @return OK, if everything went well
- * @return ERROR, if it was some mistake
- */
+/** player_destroy, destroys a player and releases the reserved memory 
+*/
 Status player_destroy(Player *player)
 {
     if (!player)
@@ -76,13 +65,8 @@ Status player_destroy(Player *player)
     return OK;
 }
 
-/**
- * @brief It gets the id of a player
- * @author Carmen Gómez Escobar
- *
- * @param player a pointer to the player in order to access to the ID
- * @return the ID of player
- */
+/** player_get_id, gets the id of the player 
+*/
 Id player_get_id(Player *player)
 {
     if (!player)
@@ -92,15 +76,8 @@ Id player_get_id(Player *player)
     return player->id;
 }
 
-/**
- * @brief It sets the name of a player
- * @author Carmen Gómez Escobar
- *
- * @param player a pointer to the player
- * @param name a string with the name of the player
- * @return OK, if everything went well
- * @return ERROR, if it was some mistake
- */
+/** player_set_name, sets the name of the player 
+*/
 Status player_set_name(Player *player, char *name)
 {
     if (!player || !name)
@@ -115,13 +92,8 @@ Status player_set_name(Player *player, char *name)
     return OK;
 }
 
-/**
- * @brief It gets the name of a player
- * @author Carmen Gómez Escobar
- *
- * @param player a pointer to the player that allows access to its name
- * @return  a string with the name of the player
- */
+/** player_get_name, gets the name of the player 
+*/
 const char *player_get_name(Player *player)
 {
     if (!player)
@@ -131,14 +103,8 @@ const char *player_get_name(Player *player)
     return player->name;
 }
 
-/**
- * @brief It sets the new object carried by the player.
- * @author Carmen Gómez Escobar
- *
- * @param player a pointer to the player that allows access to its name
- * @param id a long variable with the position
- * @return OK if everything worked, ERROR if something went wrong
- */
+/** player_set_location, sets the location of the player 
+*/
 Status player_set_location(Player *player, Id id)
 {
     if (!player || id == NO_ID)
@@ -149,13 +115,8 @@ Status player_set_location(Player *player, Id id)
     return OK;
 }
 
-/**
- * @brief It changes the localization of the player.
- * @author Carmen Gómez Escobar
- *
- * @param player a pointer to the player that allows access to its name
- * @return the id of the player
- */
+/** player_get_location, gets the location of the player 
+*/
 Id player_get_location(Player *player)
 {
     if (!player)
@@ -164,15 +125,8 @@ Id player_get_location(Player *player)
     }
     return player->location;
 }
-
-/**
- * @brief It sets the new object carried by the player.
- * @author Carmen Gómez Escobar
- *
- * @param player a pointer to the player that allows access to its name
- * @param id a long variable with the position
- * @return OK if everything worked, ERROR if something went wron
- */
+/** player_set_object, sets the new object carried by the player 
+*/
 Status player_set_object(Player *player, Id object)
 {
     if (!player)
@@ -184,13 +138,8 @@ Status player_set_object(Player *player, Id object)
     return OK;
 }
 
-/**
- * @brief It changes the position of the object in order to be with the player the player
- * @author Carmen Gómez Escobar
- *
- * @param player a pointer to the player that allows access to its name
- * @return the ID of the object that the player has
- */
+/** player_get_object, gets the position of the object carried by the player 
+*/
 Id player_get_object(Player *player)
 {
     if (!player)
@@ -200,15 +149,8 @@ Id player_get_object(Player *player)
     return player->object;
 }
 
-/**
- * @brief It prints the players ID and name
- * @author Carmen Gómez Escobar
- *
- * This function shows the information of player: id and name of the space.
- * @param player a pointer to the palyer
- * @return OK, if everything went well
- * @return ERROR, if it was some mistake
- */
+/** player_print, prints the id of the player 
+*/
 Status player_print(Player *player)
 {
     /* Error Control */
@@ -217,12 +159,11 @@ Status player_print(Player *player)
         return ERROR;
     }
 
-    /* Print the id and the name of the player */
+
     fprintf(stdout, "--> Player (Id: %ld; Name: %s)\n", player->id, player->name);
 
-    /* Print the location and the name of the player */
     fprintf(stdout, "--> Player (Location link: %ld)\n", player->location);
 
-    /*Indication that the function has worked correctly*/
+
     return OK;
 }
