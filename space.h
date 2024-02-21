@@ -2,9 +2,9 @@
  * @brief It defines the space interface
  *
  * @file space.h
- * @author Profesores PPROG
+ * @author Profesores PPROG, Estefanía Fenoy Montes
  * @version 3.5
- * @date 26-01-2024
+ * @date 12-02-2024
  * @copyright GNU Public License
  */
 
@@ -130,7 +130,7 @@ Id space_get_west(Space *space);
 
 /**
  * @brief It sets the ID of the object in the space
- * @author Profesores PPROG
+ * @author Profesores PPROG, Estefanía Fenoy Montes
  *
  * @param space a pointer to the space
  * @param value a boolean, specifying if in the space there is an object (TRUE) or not (FALSE)
@@ -140,7 +140,7 @@ Status space_set_object(Space *space, Id object);
 
 /**
  * @brief It gets the ID of the space where object is
- * @author Profesores PPROG
+ * @author Profesores PPROG, Estefanía Fenoy Montes
  *
  * @param space a pointer to the space
  * @return the ID of the object which is in the space
