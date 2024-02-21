@@ -53,4 +53,5 @@ e intentar acceder a él.
 ## 21-01-2024
 - **C** Terminado el módulo character y todas sus funciones
 - **C** Modificado el módulo player para que contenga sus puntos de vida
+- **E** Terminado módulo set 
   
