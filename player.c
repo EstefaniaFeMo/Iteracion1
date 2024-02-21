@@ -25,10 +25,10 @@ struct _Player
     char name[WORD_SIZE + 1]; /*!< Name of the player */
     Id location;              /*!< Id of the location in which the player is */
     Id object;                /*!< Id of the object that player has */
+    int health;               /*!< Number of point of life the player has */
 };
 
-/** player_create creates a new player, reserving dynamic memory and initializing its variables 
-*/
+/** player_create creates a new player, reserving dynamic memory and initializing its variables */
 Player *player_create(Id id)
 {
     Player *newPlayer = NULL;
@@ -43,16 +43,16 @@ Player *player_create(Id id)
         return NULL;
     }
 
-    /* Initialization of an empty space*/
+    /* Initialization of an empty player*/
     newPlayer->id = id;
     newPlayer->name[0] = '\0';
     newPlayer->object = NO_ID;
+    newPlayer->health = PLAYER_HEALTH;
 
     return newPlayer;
 }
 
-/** player_destroy, destroys a player and releases the reserved memory 
-*/
+/** player_destroy, destroys a player and releases the reserved memory */
 Status player_destroy(Player *player)
 {
     if (!player)
@@ -65,8 +65,7 @@ Status player_destroy(Player *player)
     return OK;
 }
 
-/** player_get_id, gets the id of the player 
-*/
+/** player_get_id, gets the id of the player */
 Id player_get_id(Player *player)
 {
     if (!player)
@@ -76,8 +75,7 @@ Id player_get_id(Player *player)
     return player->id;
 }
 
-/** player_set_name, sets the name of the player 
-*/
+/** player_set_name, sets the name of the player */
 Status player_set_name(Player *player, char *name)
 {
     if (!player || !name)
@@ -92,8 +90,7 @@ Status player_set_name(Player *player, char *name)
     return OK;
 }
 
-/** player_get_name, gets the name of the player 
-*/
+/** player_get_name, gets the name of the player */
 const char *player_get_name(Player *player)
 {
     if (!player)
@@ -103,8 +100,7 @@ const char *player_get_name(Player *player)
     return player->name;
 }
 
-/** player_set_location, sets the location of the player 
-*/
+/** player_set_location, sets the location of the player */
 Status player_set_location(Player *player, Id id)
 {
     if (!player || id == NO_ID)
@@ -115,8 +111,7 @@ Status player_set_location(Player *player, Id id)
     return OK;
 }
 
-/** player_get_location, gets the location of the player 
-*/
+/** player_get_location, gets the location of the player */
 Id player_get_location(Player *player)
 {
     if (!player)
@@ -125,8 +120,7 @@ Id player_get_location(Player *player)
     }
     return player->location;
 }
-/** player_set_object, sets the new object carried by the player 
-*/
+/** player_set_object, sets the new object carried by the player */
 Status player_set_object(Player *player, Id object)
 {
     if (!player)
@@ -138,8 +132,7 @@ Status player_set_object(Player *player, Id object)
     return OK;
 }
 
-/** player_get_object, gets the position of the object carried by the player 
-*/
+/** player_get_object, gets the position of the object carried by the player */
 Id player_get_object(Player *player)
 {
     if (!player)
@@ -149,8 +142,33 @@ Id player_get_object(Player *player)
     return player->object;
 }
 
-/** player_print, prints the id of the player 
-*/
+/** player_set_health, sets the health of the player */
+Status palyer_set_health(Player *player, int health)
+{
+    /* Error Control */
+    if (!player || !health)
+    {
+        return ERROR;
+    }
+
+    player->health = health;
+
+    return OK;
+}
+
+/** character_get_health, gets the health of the player */
+int character_get_health(Player *player)
+{
+    /* Error Control */
+    if (!player)
+    {
+        return NULL;
+    }
+
+    return player->health;
+}
+
+/** player_print, prints the id of the player */
 Status player_print(Player *player)
 {
     /* Error Control */
@@ -159,11 +177,19 @@ Status player_print(Player *player)
         return ERROR;
     }
 
-    /* Print the id and the name of the player */
-    fprintf(stdout, "--> Player (Id: %ld; Name: %s)\n", player->id, player->name);
+    /* Print the location and the health of the player */
+    fprintf(stdout, "--> Player: %ld (%d)\n", player->location, player->health);
 
-    /* Print the location and the name of the player */
-    fprintf(stdout, "--> Player (Location link: %ld)\n", player->location);
+    /* Print whether or not the player has an object */
+
+    if (player_get_object(player) == TRUE)
+    {
+        fprintf(stdout, "The player has an object\n");
+    }
+    else if (player_get_object(player) == FALSE)
+    {
+        fprintf(stdout, "The player has no object\n");
+    }
 
     /*Indication that the function has worked correctly*/
     return OK;
