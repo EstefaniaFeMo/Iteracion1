@@ -1,7 +1,3 @@
-/* Si lo inicializas a enemigo nada, pero si es a amigo, que inicie con un mensaje
- * número de vidas de player y character lo defines en los dos .h para probar la lucha, y que muere del todo
- * */
-
 /**
  * @brief It defines the game interface for the characters control, decribing its location, name, identification and their health. It also
  * determinates if the character is friendly, and if he has any message.
@@ -132,7 +128,7 @@ int character_get_health(Character *character)
     /* Error Control */
     if (!character)
     {
-        return NULL;
+        return -1;
     }
 
     return character->health;
@@ -158,7 +154,7 @@ Bool character_get_friendly(Character *character)
     /* Error Control */
     if (!character)
     {
-        return NULL;
+        return FALSE;
     }
 
     return character->friendly;
@@ -220,11 +216,11 @@ Status character_print(Character *character)
 
     /* Print the character, its location and points of life */
 
-    if (charcter_get_freindly(character) == FALSE)
+    if (character_get_friendly(character) == FALSE)
     {
-        fprintf(stdout, "--> /\oo/\ : %ld, (%d)\n", character->id, character->health);
+        fprintf(stdout, "--> /|oo/| : %ld, (%d)\n", character->id, character->health);
     }
-    else if (charcter_get_freindly(character) == TRUE)
+    else if (character_get_friendly(character) == TRUE)
     {
         fprintf(stdout, "--> ^0m : %ld, (%d)\n", character->id, character->health);
     }
