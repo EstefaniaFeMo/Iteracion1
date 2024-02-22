@@ -14,7 +14,7 @@
 /** The number of the command types*/
 #define N_CMDT 2
 /** The number of possible commands*/
-#define N_CMD 7
+#define N_CMD 10
 
 /**
  * @brief CommandType
@@ -41,7 +41,10 @@ typedef enum
     NEXT,
     BACK,
     TAKE,
-    DROP
+    DROP, 
+    LEFT, 
+    RIGTH,
+    ATTACK
 } Command;
 
 /**
