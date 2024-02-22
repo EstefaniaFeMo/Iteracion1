@@ -9,7 +9,6 @@
  */
 
 #include "space.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -27,7 +26,7 @@ struct _Space
   Id south;                 /*!< Id of the space at the south */
   Id east;                  /*!< Id of the space at the east */
   Id west;                  /*!< Id of the space at the west */
-  Id object;                /*!< Id of the object at the space*/
+  Set * objects;                /*!< Set with the IDs of the objects*/
 };
 
 /** space_create allocates memory for a new space and initializes its members 
@@ -53,7 +52,7 @@ Space *space_create(Id id)
   newSpace->south = NO_ID;
   newSpace->east = NO_ID;
   newSpace->west = NO_ID;
-  newSpace->object = NO_ID;
+  newSpace->objects= set_create;
 
   return newSpace;
 }
@@ -210,19 +209,21 @@ Status space_set_object(Space *space, Id object)
   {
     return ERROR;
   }
-  space->object = object;
+  if(set_add(space->objects, object)==ERROR){
+    return ERROR;
+  }
   return OK;
 }
 
 /** space_get_object gets the ID of the space where the object is 
 */
-Id space_get_object(Space *space)
+Id * space_get_object(Space *space)
 {
-  if (!space)
+  if (!space || space->objects==NULL)
   {
     return NO_ID;
   }
-  return space->object;
+  return set_get_ids(space->objects);
 }
 
 /** space_print prints the space information 
@@ -278,12 +279,9 @@ Status space_print(Space *space)
     fprintf(stdout, "---> No west link.\n");
   }
 
-  /* 3. Print the ID of the object */
-  idaux = space_get_object(space);
-  if (NO_ID != idaux)
-  {
-    fprintf(stdout, "---> Object: %ld\n", idaux);
-  }
+  /* 3. Print the IDs of the objects */
+  fprintf(stdout, "Objects: \n");
+  if (set_print(space->objects)==OK);
   else
   {
     fprintf(stdout, "---> No object.\n");
@@ -291,3 +289,14 @@ Status space_print(Space *space)
 
   return OK;
 }
+
+Bool space_check_object(Space * space, Id object){
+  if(space==NULL || object==NO_ID){
+    return FALSE;
+  }
+  if(set_check_id(space->objects, object)==FALSE){
+    return FALSE;
+  }
+  return TRUE;
+}
+

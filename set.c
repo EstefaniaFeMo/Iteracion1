@@ -64,7 +64,7 @@ Status set_destroy(Set *set){
  */
 Status set_add(Set *set, Id id){
     /* Error control */
-    if(set==NULL){
+    if(set==NULL || id==NO_ID){
         return ERROR;
     }
     /* Error control */
@@ -75,15 +75,15 @@ Status set_add(Set *set, Id id){
     set->n_ids++;
     return OK;
 }
-/** set_del deleates in the array of IDs the ID given as a parameter
+/** set_del deletes in the array of IDs the ID given as a parameter
  */
 Status set_del(Set *set, Id id){
     int i, flag, j;
     /* Error control */
-    if(set==NULL || set->n_ids>MAX_NUM_IDS || set->n_ids<=0){
+    if(set==NULL || set->n_ids>MAX_NUM_IDS || set->n_ids<=0 || id==NO_ID){
         return ERROR;
     }
-
+    /*This loop finds if there given id is in the array with the use of the variable flag*/
     for(i=flag=0; i<set->n_ids; i++){
         if(set->ids[i]==id){
             flag=1;
@@ -94,11 +94,13 @@ Status set_del(Set *set, Id id){
     if(!flag){
         return ERROR;
     }
-
+    /*It restructurates the array having the position of the Id that will be deleted
+    moving the following IDs one position back*/
     for(j=i+1; j<set->n_ids; j++, i++){
         set->ids[i]=set->ids[j];
     }
 
+    /*The last ID that will be duplicated is set as NO_ID and the number of IDs will be decrease by one*/
     set->ids[i]=NO_ID;
     set->n_ids--;
     return OK;
@@ -112,7 +114,34 @@ Status set_print(Set *set){
         return ERROR;
     }
     for(i=0; i<set->n_ids; i++){
-        fprintf(stdout, "Id %d de %d: %ld\n", i+1, set->n_ids, set->ids[i]);
+        fprintf(stdout, " 02%d: %ld\n", i+1, set->n_ids, set->ids[i]);
     }
     return OK;
+}
+
+/** set_check_id  checks if the given Id is in the set*/
+Bool set_check_id(Set * set, Id id){
+    int i, flag;
+    /* Error control */
+    if(set==NULL || id==NO_ID){
+        return FALSE;
+    }
+    for(i=flag=0; i<set->n_ids; i++){
+        if(set->ids[i]==id){
+            flag=1;
+            break;
+        }
+    }
+    if(!flag){
+        return FALSE;
+    }
+    return TRUE;
+}
+/** set_get_ids obtains the array of IDs in the set*/
+Id * set_get_ids(Set *set){
+    /* Error control */
+    if(set==NULL){
+        return NULL;
+    }
+    return set->ids;
 }

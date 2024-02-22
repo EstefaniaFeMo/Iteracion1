@@ -51,7 +51,7 @@ Status object_destroy(Set *set);
 Status set_add(Set *set, Id id);
 
 /**
- * @brief It deleates in the array of IDs  the given ID when the parameters are appropiate and if ID is part of the array.
+ * @brief It deletes in the array of IDs  the given ID when the parameters are appropiate and if ID is part of the array.
  * @author Estefanía Fenoy Montes
  *
  * @param set a pointer to the set which contains the array with Ids and in which the given ID will be deleated.
@@ -70,6 +70,24 @@ Status set_del(Set *set, Id id);
  */
 Status set_print(Set *set);
 
+/**
+ * @brief It checks if the given Id is part of the array of IDs of the set
+ * @author Estefanía Fenoy Montes
+ *
+ * @param set a pointer to the set that cantains the array of IDs 
+ * @param id an identifier with the ID that will be checked if it is in the array
+ * @return TRUE, if the ID is part of the set or FALSE if not or if there had been
+ */
+Bool set_check_id(Set * set, Id id);
+
+/**
+ * @brief It obtains the array of IDs in the set
+ * @author Estefanía Fenoy Montes
+ *
+ * @param set a pointer to the set that cantains the array of IDs 
+ * @return the array of IDs of the set
+ */
+Id * set_get_ids(Set *set);
 
 
 #endif

@@ -50,8 +50,11 @@ e intentar acceder a él.
 ## 20-02-2024
 - **C** He empezado a implementar el módulo character que incluye character.c y character.h
 
-## 21-01-2024
+## 21-02-2024
 - **C** Terminado el módulo character y todas sus funciones
 - **C** Modificado el módulo player para que contenga sus puntos de vida
 - **E** Terminado módulo set 
+
+## 22-02-2024
+- **E** Modificaciones (aunque aun no terminadas) en el modulo space con el modulo set y nuevas funciones para set. (preguntar al profesor si hay que comprobar que las ids del array son unicas o darlo por supuesto)
   
