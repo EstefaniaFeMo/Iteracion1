@@ -17,7 +17,7 @@
 /** This is the max length the command can be*/
 #define CMD_LENGHT 30
 
-char *cmd_to_str[N_CMD][N_CMDT] = {{"", "No command"}, {"", "Unknown"}, {"e", "Exit"}, {"n", "Next"}, {"b", "Back"}, {"t", "Take"}, {"d", "Drop"}};
+char *cmd_to_str[N_CMD][N_CMDT] = {{"", "No command"}, {"", "Unknown"}, {"e", "Exit"}, {"n", "Next"}, {"b", "Back"}, {"t", "Take"}, {"d", "Drop"}, {"l", "Left"}, {"r", "Rigth"}, {"a", "Attack"}};
 
 /** command_get_user_input reads a command recived from the user input and gives the asociated value defined in the Command struct. */
 Command command_get_user_input()

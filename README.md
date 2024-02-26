@@ -57,4 +57,5 @@ e intentar acceder a él.
 
 ## 22-02-2024
 - **E** Modificaciones (aunque aun no terminadas) en el modulo space con el modulo set y nuevas funciones para set. (preguntar al profesor si hay que comprobar que las ids del array son unicas o darlo por supuesto)
-  
+- **C** Creado la función game_reader_load_objects, y empezado a implemenatar los nuevos comandos.
+- **C** Modificado el fichero para que contenga 4 objetos

@@ -21,7 +21,7 @@
 */
 
 /**
- * @brief Carga los espacios definidos en un fichero
+ * @brief recives a pointer to Game in the case that the command that the function that calls this one is unknown.
  * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
@@ -29,7 +29,7 @@
 void game_actions_unknown(Game *game);
 
 /**
- * @brief Carga los espacios definidos en un fichero
+ * @brief recives a pointer to Game in the case that the command that the function that calls this one is exit.
  * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
@@ -37,7 +37,8 @@ void game_actions_unknown(Game *game);
 void game_actions_exit(Game *game);
 
 /**
- * @brief Carga los espacios definidos en un fichero
+ * @brief recives a pointer to Game in the case that the command that the function that calls this one is next,
+ * and calls to a function that reads which is the space below and sends the player there.
  * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
@@ -46,7 +47,8 @@ void game_actions_exit(Game *game);
 void game_actions_next(Game *game);
 
 /**
- * @brief Carga los espacios definidos en un fichero
+ * @brief recives a pointer to Game in the case that the command that the function that calls this one is back,
+ * and calls to a function that reads which is the space above and sends the player there.
  * @author Estefania Fenoy Montes, Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
@@ -71,6 +73,37 @@ void game_actions_take(Game *game);
  * @param game a pointer to the struct called Game which contains the current information of the game session.
  */
 void game_actions_drop(Game *game);
+
+/**
+ * @brief recives a pointer to Game in the case that the command that the function that calls this one is left,
+ * and calls to a function that reads which is the space located at the left and sends the player there.
+ * @author Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct called Game.
+ */
+
+void game_actions_left(Game *game);
+
+/**
+ * @brief recives a pointer to Game in the case that the command that the function that calls this one is rigth,
+ * and calls to a function that reads which is the space located at the rigth and sends the player there.
+ * @author Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct called Game.
+ */
+
+void game_actions_rigth(Game *game);
+
+/**
+ * @brief recives a pointer to Game in the case that the command that the function that calls this one is attcak,
+ * and starts a figth with the character if it is not friendly.
+ * @author Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct called Game.
+ */
+
+void game_actions_attack(Game *game);
+
 
 /**
    Game actions implementation
@@ -107,6 +140,18 @@ Status game_actions_update(Game *game, Command cmd)
 
   case TAKE:
     game_actions_take(game);
+    break;
+
+   case LEFT:
+    game_actions_left(game);
+    break;
+
+  case RIGTH:
+    game_actions_rigth(game);
+    break;
+
+  case ATTACK:
+    game_actions_attack(game);
     break;
 
   default:
@@ -212,3 +257,54 @@ void game_actions_drop(Game *game)
   }
   return;
 }
+
+/** game_actions_left recives a pointer to Game in the case that the command that the function that calls this one is left,
+ * and calls to a function that reads which is the space located at the left and sends the player there.*/
+void game_actions_left(Game *game){
+  Id current_id = NO_ID;
+  Id space_id = NO_ID;
+
+  space_id = game_get_player_location(game);
+
+  if (NO_ID == space_id)
+  {
+    return;
+  }
+
+  current_id = space_get_west(game_get_space(game, space_id));
+  if (current_id != NO_ID)
+  {
+    game_set_player_location(game, current_id);
+  }
+
+  return;
+}
+
+/** game_actions_rigth recives a pointer to Game in the case that the command that the function that calls this one is rigth,
+ * and calls to a function that reads which is the space located at the rigth and sends the player there.*/
+void game_actions_rigth(Game *game){
+  Id current_id = NO_ID;
+  Id space_id = NO_ID;
+
+  space_id = game_get_player_location(game);
+
+  if (NO_ID == space_id)
+  {
+    return;
+  }
+
+  current_id = space_get_east(game_get_space(game, space_id));
+  if (current_id != NO_ID)
+  {
+    game_set_player_location(game, current_id);
+  }
+
+  return;
+}
+
+/** game_actions_attack recives a pointer to Game in the case that the command that the function that calls this one is attcak,
+ * and starts a figth with the character if it is not friendly.*/
+void game_actions_attack(Game *game){
+  return;
+}
+
