@@ -37,7 +37,7 @@ Set * set_create();
  * @param set a pointer to the set that will be destroyed
  * @return OK, if everything goes well or ERROR in case there was some mistake
  */
-Status object_destroy(Set *set);
+Status set_destroy(Set *set);
 
 /**
  * @brief It adds in the array of IDs in the last position of it the given ID 

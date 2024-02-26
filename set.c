@@ -114,7 +114,7 @@ Status set_print(Set *set){
         return ERROR;
     }
     for(i=0; i<set->n_ids; i++){
-        fprintf(stdout, " 02%d: %ld\n", i+1, set->n_ids, set->ids[i]);
+        fprintf(stdout, " 02%d: %ld\n", i+1, set->ids[i]);
     }
     return OK;
 }

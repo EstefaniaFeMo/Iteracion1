@@ -16,11 +16,16 @@
 #include "types.h"
 #include "object.h"
 #include "player.h"
+
 /**Macro with the maximum number of spaces*/
 #define MAX_SPACES 100
+/**Macro with the id of player and object when they are initialized*/
 #define ID_PLAYER 0
 #define ID_OBJECT 0
-#define ERROR_SPACE -1
+/*Macro with the maximum number of objects*/
+#define MAX_OBJECTS 5
+/*Macro with the maximum number of players*/
+#define MAX_CHARACTERS 4
 
 
 /**
@@ -29,10 +34,13 @@
  * This struct contains all the information related to the data of the game.
  */
 typedef struct _Game {
-  Object *object;/*!< Information of the object */
+  Object *objects[MAX_OBJECTS];/*!< Array with different objects */
   Player *player;/*!< Information of the player */
+  Player *characters[MAX_CHARACTERS];
   Space *spaces[MAX_SPACES];/*!< Array with different spaces */
   int n_spaces; /*!< Number of spaces*/
+  int n_objects; /*!< Number of objects*/
+  int n_characters; /*!< Number of characters*/
   Command last_cmd; /*!< Command to modify the location: no actions, exit, next or back */
   Bool finished; /*!< Boolean variable whcih indicates with the values TRUE/FALSE whether the program has finished or not */
 } Game;
@@ -120,25 +128,26 @@ Id game_get_player_location(Game *game);
 Status game_set_player_location(Game *game, Id id);
 
 /**
- * @brief The function returns the value of the variable object_location of the current game
+ * @brief The function returns the Id of the space in which is tge given object
  * @author Profesores PPROG, Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct that contains the information of the current game session 
- * @return game->object_location. Always return the value of the variable.
+ * @param object an identifier of the object whose space is going to be returned
+ * @return the id of the space in which the given object is
  */
-Id game_get_object_location(Game *game);
+Id game_get_object_location(Game *game, Id object);
 
 /**
- * @brief It receives as arguments the current game session and sets the value of the 
- * variable object_location with the given ID.
+ * @brief It sets the given object of the game into the given space
  * @author Profesores PPROG, Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct that contains the information of the current game session
- * @param id is the id of the position of the space in which we want the object to be moved.
+ * @param space is the id of the position of the space in which we want the object to be moved.
+ * @param object an identifier of the object that wants to be set in the given space
  * @return status==ERROR, if the ID is not declared.
  * @return status==OK, if the ID has been set correctly.
  */
-Status game_set_object_location(Game *game, Id id);
+Status game_set_object_location(Game *game, Id space, Id object);
 
 /**
  * @brief The function returns the last command executed of the current game

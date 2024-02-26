@@ -48,15 +48,27 @@ Id game_get_space_id_at(Game *game, int position);
 Status game_create(Game *game)
 {
   int i;
+  /* Initializes all variables*/
   /* Loop to initialize all the spaces of game*/
   for (i = 0; i < MAX_SPACES; i++)
   {
     game->spaces[i] = NULL;
   }
-  /* Initializes all variables*/
   game->n_spaces = 0;
+  /* Loop to initialize all the objects of game*/
+  for (i = 0; i < MAX_OBJECTS; i++)
+  {
+    game->objects[i] = NULL;
+  }
+  game->n_objects = 0;
+  /* Loop to initialize all the players of game*/
+  for (i = 0; i < MAX_CHARACTERS; i++)
+  {
+    game->characters[i] = NULL;
+  }
+  game->n_characters = 0;
+
   game->player = NULL;
-  game->object = NULL;
   game->last_cmd = NO_CMD;
   game->finished = FALSE;
 
@@ -67,6 +79,7 @@ Status game_create(Game *game)
  */
 Status game_create_from_file(Game *game, char *filename)
 {
+  int i;
   /* Error control */
   if (game_create(game) == ERROR)
   {
@@ -78,13 +91,22 @@ Status game_create_from_file(Game *game, char *filename)
     return ERROR;
   }
 
-  /* Creates the player and the object with the id 0 */
+  /* Creates the player, all the objects and the characters with the id 0 */
   game->player = player_create(ID_PLAYER);
-  game->object = object_create(ID_OBJECT);
+  /*Puede que haya que verlo en función de lo que se haga en gamer_reader*/
+  for(i=0; i<game->n_objects; i++){
+    game->objects[i]= object_create(ID_OBJECT);
+  }
+  for(i=0; i<game->n_characters; i++){
+    game->characters[i]= player_create(ID_OBJECT);
+  }
 
   /* The player and the object are located in the first space */
   game_set_player_location(game, game_get_space_id_at(game, 0));
-  game_set_object_location(game, game_get_space_id_at(game, 0));
+  for(i=0; i<game->n_objects; i++){
+    game_set_object_location(game, game_get_space_id_at(game, 0), object_get_id(game->objects[i]));
+  }
+  
 
 
   return OK;
@@ -101,7 +123,12 @@ Status game_destroy(Game *game)
     space_destroy(game->spaces[i]);
   }
   /*Destroys the object and the player from the game and set them as NULL*/
-  object_destroy(game->object);
+  for(i=0; i<game->n_objects; i++){
+    object_destroy(game->objects[i]);
+  }
+  for(i=0; i<game->n_characters; i++){
+    player_destroy(game->characters[i]);
+  }
   player_destroy(game->player);
 
   return OK;
@@ -154,16 +181,23 @@ Status game_set_player_location(Game *game, Id id)
   return OK;
 }
 
-/*game_get_object_location returns the value of the ID location of the object in the current game
+/*game_get_object_location returns the value of the ID location of a given object in the current game
 */
-Id game_get_object_location(Game *game)
+Id game_get_object_location(Game *game, Id object)
 {
-  long i;
+  long i, j;
+  Id *ids;
+  if(object == NO_ID){
+    return NO_ID;
+  }
   for (i = 0; i < game->n_spaces; i++)
   {
-    if (space_get_object(game->spaces[i]) != NO_ID)
+    ids=space_get_objects(game->spaces[i]);
+    for(j=0; j<game->n_objects; j++){
+    if (ids[j] == object)
     {
       return space_get_id(game->spaces[i]);
+    }
     }
   }
   return NO_ID;
@@ -171,15 +205,26 @@ Id game_get_object_location(Game *game)
 
 /*game_set_object_location sets the value of the variable object_location with the given ID.
 */
-Status game_set_object_location(Game *game, Id id)
+Status game_set_object_location(Game *game, Id space, Id object)
 {
+  int i;
   /* Error control */
-  if (id == NO_ID)
+  if (space == NO_ID)
   {
     return ERROR;
   }
-  space_set_object(game_get_space(game, id), object_get_id(game->object));
-
+  /* Error control */
+  if (object == NO_ID)
+  {
+    return ERROR;
+  }
+  for (i=0; i<game->n_objects; i++){
+    if(object_get_id(game->objects[i])==object){
+      space_set_object(game_get_space(game, space), object);
+      return OK;
+    }
+  }
+  
   return ERROR;
 }
 
@@ -220,8 +265,11 @@ void game_print(Game *game)
   {
     space_print(game->spaces[i]);
   }
-
-  printf("=> Object location: %ld\n", game_get_object_location(game));
+  printf("Objects:\n");
+  for(i=0; i<game->n_objects; i++){
+   printf(" 02%d: %ld\n", i+1, game_get_object_location(game, object_get_id(game->objects[i]))); 
+  }
+  
   printf("=> Player location: %ld\n", game_get_player_location(game));
 }
 

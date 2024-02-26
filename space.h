@@ -130,23 +130,42 @@ Status space_set_west(Space *space, Id id);
 Id space_get_west(Space *space);
 
 /**
- * @brief It sets the ID of the object in the space
+ * @brief It sets the ID of an object in the set of objects of space
  * @author Profesores PPROG, Estefanía Fenoy Montes
  *
  * @param space a pointer to the space
- * @param value a boolean, specifying if in the space there is an object (TRUE) or not (FALSE)
+ * @param object an identifier of the object that will be added in the set of objects of space
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
 Status space_set_object(Space *space, Id object);
 
 /**
- * @brief It gets the ID of the space where object is
+ * @brief It gets the array of ids of the objects in the given space
  * @author Profesores PPROG, Estefanía Fenoy Montes
  *
  * @param space a pointer to the space
- * @return the ID of the object which is in the space
+ * @return the array of IDs of the object which is in the space
  */
-Set * space_get_object(Space *space);
+Id * space_get_objects(Space *space);
+/**
+ * @brief It gets the ID of the character in the given space
+ * @author Estefanía Fenoy Montes
+ *
+ * @param space a pointer to the space
+ * @return the ID of the character which is in the space
+ */
+Id space_get_character(Space * space);
+
+/**
+ * @brief It sets the ID of a character in the given space
+ * @author Estefanía Fenoy Montes
+ *
+ * @param space a pointer to the space
+ * @param character an identifier of the character that will be added in the space
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status space_set_character(Space *space, Id character);
+
 
 /**
  * @brief It prints the space information

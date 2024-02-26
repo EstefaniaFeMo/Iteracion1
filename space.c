@@ -26,7 +26,8 @@ struct _Space
   Id south;                 /*!< Id of the space at the south */
   Id east;                  /*!< Id of the space at the east */
   Id west;                  /*!< Id of the space at the west */
-  Set * objects;                /*!< Set with the IDs of the objects*/
+  Set * objects;            /*!< Set with the IDs of the objects*/
+  Id character;             /*!< Id of the character that is in the space */
 };
 
 /** space_create allocates memory for a new space and initializes its members 
@@ -52,8 +53,8 @@ Space *space_create(Id id)
   newSpace->south = NO_ID;
   newSpace->east = NO_ID;
   newSpace->west = NO_ID;
-  newSpace->objects= set_create;
-
+  newSpace->objects = set_create();
+  newSpace->character = NO_ID;
   return newSpace;
 }
 
@@ -201,7 +202,7 @@ Id space_get_west(Space *space)
   return space->west;
 }
 
-/** space_set_object sets the ID of the object in the space 
+/** space_set_object sets the ID of an object in the set of objects of the space 
 */
 Status space_set_object(Space *space, Id object)
 {
@@ -215,17 +216,30 @@ Status space_set_object(Space *space, Id object)
   return OK;
 }
 
-/** space_get_object gets the ID of the space where the object is 
-*/
-Id * space_get_object(Space *space)
+/** space_get_object gets the array of IDs that are in the set of objects of the space*/
+Id * space_get_objects(Space *space)
 {
   if (!space || space->objects==NULL)
   {
-    return NO_ID;
+    return NULL;
   }
   return set_get_ids(space->objects);
 }
-
+/*space_set_character sets the given ID of the character to the space*/
+Status space_set_character(Space *space, Id character){
+  if(!space){
+    return ERROR;
+  }
+  space->character = character;
+  return OK;
+}
+/*space_get_character obtains the ID of the character which is in the given space*/
+Id space_get_character(Space * space){
+  if(!space){
+    return NO_ID;
+  }
+  return space->character;
+}
 /** space_print prints the space information 
 */
 Status space_print(Space *space)
