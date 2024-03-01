@@ -66,9 +66,14 @@ Status space_destroy(Space *space)
   {
     return ERROR;
   }
+  if(set_destroy(space->objects)==ERROR){
+      return ERROR;
+  }
+    space->objects = NULL;
 
   free(space);
   space = NULL;
+  
   return OK;
 }
 
@@ -217,13 +222,14 @@ Status space_set_object(Space *space, Id object)
 }
 
 /** space_get_object gets the array of IDs that are in the set of objects of the space*/
-Id * space_get_objects(Space *space)
+Id space_get_object_id(Space *space, int position)
 {
-  if (!space || space->objects==NULL)
+  if (!space || position<0)
   {
-    return NULL;
+    return NO_ID;
   }
-  return set_get_ids(space->objects);
+  return set_return_id(space->objects, position);
+
 }
 /*space_set_character sets the given ID of the character to the space*/
 Status space_set_character(Space *space, Id character){

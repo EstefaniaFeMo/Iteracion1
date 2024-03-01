@@ -80,14 +80,7 @@ Status set_print(Set *set);
  */
 Bool set_check_id(Set * set, Id id);
 
-/**
- * @brief It obtains the array of IDs in the set
- * @author Estefanía Fenoy Montes
- *
- * @param set a pointer to the set that cantains the array of IDs 
- * @return the array of IDs of the set
- */
-Id * set_get_ids(Set *set);
+Id set_return_id(Set *set, int position);
 
 
 #endif

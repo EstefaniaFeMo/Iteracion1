@@ -137,11 +137,9 @@ Bool set_check_id(Set * set, Id id){
     }
     return TRUE;
 }
-/** set_get_ids obtains the array of IDs in the set*/
-Id * set_get_ids(Set *set){
-    /* Error control */
-    if(set==NULL){
-        return NULL;
+Id set_return_id(Set *set, int position){
+    if(set==NULL || position<0){
+        return NO_ID;
     }
-    return set->ids;
+    return set->ids[position];
 }

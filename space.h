@@ -111,6 +111,16 @@ Id space_get_south(Space *space);
  */
 Status space_set_east(Space *space, Id id);
 
+
+/**
+ * @brief It gets the id of the space located at the east
+ * @author Profesores PPROG
+ *
+ * @param space a pointer to the space
+ * @return the id number of the space located at the east
+ */
+Id space_get_east(Space* space);
+
 /**
  * @brief It gets the id of the space located at the east
  * @author Profesores PPROG
@@ -140,13 +150,9 @@ Id space_get_west(Space *space);
 Status space_set_object(Space *space, Id object);
 
 /**
- * @brief It gets the array of ids of the objects in the given space
- * @author Profesores PPROG, Estefanía Fenoy Montes
- *
- * @param space a pointer to the space
- * @return the array of IDs of the object which is in the space
+
  */
-Id * space_get_objects(Space *space);
+Id space_get_object_id(Space *space, int position);
 /**
  * @brief It gets the ID of the character in the given space
  * @author Estefanía Fenoy Montes
@@ -176,5 +182,7 @@ Status space_set_character(Space *space, Id character);
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
 Status space_print(Space *space);
+
+Bool space_check_object(Space * space, Id object);
 
 #endif

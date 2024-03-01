@@ -186,18 +186,16 @@ Status game_set_player_location(Game *game, Id id)
 Id game_get_object_location(Game *game, Id object)
 {
   long i, j;
-  Id *ids;
+  Id id;
   if(object == NO_ID){
     return NO_ID;
   }
   for (i = 0; i < game->n_spaces; i++)
   {
-    ids=space_get_objects(game->spaces[i]);
     for(j=0; j<game->n_objects; j++){
-    if (ids[j] == object)
-    {
-      return space_get_id(game->spaces[i]);
-    }
+      if(space_get_object_id(game->spaces[i], j)==object){
+        return space_get_id(game->spaces[i]);
+      }
     }
   }
   return NO_ID;
@@ -209,15 +207,11 @@ Status game_set_object_location(Game *game, Id space, Id object)
 {
   int i;
   /* Error control */
-  if (space == NO_ID)
+  if (space == NO_ID || object == NO_ID)
   {
     return ERROR;
   }
-  /* Error control */
-  if (object == NO_ID)
-  {
-    return ERROR;
-  }
+
   for (i=0; i<game->n_objects; i++){
     if(object_get_id(game->objects[i])==object){
       space_set_object(game_get_space(game, space), object);
