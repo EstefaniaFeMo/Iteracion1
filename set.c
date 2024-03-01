@@ -137,6 +137,7 @@ Bool set_check_id(Set * set, Id id){
     }
     return TRUE;
 }
+/*set_return_id returns and identifier of the ID which is in the given position*/
 Id set_return_id(Set *set, int position){
     if(set==NULL || position<0){
         return NO_ID;

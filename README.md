@@ -59,3 +59,6 @@ e intentar acceder a él.
 - **E** Modificaciones (aunque aun no terminadas) en el modulo space con el modulo set y nuevas funciones para set. (preguntar al profesor si hay que comprobar que las ids del array son unicas o darlo por supuesto)
 - **C** Creado la función game_reader_load_objects, y empezado a implemenatar los nuevos comandos.
 - **C** Modificado el fichero para que contenga 4 objetos
+## 01-03-2024
+- **E** Comprobado space test que funcione space, falta documentar correctamente las funciones de space, 
+modificando game con las funciones de space, la parte de objetos falta documentar y comprobar y falta las funciones de los characters

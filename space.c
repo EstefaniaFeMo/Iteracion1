@@ -221,7 +221,8 @@ Status space_set_object(Space *space, Id object)
   return OK;
 }
 
-/** space_get_object gets the array of IDs that are in the set of objects of the space*/
+/** space_get_object_id gets the identifier of a particular object that is in the space 
+ * with the given position*/
 Id space_get_object_id(Space *space, int position)
 {
   if (!space || position<0)
@@ -309,7 +310,7 @@ Status space_print(Space *space)
 
   return OK;
 }
-
+/*space_check_objects checks if the given identifier of the object is in the given space*/
 Bool space_check_object(Space * space, Id object){
   if(space==NULL || object==NO_ID){
     return FALSE;

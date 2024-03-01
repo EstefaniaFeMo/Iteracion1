@@ -79,7 +79,14 @@ Status set_print(Set *set);
  * @return TRUE, if the ID is part of the set or FALSE if not or if there had been
  */
 Bool set_check_id(Set * set, Id id);
-
+/**
+ * @brief It returns the ID of the set which is in the given position
+ * @author Estefanía Fenoy Montes
+ *
+ * @param set a pointer to the set that cantains the array of IDs 
+ * @param position an int to get the position of the ID in the array of IDS that will be given
+ * @return the Id of the given position
+ */
 Id set_return_id(Set *set, int position);
 
 
