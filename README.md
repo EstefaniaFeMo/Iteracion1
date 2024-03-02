@@ -62,3 +62,5 @@ e intentar acceder a él.
 ## 01-03-2024
 - **E** Comprobado space test que funcione space, falta documentar correctamente las funciones de space, 
 modificando game con las funciones de space, la parte de objetos falta documentar y comprobar y falta las funciones de los characters
+## 02-03-204
+- **E** Hecho y documentado todas las funciones en space y game y finalizado game
