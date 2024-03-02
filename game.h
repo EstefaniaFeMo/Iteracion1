@@ -16,12 +16,15 @@
 #include "types.h"
 #include "object.h"
 #include "player.h"
+#include "character.h"
 
 /**Macro with the maximum number of spaces*/
 #define MAX_SPACES 100
-/**Macro with the id of player and object when they are initialized*/
+/**Macro with the id of player, the object and the character when they are initialized*/
 #define ID_PLAYER 0
 #define ID_OBJECT 0
+#define ID_CHARACTER 0
+
 /*Macro with the maximum number of objects*/
 #define MAX_OBJECTS 5
 /*Macro with the maximum number of players*/
@@ -36,7 +39,7 @@
 typedef struct _Game {
   Object *objects[MAX_OBJECTS];/*!< Array with different objects */
   Player *player;/*!< Information of the player */
-  Player *characters[MAX_CHARACTERS];
+  Character *characters[MAX_CHARACTERS];
   Space *spaces[MAX_SPACES];/*!< Array with different spaces */
   int n_spaces; /*!< Number of spaces*/
   int n_objects; /*!< Number of objects*/
@@ -128,7 +131,7 @@ Id game_get_player_location(Game *game);
 Status game_set_player_location(Game *game, Id id);
 
 /**
- * @brief The function returns the Id of the space in which is tge given object
+ * @brief The function returns the Id of the space in which is the given object
  * @author Profesores PPROG, Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct that contains the information of the current game session 
@@ -148,6 +151,28 @@ Id game_get_object_location(Game *game, Id object);
  * @return status==OK, if the ID has been set correctly.
  */
 Status game_set_object_location(Game *game, Id space, Id object);
+
+/**
+ * @brief The function returns the Id of the space in which is the given character
+ * @author Estefanía Fenoy Montes
+ *
+ * @param game a pointer to the struct that contains the information of the current game session 
+ * @param character an identifier of the character whose space is going to be returned
+ * @return the id of the space in which the given character is
+ */
+Id game_get_character_location(Game *game, Id character);
+
+/**
+ * @brief It sets the given character in the given space
+ * @author Estefanía Fenoy Montes
+ *
+ * @param game a pointer to the struct that contains the information of the current game session
+ * @param space is the id of the position of the space in which we want the chaarcter to be moved.
+ * @param caharcter an identifier of the character that wants to be set in the given space
+ * @return status==ERROR, if the ID is not declared.
+ * @return status==OK, if the ID has been set correctly.
+ */
+Status game_set_character_location(Game *game, Id space, Id character);
 
 /**
  * @brief The function returns the last command executed of the current game

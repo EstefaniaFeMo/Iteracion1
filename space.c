@@ -234,7 +234,7 @@ Id space_get_object_id(Space *space, int position)
 }
 /*space_set_character sets the given ID of the character to the space*/
 Status space_set_character(Space *space, Id character){
-  if(!space){
+  if(!space || character==NO_ID){
     return ERROR;
   }
   space->character = character;
