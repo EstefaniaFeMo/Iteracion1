@@ -324,20 +324,7 @@ Status game_actions_rigth(Game *game){
 
 /** game_actions_attack recives a pointer to Game in the case that the command that the function that calls this one is attcak,
  * and starts a figth with the character if it is not friendly.*/
-Status game_actions_attack(Game *game){
-  return OK;
-}
-
-Status game_actions_chat(Game *game){
-  Id player_location=game_get_player_location(game);
-  Character *c = NULL;
-  if(space_get_character(game_get_space(game, player_location)) == NO_ID){
-    return ERROR;
-  }
-  c=game_get_character(game, space_get_character(game_get_space(game, player_location)));
-  if(character_get_friendly(c)==FALSE){
-    return ERROR;
-  }
-  return OK;
+void game_actions_attack(Game *game){
+  return;
 }
 

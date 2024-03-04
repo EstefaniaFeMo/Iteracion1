@@ -100,8 +100,6 @@ Status game_create_from_file(Game *game, char *filename)
     game_set_character_location(game, game_get_space_id_at(game, 0), character_get_id(game->characters[i]));
   }
   
-
-
   return OK;
 }
 
@@ -333,6 +331,19 @@ Status game_add_space(Game *game, Space *space)
   game->spaces[game->n_spaces] = space;
   game->n_spaces++;
 
+
+  return OK;
+}
+
+/*game_add_object adds a new object in the game->objects array 
+*/
+Status game_add_object(Game *game, Object *object){
+  if(game->objects==NULL || (game->n_objects)){
+    return ERROR;
+  }
+
+  game->objects[game->n_objects] = object;
+  game->n_objects++;
 
   return OK;
 }
