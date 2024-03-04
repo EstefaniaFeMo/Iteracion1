@@ -15,7 +15,7 @@
 
 /**
  * @brief It downloads the spaces defined in a file
- * @author Profesores PPROG, Carmen Gómez Escobar
+ * @author Carmen Gómez Escobar
  *
  * @param game a pointer to the struct, Game and it uses it to define the space that makes the function to add it
  * @param filename a pointer to the file of text that is passed as an argument to the function

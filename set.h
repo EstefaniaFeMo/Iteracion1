@@ -9,8 +9,8 @@
  */
 #ifndef SET_H
 #define SET_H
-/*Macro with the maximum value of ID's*/
-#define MAX_NUM_IDS  8
+
+#define MAX_NUM_IDS  8 /*!Macro with the maximum value of ID's*/
 
 #include "types.h"
 /**

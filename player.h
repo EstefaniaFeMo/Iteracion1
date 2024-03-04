@@ -11,7 +11,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#define PLAYER_HEALTH 5
+#define PLAYER_HEALTH 5 /*!<Indicates the health of the player*/
 
 #include "types.h"
 

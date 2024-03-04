@@ -29,7 +29,8 @@
 /**
  * @brief Graphic_engine
  *
- * This struct defines five pointers which type is Area, resulting the five posible areas of the game
+ * This struct defines five pointers which type is Area, resulting the five posible areas of the game: the map, the description, the banner, a field fot help
+ * and the feedback
  */
 struct _Graphic_engine
 {
@@ -89,8 +90,8 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, obj_loc = NO_ID;
   Space *space_act = NULL;
   char obj = '\0';
-  char str[255];
-  Command last_cmd = UNKNOWN;
+  char str[MAX_STRING];
+  CommandNum last_cmd = UNKNOWN;
   extern char *cmd_to_str[N_CMD][N_CMDT];
 
   /* Paint the in the map area */
@@ -102,7 +103,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
     id_next = space_get_south(space_act);
 
     if (game_get_object_location(game) == id_back)
-      obj = '*';
+      obj = 'O' +;
     else
       obj = ' ';
 
@@ -186,6 +187,13 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
     screen_area_puts(ge->descript, str);
   }
 
+ if (command_get_cmd(game_get_last_command(game)) == CHAT && command_get_cmd_status(game_get_last_command(game)) == OK)
+  {
+    sprintf(str, "  Message: %s", character_get_message(game_get_character(game, space_get_character(space_act)))); /*In futures iterations perhaps there'll be changes to have the ID of the object since there'd be more objects*/
+    screen_area_puts(ge->descript, str);
+  }
+
+
   /* Paint in the banner area */
   screen_area_puts(ge->banner, "    The anthill game ");
 
@@ -197,7 +205,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
   screen_area_puts(ge->help, str);
 
   /* Paint in the feedback area */
-  last_cmd = game_get_last_command(game);
+  last_cmd = command_get_cmd(game_get_last_command(game));
   sprintf(str, " %s (%s)", cmd_to_str[last_cmd - NO_CMD][CMDL], cmd_to_str[last_cmd - NO_CMD][CMDS]);
   screen_area_puts(ge->feedback, str);
 

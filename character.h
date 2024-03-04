@@ -11,7 +11,7 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#define CHARACTER_HEALTH 5
+#define CHARACTER_HEALTH 5 /*!<Macro with the health of the character*/
 
 #include "types.h"
 

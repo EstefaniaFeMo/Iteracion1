@@ -150,6 +150,16 @@ Id space_get_west(Space *space);
 Status space_set_object(Space *space, Id object);
 
 /**
+ * @brief It deletes the ID of an object in the set of objects of space
+ * @author Profesores PPROG, Estefanía Fenoy Montes
+ *
+ * @param space a pointer to the space
+ * @param object an identifier of the object that will be deleted in the set of objects of space
+ * @return OK, if everything goes well or ERROR if there was some mistake
+ */
+Status space_del_object(Space *space, Id object);
+
+/**
  * @brief It sets the ID of a particular object which is in the set of objects of the given space
  * by its position
  * @author Profesores PPROG, Estefanía Fenoy Montes

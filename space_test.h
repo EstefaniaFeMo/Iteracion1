@@ -11,6 +11,7 @@
 #ifndef SPACE_TEST_H
 #define SPACE_TEST_H
 
+#define MAX_TESTS 46 /*!<Indicates the maximum number of possible tests*/
 /**
  * @test Test space creation
  * @pre Space ID 
@@ -65,6 +66,7 @@ void test1_space_get_id();
 void test2_space_get_id();
 void test1_space_set_object();
 void test2_space_set_object();
+void test3_space_set_object();
 void test1_space_get_name();
 void test2_space_get_name();
 void test1_space_get_north();
@@ -80,4 +82,14 @@ void test2_space_check_object();
 void test3_space_check_object();
 void test1_space_get_object_id();
 void test2_space_get_object_id();
+void test1_space_del_object();
+void test2_space_del_object();
+void test3_space_del_object();
+void test4_space_del_object();
+void test1_space_set_character();
+void test2_space_set_character();
+void test3_space_set_character();
+void test1_space_get_character();
+void test2_space_get_character();
+
 #endif

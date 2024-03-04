@@ -63,7 +63,6 @@ Status player_destroy(Player *player)
     }
 
     free(player);
-    player = NULL;
     return OK;
 }
 

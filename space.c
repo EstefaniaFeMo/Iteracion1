@@ -72,7 +72,6 @@ Status space_destroy(Space *space)
     space->objects = NULL;
 
   free(space);
-  space = NULL;
   
   return OK;
 }
@@ -216,6 +215,19 @@ Status space_set_object(Space *space, Id object)
     return ERROR;
   }
   if(set_add(space->objects, object)==ERROR){
+    return ERROR;
+  }
+  return OK;
+}
+/** space_del_object deletes the ID of an object in the set of objects of the space 
+*/
+Status space_del_object(Space *space, Id object)
+{
+  if (!space)
+  {
+    return ERROR;
+  }
+  if(set_del(space->objects, object)==ERROR){
     return ERROR;
   }
   return OK;

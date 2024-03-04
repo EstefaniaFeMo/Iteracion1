@@ -18,17 +18,16 @@
 #include "player.h"
 #include "character.h"
 
-/**Macro with the maximum number of spaces*/
-#define MAX_SPACES 100
-/**Macro with the id of player, the object and the character when they are initialized*/
-#define ID_PLAYER 0
-#define ID_OBJECT 0
-#define ID_CHARACTER 0
 
-/*Macro with the maximum number of objects*/
-#define MAX_OBJECTS 5
-/*Macro with the maximum number of players*/
-#define MAX_CHARACTERS 4
+#define MAX_SPACES 100 /*!<Macro with the maximum number of spaces*/
+
+#define ID_PLAYER 0 /*!<Macro with the id of player */
+#define ID_OBJECT 0 /*!<Macro with the id of the object when it is initialized*/
+#define ID_CHARACTER 0 /*!<Macro with the id of the character when it is initialized*/
+
+#define MAX_OBJECTS 5 /*!<Macro with the maximum number of objects*/
+
+#define MAX_CHARACTERS 4 /*!<Macro with the maximum number of players*/
 
 
 /**
@@ -44,7 +43,7 @@ typedef struct _Game {
   int n_spaces; /*!< Number of spaces*/
   int n_objects; /*!< Number of objects*/
   int n_characters; /*!< Number of characters*/
-  Command last_cmd; /*!< Command to modify the location: no actions, exit, next or back */
+  Command *last_cmd; /*!< Command to modify the location: no actions, exit, next or back */
   Bool finished; /*!< Boolean variable whcih indicates with the values TRUE/FALSE whether the program has finished or not */
 } Game;
 
@@ -52,7 +51,7 @@ typedef struct _Game {
 
 /**
  * @brief It creates and initializes the game 
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct: Game, which will be initilized
  * @return status==OK, if the function has worked correctly
@@ -64,7 +63,7 @@ Status game_create(Game *game);
  * @brief It creates the game. If there were a problem, it would return ERROR. Then, it loads the spaces with the information
  * of the file passed as an argument to the function. If there were a problem, it would return ERROR. Next, the player and the 
  * object are located in the first space
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct that initiales it
  * @param filename a pointer with the name of a file of text which will be read to download the spaces 
@@ -74,21 +73,8 @@ Status game_create(Game *game);
 Status game_create_from_file(Game *game, char *filename);
 
 /**
- * @brief It receives as arguments the current game session and the command that the user wants to execute. Then this command is set 
- * as the last command and then starts a switch. As long as the command is UNKNOWN it doesn't do anything. Wether it is EXIT
- * it doesn't do anything. If it is NEXT it changes the position to the south. Finally, provided the command is BACK it changes
- * the position to the north.
- * @author Profesores PPROG, Estefanía Fenoy Montes
- *
- * @param game a pointer to the struct that contains the information of the current game session
- * @param cmd the command which will be executed 
- * @return status==OK, if the function has worked correctly
- */
-Status game_actions_update(Game *game, Command cmd);
-
-/**
  * @brief It destroys the game by freeing the spaces, the object and the player, then it sets them as NULL.
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct: Game, which contains the information of the current game session
  * @return status==OK, if the function has worked correctly
@@ -100,7 +86,7 @@ Status game_destroy(Game *game);
  * of the ID. First, it checks if the given ID is initialized but not set, if this is the case returns NULL.
  * If not, it compares every space ID from the array game->spaces[] with the given ID. In case it matches,
  * the function returns the value of the space. If the ID doesn't match with any ID, returns NULL.
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Profesores PPROG
  *
  * @param game a pointer to the struct that contains the information of the current game session
  * @param cmd the command which will be executed 
@@ -111,7 +97,7 @@ Space *game_get_space(Game *game, Id id);
 
 /**
  * @brief The function returns the value of the variable player_location of the current game
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct that contains the information of the current game session 
  * @return game->player_location. Always return the value of the variable.
@@ -121,7 +107,7 @@ Id game_get_player_location(Game *game);
 /**
  * @brief It receives as arguments the current game session and sets the value of the 
  * variable player_location with the given ID.
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct that contains the information of the current game session
  * @param id is the id of the position of the space in which we want the player to be moved.
@@ -132,7 +118,7 @@ Status game_set_player_location(Game *game, Id id);
 
 /**
  * @brief The function returns the Id of the space in which is the given object
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct that contains the information of the current game session 
  * @param object an identifier of the object whose space is going to be returned
@@ -142,7 +128,7 @@ Id game_get_object_location(Game *game, Id object);
 
 /**
  * @brief It sets the given object of the game into the given space
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct that contains the information of the current game session
  * @param space is the id of the position of the space in which we want the object to be moved.
@@ -151,6 +137,8 @@ Id game_get_object_location(Game *game, Id object);
  * @return status==OK, if the ID has been set correctly.
  */
 Status game_set_object_location(Game *game, Id space, Id object);
+
+Character *game_get_character(Game *game, Id id);
 
 /**
  * @brief The function returns the Id of the space in which is the given character
@@ -176,27 +164,27 @@ Status game_set_character_location(Game *game, Id space, Id character);
 
 /**
  * @brief The function returns the last command executed of the current game
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct that contains the information of the current game session 
  * @return game->last_cmd. Always return the value of the variable.
  */
-Command game_get_last_command(Game *game);
+Command *game_get_last_command(Game *game);
 
 /**
  * @brief It receives as arguments the current game session and a command, which sets this command as the
  * last executed command
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct that contains the information of the current game session
  * @param command is the command that we want to set as the last command
  * @return status==OK, always return OK.
  */
-Status game_set_last_command(Game *game, Command command);
+Status game_set_last_command(Game *game, Command *command);
 
 /**
  * @brief The function returns TRUE if the game is finished and FALSE if not.
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Profesores PPROG
  *
  * @param game a pointer to the struct that contains the information of the current game session 
  * @return game->finished. Always return the value of the variable.
@@ -206,7 +194,7 @@ Bool game_get_finished(Game *game);
 /**
  * @brief It receives as arguments the current game session and a boolean value, then sets the state
  * of the game if it's finished or not
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Profesores PPROG
  *
  * @param game a pointer to the struct that contains the information of the current game session
  * @param finished is a boolean value to indicate if the game is finished or not.
@@ -218,7 +206,7 @@ Status game_set_finished(Game *game, Bool finished);
  * @brief It prints the current game session. First prints the header which are only a straight line.
  * Then it starts to print all the spaces and last gives the information of the player and object 
  * location.
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct that contains the information of the current game session
  */
@@ -227,7 +215,7 @@ void game_print(Game *game);
 /*Function that was private, make it public to have it in game_reader*/
 /**
  * @brief It adds a new space in the last position available of the array and increases the number of spaces by one
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Profesores PPROG
  *
  * @param game a pointer to the struct, Game and it uses it to add a new space in the array game->spaces
  * @param space a pointer to the space that will be added

@@ -26,7 +26,7 @@ struct _Character
     char name[WORD_SIZE + 1];    /*!< Name of the character */
     int health;                  /*!< Id of the object that character has */
     Bool friendly;               /*!< Boolean of whether the caracther is a friend or an enemy */
-    char message[WORD_SIZE + 1]; /*!< String with the message of tha character */
+    char message[WORD_SIZE + 1]; /*!< String with the message of that character */
 };
 
 /** character_create creates a new character, reserving dynamic memory and initializing its variables */

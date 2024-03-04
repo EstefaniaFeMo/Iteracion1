@@ -11,10 +11,10 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-/** The number of the command types*/
-#define N_CMDT 2
-/** The number of possible commands*/
-#define N_CMD 10
+#include "types.h"
+
+#define N_CMDT 2 /*!<Macro with the number of the command types*/
+#define N_CMD 11 /*!<Macro with the number of possible commands*/
 
 /**
  * @brief CommandType
@@ -31,7 +31,7 @@ typedef enum
  * @brief Command
  *
  * This struct defines the possible values of the commands, NO_CMD, UNKNOWN, EXIT, NEXT, 
- * BACK, TAKE, or DROP.
+ * BACK, TAKE, DROP, LEFT, RIGHT, ATTACK, CHAT.
  */
 typedef enum
 {
@@ -44,15 +44,29 @@ typedef enum
     DROP, 
     LEFT, 
     RIGTH,
-    ATTACK
-} Command;
+    ATTACK,
+    CHAT,
+} CommandNum;
+
+typedef struct _Command Command;
+
+Command * command_create();
 
 /**
  * @brief  It reads a command recived from the user input and gives the asociated value defined in the Command struct.
- * @author Profesores PPROG, Carmen Gómez Escobar
+ * @author Carmen Gómez Escobar
  *
  * @return  cmd, a Command variable whcich value is the asociated command to the word recived.
  */
-Command command_get_user_input();
+Command *command_get_user_input();
 
+CommandNum command_get_cmd(Command *command);
+
+char* command_get_args(Command* command);
+
+Status command_destroy(Command *command);
+
+Status command_get_cmd_status(Command *command);
+
+Status command_set_cmd_status(Command *command, Status status);
 #endif

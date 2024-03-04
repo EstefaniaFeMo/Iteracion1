@@ -18,20 +18,10 @@
 /**
    Private functions
 */
-/**
- * @brief It adds a new space in the last position available of the array and increases the number of spaces by one
- * @author Profesores PPROG, Estefanía Fenoy Montes
- *
- * @param game a pointer to the struct, Game and it uses it to add a new space in the array game->spaces
- * @param space a pointer to the space that will be added
- * @return status==OK, if the function has worked correctly
- * @return status==ERROR, if a mistken has happened
- */
-Status game_add_space(Game *game, Space *space);
 
 /**
  * @brief It gives the ID of the position of the given parameter
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Profesores PPROG
  *
  * @param game a pointer to the struct, Game and it uses it to get access to the game->spaces IDs
  * @param position the position we want to get the id
@@ -69,7 +59,7 @@ Status game_create(Game *game)
   game->n_characters = 0;
 
   game->player = NULL;
-  game->last_cmd = NO_CMD;
+  game->last_cmd = NULL;
   game->finished = FALSE;
 
   return OK;
@@ -107,7 +97,7 @@ Status game_create_from_file(Game *game, char *filename)
     game_set_object_location(game, game_get_space_id_at(game, 0), object_get_id(game->objects[i]));
   }
   for(i=0; i<game->n_characters; i++){
-    game_set_character_location(game, game_get_space_id_at(game, 0), character_get_id(game->objects[i]));
+    game_set_character_location(game, game_get_space_id_at(game, 0), character_get_id(game->characters[i]));
   }
   
 
@@ -207,7 +197,6 @@ Id game_get_object_location(Game *game, Id object)
 */
 Status game_set_object_location(Game *game, Id space, Id object)
 {
-  int i;
   /* Error control */
   if (space == NO_ID || object == NO_ID)
   {
@@ -219,6 +208,26 @@ Status game_set_object_location(Game *game, Id space, Id object)
     }
 
   return OK;
+}
+
+Character *game_get_character(Game *game, Id id)
+{
+  int i = 0;
+  /* Error control */
+  if (id == NO_ID)
+  {
+    return NULL;
+  }
+  /*Loop to check the space which matches with the given ID*/
+  for (i = 0; i < game->n_characters; i++)
+  {
+    if (id == character_get_id(game->characters[i]))
+    {
+      return game->characters[i];
+    }
+  }
+  /*If the ID is not equal to any space, return NULL*/
+  return NULL;
 }
 
 /*game_get_character_location returns the ID of the space in which the given character is
@@ -241,7 +250,6 @@ Id game_get_character_location(Game *game, Id character)
 */
 Status game_set_character_location(Game *game, Id space, Id character)
 {
-  int i;
   Space *s;
   /* Error control */
   if (space == NO_ID || character == NO_ID )
@@ -260,10 +268,10 @@ Status game_set_character_location(Game *game, Id space, Id character)
 }
 /*game_get_last_command returns the last command executed
 */
-Command game_get_last_command(Game *game) { return game->last_cmd; }
+Command *game_get_last_command(Game *game) { return game->last_cmd; }
 
 /*game_set_last_command sets the command given as the last one*/
-Status game_set_last_command(Game *game, Command command)
+Status game_set_last_command(Game *game, Command *command)
 {
   game->last_cmd = command;
   /*Indicate that the function has worked correctly*/

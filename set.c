@@ -56,8 +56,6 @@ Status set_destroy(Set *set){
 
     free(set);
 
-    set = NULL;
-
     return OK;
 }
 /** set_add includes in the array of IDs the given ID

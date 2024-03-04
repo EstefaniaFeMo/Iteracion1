@@ -24,6 +24,6 @@
  * @param cmd a variable type Command with the command.
  * @return OK sif everything has worked out, ERROR if there is some mistake
  */
-Status game_actions_update(Game *game, Command cmd);
+Status game_actions_update(Game *game, Command *comamnd);
 
 #endif
