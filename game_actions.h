@@ -18,7 +18,7 @@
 /**
  * @brief It recives the new command and for each type of command, calls a new function. At the end it
  * will update the status.
- * @author Profesores PPROG, Carmen Gómez Escobar.
+ * @author Profesores PPROG
  *
  * @param game a pointer to the struct called Game and uses it as an argument in the called functions.
  * @param cmd a variable type Command with the command.
