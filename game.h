@@ -236,4 +236,15 @@ void game_print(Game *game);
  */
 Status game_add_space(Game *game, Space *space);
 
+/**
+ * @brief It adds a new object in the last position available of the array and increases the number of objects by one
+ * @author Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct.
+ * @param object a pointer to the space that will be added
+ * @return status==OK, if the function has worked correctly
+ * @return status==ERROR, if a mistken has happened
+ */
+Status game_add_object(Game *game, Object *object);
+
 #endif
