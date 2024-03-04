@@ -304,7 +304,37 @@ void game_actions_rigth(Game *game){
 
 /** game_actions_attack recives a pointer to Game in the case that the command that the function that calls this one is attcak,
  * and starts a figth with the character if it is not friendly.*/
-void game_actions_attack(Game *game){
-  return;
+void game_actions_attack(Game *game)
+{
+  Character *character;
+  Id player_location= NO_ID;
+  Id character_location= NO_ID;
+  int num=rand( );
+
+  if(game==NULL){
+    return;
+  }
+
+  character= game_get_character(game, game_get_space(game, player_location));
+  player_location= game_get_player_location(game);
+  character_location= game_get_character_location(game, character_get_id(character));
+
+  if(character_location==NO_ID || player_location==NO_ID){
+    return;
+  }
+
+  if(character_location==player_location && character_get_friendly(character)==FALSE){
+    if(num<5){
+      player_set_health(game->player, player_get_health(game->player)-1);
+    }
+    if(num>=5){
+      character_set_health(character, character_get_health(character)-1);
+    }
+  }
+
+  if(player_get_health(game->player)==0){
+      game_actions_exit(game);
+  }
+
 }
 
