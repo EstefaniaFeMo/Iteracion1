@@ -18,16 +18,6 @@
 /**
    Private functions
 */
-/**
- * @brief It adds a new space in the last position available of the array and increases the number of spaces by one
- * @author Profesores PPROG, Estefanía Fenoy Montes
- *
- * @param game a pointer to the struct, Game and it uses it to add a new space in the array game->spaces
- * @param space a pointer to the space that will be added
- * @return status==OK, if the function has worked correctly
- * @return status==ERROR, if a mistken has happened
- */
-Status game_add_space(Game *game, Space *space);
 
 /**
  * @brief It gives the ID of the position of the given parameter
@@ -107,11 +97,9 @@ Status game_create_from_file(Game *game, char *filename)
     game_set_object_location(game, game_get_space_id_at(game, 0), object_get_id(game->objects[i]));
   }
   for(i=0; i<game->n_characters; i++){
-    game_set_character_location(game, game_get_space_id_at(game, 0), character_get_id(game->objects[i]));
+    game_set_character_location(game, game_get_space_id_at(game, 0), character_get_id(game->characters[i]));
   }
   
-
-
   return OK;
 }
 
@@ -207,7 +195,6 @@ Id game_get_object_location(Game *game, Id object)
 */
 Status game_set_object_location(Game *game, Id space, Id object)
 {
-  int i;
   /* Error control */
   if (space == NO_ID || object == NO_ID)
   {
@@ -241,7 +228,6 @@ Id game_get_character_location(Game *game, Id character)
 */
 Status game_set_character_location(Game *game, Id space, Id character)
 {
-  int i;
   Space *s;
   /* Error control */
   if (space == NO_ID || character == NO_ID )
@@ -325,6 +311,19 @@ Status game_add_space(Game *game, Space *space)
   game->spaces[game->n_spaces] = space;
   game->n_spaces++;
 
+
+  return OK;
+}
+
+/*game_add_object adds a new object in the game->objects array 
+*/
+Status game_add_object(Game *game, Object *object){
+  if(game->objects==NULL || (game->n_objects)){
+    return ERROR;
+  }
+
+  game->objects[game->n_objects] = object;
+  game->n_objects++;
 
   return OK;
 }
