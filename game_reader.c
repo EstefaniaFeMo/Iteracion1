@@ -3,7 +3,7 @@
  * for each command in order to read the possible spaces and elements of the game
  *
  * @file game_reader.c
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Profesores PPROG, Estefanía Fenoy Montes, Carmen Gómez
  * @version 3.5
  * @date 04-02-2024
  * @copyright GNU Public License
@@ -82,5 +82,76 @@ Status game_reader_load_spaces(Game *game, char *filename)
   fclose(file);
   /*Indicate that the function has worked correctly with OK or if there has been a problem
   returning ERROR*/
+  return status;
+}
+
+/*game_reader_load_objects downloads the objects defined in a file */
+Status game_reader_load_objects(Game *game, char *filename)
+{
+  /*Initialization of the variables*/
+  FILE *file = NULL;
+  char line[WORD_SIZE] = "";
+  char name[WORD_SIZE] = "";
+  char *toks = NULL;
+  Id id = NO_ID, location = NO_ID;
+  Object *object = NULL;
+  Status status = OK;
+  Set *set;
+
+  /* Error control of the filename*/
+  if (!filename)
+  {
+    return ERROR;
+  }
+  /*Open the file*/
+  file = fopen(filename, "r");
+  /*Error control*/
+  if (file == NULL)
+  {
+    return ERROR;
+  }
+
+  while (fgets(line, WORD_SIZE, file))
+  {
+    if (strncmp("#o:", line, 3) == 0)
+    {
+      toks = strtok(line + 3, "|");
+      id = atol(toks);
+      toks = strtok(NULL, "|");
+      strcpy(name, toks);
+      toks = strtok(NULL, "|");
+      location = atol(toks);
+    }
+#ifdef DEBUG
+    printf("Leido: %ld|%s|%ld\n", id, name, location);
+#endif
+    /*Create a space with the constructor with the given id*/
+
+    set = set_create();
+
+    if (set_add(set, id) == ERROR)
+    {
+      return ERROR;
+    }
+
+    object = object_create(id);
+
+    if (object != NULL)
+    {
+      /*Set the values saved on the variables before*/
+      object_set_name(object, name);
+      game_set_object_location(game, location, id);
+      game_add_object(game, object);
+    }
+  }
+
+  /* Error control of the file*/
+  if (ferror(file))
+  {
+    status = ERROR;
+  }
+  /*Close the file*/
+  fclose(file);
+  /*Indicate that the function has worked correctly with OK or if there has been a problem*/
   return status;
 }
