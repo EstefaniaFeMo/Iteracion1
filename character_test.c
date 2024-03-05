@@ -73,12 +73,15 @@ int main(int argc, char **argv) {
   if (all || test == 27) test2_character_get_message();
   if (all || test == 28) test1_character_get_id();
   if (all || test == 29) test2_character_get_id();
+  if (all || test == 30) test2_character_destroy();
+  if (all || test == 31) test2_character_destroy();
 
   PRINT_PASSED_PERCENTAGE;
 
   return 1;
 }
 
+/** Test function for character_create setting */
 void test1_character_create(){
   int result;
   Character *character;
@@ -88,6 +91,7 @@ void test1_character_create(){
   character_destroy(character);
 }
 
+/** Test function for character_create setting */
 void test2_character_create(){
   Character *character;
   character = character_create(1);
@@ -95,6 +99,7 @@ void test2_character_create(){
   character_destroy(character);
 }
 
+/** Test function for character_get_id setting */
 void test1_character_get_id(){
   Character *character;
   character = character_create(25);
@@ -102,11 +107,13 @@ void test1_character_get_id(){
   character_destroy(character);
 }
 
+/** Test function for character_get_id setting */
 void test2_character_get_id(){
   Character *character = NULL;
   PRINT_TEST_RESULT(character_get_id(character) == NO_ID);
 }
 
+/** Test function for character_set_name setting */
 void test1_character_set_name(){
   Character *character;
   character = character_create(5);
@@ -114,11 +121,13 @@ void test1_character_set_name(){
   character_destroy(character);
 }
 
+/** Test function for character_set_name setting */
 void test2_character_set_name(){
   Character *character = NULL;
   PRINT_TEST_RESULT(character_set_name(character, "hola") == ERROR);
 }
 
+/** Test function for character_set_name setting */
 void test3_character_set_name() {
   Character *character;
   character = character_create(5);
@@ -126,6 +135,7 @@ void test3_character_set_name() {
   character_destroy(character);
 }
 
+/** Test function for character_get_name setting */
 void test1_character_get_name() {
   Character *character;
   character = character_create(1);
@@ -134,11 +144,13 @@ void test1_character_get_name() {
   character_destroy(character);
 }
 
+/** Test function for character_get_name setting */
 void test2_character_get_name(){
   Character *character = NULL;
   PRINT_TEST_RESULT(character_get_name(character) == NULL);
 }
 
+/** Test function for character_set_health setting */
 void test1_character_set_health(){
   Character *character;
   character = character_create(1);
@@ -146,11 +158,13 @@ void test1_character_set_health(){
   character_destroy(character);
 }
 
+/** Test function for character_set_health setting */
 void test2_character_set_health(){
   Character *character=NULL;
   PRINT_TEST_RESULT(character_set_health(character, 4) == ERROR);
 }
 
+/** Test function for character_set_health setting */
 void test3_character_set_health(){
   Character *character;
   character = character_create(1);
@@ -158,6 +172,7 @@ void test3_character_set_health(){
   character_destroy(character);
 }
 
+/** Test function for character_get_health setting */
 void test1_character_get_health(){
   Character *character;
   character = character_create(2);
@@ -166,11 +181,13 @@ void test1_character_get_health(){
   character_destroy(character);
 }
 
+/** Test function for character_get_health setting */
 void test2_character_get_health(){
   Character *character=NULL;
   PRINT_TEST_RESULT(character_get_health(character) == -1);
 }
 
+/** Test function for character_set_friendly setting */
 void test1_character_set_friendly(){
   Character *character;
   character = character_create(1);
@@ -178,11 +195,13 @@ void test1_character_set_friendly(){
   character_destroy(character);
 }
 
+/** Test function for character_set_friendly setting */
 void test2_character_set_friendly(){
   Character *character=NULL;
   PRINT_TEST_RESULT(character_set_friendly(character, TRUE) == ERROR);
 }
 
+/** Test function for character_set_friendly setting */
 void test3_character_set_friendly(){
   Character *character;
   character = character_create(1);
@@ -190,6 +209,7 @@ void test3_character_set_friendly(){
   character_destroy(character);
 }
 
+/** Test function for character_get_friendly setting */
 void test1_character_get_friendly(){
   Character *character;
   character = character_create(2);
@@ -198,11 +218,13 @@ void test1_character_get_friendly(){
   character_destroy(character);
 }
 
+/** Test function for character_get_friendly setting */
 void test2_character_get_friendly(){
   Character *character=NULL;
   PRINT_TEST_RESULT(character_get_friendly(character) == FALSE);
 }
 
+/** Test function for character_set_message setting */
 void test1_character_set_message(){
   Character *character;
   character = character_create(1);
@@ -210,11 +232,13 @@ void test1_character_set_message(){
   character_destroy(character);
 }
 
+/** Test function for character_set_message setting */
 void test2_character_set_message(){
   Character *character = NULL;
   PRINT_TEST_RESULT(character_set_message(character, "hola") == ERROR);
 }
 
+/** Test function for character_set_message setting */
 void test3_character_set_message() {
   Character *character;
   character = character_create(1);
@@ -222,6 +246,7 @@ void test3_character_set_message() {
   character_destroy(character);
 }
 
+/** Test function for character_get_message setting */
 void test1_character_get_message() {
   Character *character;
   character = character_create(1);
@@ -230,11 +255,13 @@ void test1_character_get_message() {
   character_destroy(character);
 }
 
+/** Test function for character_get_message setting */
 void test2_character_get_message(){
   Character *character = NULL;
   PRINT_TEST_RESULT(character_get_message(character) == NULL);
 }
 
+/** Test function for character_print_message setting */
 void test1_character_print_message(){
   Character *character;
   character = character_create(1);
@@ -243,11 +270,13 @@ void test1_character_print_message(){
   character_destroy(character);
 }
 
+/** Test function for character_print_message setting */
 void test2_character_print_message(){
   Character *character = NULL;
   PRINT_TEST_RESULT(character_print_message(character) == ERROR);
 }
 
+/** Test function for character_print setting */
 void test1_character_print(){
   Character *character;
   character = character_create(1);
@@ -256,6 +285,7 @@ void test1_character_print(){
   character_destroy(character);
 }
 
+/** Test function for character_print setting */
 void test2_character_print(){
   Character *character;
   character = character_create(1);
@@ -264,8 +294,22 @@ void test2_character_print(){
   character_destroy(character);
 }
 
+/** Test function for character_print setting */
 void test3_character_print(){
   Character *character = NULL;
   PRINT_TEST_RESULT(character_print(character) == ERROR);
+}
+
+/** Test function for character_destroy setting */
+void test1_character_destroy(){
+  Character *character;
+  character=character_create(5);
+  PRINT_TEST_RESULT(character_destroy(character)==OK);
+}
+
+/** Test function for character_destroy setting */
+void test2_character_destroy(){
+  Character *character=NULL;
+  PRINT_TEST_RESULT(character_destroy(character)==ERROR);
 }
 
