@@ -125,15 +125,7 @@ Status game_reader_load_objects(Game *game, char *filename)
 #ifdef DEBUG
     printf("Leido: %ld|%s|%ld\n", id, name, location);
 #endif
-    /*Create a space with the constructor with the given id*/
-
-    set = set_create();
-
-    if (set_add(set, id) == ERROR)
-    {
-      return ERROR;
-    }
-
+    /*Create an object with the constructor with the given id*/
     object = object_create(id);
 
     if (object != NULL)
