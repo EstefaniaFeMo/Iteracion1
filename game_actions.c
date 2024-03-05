@@ -376,5 +376,3 @@ Status game_actions_chat(Game *game){
   }
   return OK;
 }
-
-
