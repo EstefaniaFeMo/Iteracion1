@@ -218,7 +218,7 @@ Status character_print(Character *character)
 
     if (character_get_friendly(character) == FALSE)
     {
-        fprintf(stdout, "--> /|oo/| : %ld, (%d)\n", character->id, character->health);
+        fprintf(stdout, "-->  /\\oo/\\ : %ld, (%d)\n", character->id, character->health);
     }
     else if (character_get_friendly(character) == TRUE)
     {
