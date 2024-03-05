@@ -167,7 +167,7 @@ void test1_character_get_health(){
 
 void test2_character_get_health(){
   Character *character=NULL;
-  PRINT_TEST_RESULT(character_get_health(character) == ERROR);
+  PRINT_TEST_RESULT(character_get_health(character) == -1);
 }
 
 void test1_character_set_friendly(){
@@ -192,19 +192,19 @@ void test3_character_set_friendly(){
 void test1_character_get_friendly(){
   Character *character;
   character = character_create(2);
-  character_set_health(character, TRUE);
-  PRINT_TEST_RESULT(character_get_health(character) == TRUE);
+  character_set_friendly(character, TRUE);
+  PRINT_TEST_RESULT(character_get_friendly(character) == TRUE);
   character_destroy(character);
 }
 
 void test2_character_get_friendly(){
   Character *character=NULL;
-  PRINT_TEST_RESULT(character_get_health(character) == ERROR);
+  PRINT_TEST_RESULT(character_get_friendly(character) == FALSE);
 }
 
 void test1_character_set_message(){
   Character *character;
-  character = character_create(5);
+  character = character_create(1);
   PRINT_TEST_RESULT(character_set_message(character, "hola") == OK);
   character_destroy(character);
 }
@@ -216,7 +216,7 @@ void test2_character_set_message(){
 
 void test3_character_set_message() {
   Character *character;
-  character = character_create(5);
+  character = character_create(1);
   PRINT_TEST_RESULT(character_set_message(character, NULL) == ERROR);
   character_destroy(character);
 }
@@ -224,7 +224,7 @@ void test3_character_set_message() {
 void test1_character_get_message() {
   Character *character;
   character = character_create(1);
-  character_set_name(character, "adios");
+  character_set_message(character, "adios");
   PRINT_TEST_RESULT(strcmp(character_get_message(character), "adios") == 0);
   character_destroy(character);
 }
