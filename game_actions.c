@@ -169,6 +169,7 @@ Status game_actions_update(Game *game, Command *command)
   case CHAT:
     cmd_status = game_actions_chat(game);
     break;
+
   default:
     break;
   }
@@ -279,7 +280,7 @@ Status game_actions_drop(Game *game)
 }
 /** game_actions_left recives a pointer to Game in the case that the command that the function that calls this one is left,
  * and calls to a function that reads which is the space located at the left and sends the player there.*/
-void game_actions_left(Game *game)
+Status game_actions_left(Game *game)
 {
   Id current_id = NO_ID;
   Id space_id = NO_ID;
@@ -288,7 +289,7 @@ void game_actions_left(Game *game)
 
   if (NO_ID == space_id)
   {
-    return;
+    return ERROR;
   }
 
   current_id = space_get_left(game_get_space(game, space_id));
@@ -297,12 +298,12 @@ void game_actions_left(Game *game)
     game_set_player_location(game, current_id);
   }
 
-  return;
+  return OK;
 }
 
 /** game_actions_rigth recives a pointer to Game in the case that the command that the function that calls this one is rigth,
  * and calls to a function that reads which is the space located at the rigth and sends the player there.*/
-void game_actions_rigth(Game *game)
+Status game_actions_rigth(Game *game)
 {
   Id current_id = NO_ID;
   Id space_id = NO_ID;
@@ -311,7 +312,7 @@ void game_actions_rigth(Game *game)
 
   if (NO_ID == space_id)
   {
-    return;
+    return ERROR;
   }
 
   current_id = space_get_rigth(game_get_space(game, space_id));
@@ -320,12 +321,12 @@ void game_actions_rigth(Game *game)
     game_set_player_location(game, current_id);
   }
 
-  return;
+  return OK;
 }
 
 /** game_actions_attack recives a pointer to Game in the case that the command that the function that calls this one is attcak,
  * and starts a figth with the character if it is not friendly.*/
-void game_actions_attack(Game *game)
+Status game_actions_attack(Game *game)
 {
   Character *character;
   Id player_location = NO_ID;
@@ -334,7 +335,7 @@ void game_actions_attack(Game *game)
 
   if (game == NULL)
   {
-    return;
+    return ERROR;
   }
 
   character = game_get_character(game, game_get_space(game, player_location));
@@ -343,7 +344,7 @@ void game_actions_attack(Game *game)
 
   if (character_location == NO_ID || player_location == NO_ID)
   {
-    return;
+    return ERROR;
   }
 
   if (character_location == player_location && character_get_friendly(character) == FALSE)
@@ -362,6 +363,8 @@ void game_actions_attack(Game *game)
   {
     game_actions_exit(game);
   }
+
+  return OK;
 }
 
 Status game_actions_chat(Game *game){
