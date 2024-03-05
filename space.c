@@ -51,8 +51,8 @@ Space *space_create(Id id)
   newSpace->name[0] = '\0';
   newSpace->north = NO_ID;
   newSpace->south = NO_ID;
-  newSpace->east = NO_ID;
-  newSpace->west = NO_ID;
+  newSpace->rigth = NO_ID;
+  newSpace->left = NO_ID;
   newSpace->objects = set_create();
   newSpace->character = NO_ID;
   return newSpace;
