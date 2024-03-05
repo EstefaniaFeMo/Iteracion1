@@ -112,10 +112,54 @@ Status set_print(Set *set){
         return ERROR;
     }
     for(i=0; i<set->n_ids; i++){
-        fprintf(stdout, " 02%d: %ld\n", i+1, set->ids[i]);
+        fprintf(stdout, " Id %d of %d IDs that are in the set: %ld\n", i+1, set->n_ids, set->ids[i]);
     }
     return OK;
 }
+
+/*char* set_print_all(Set *set){
+    int max, i;
+    char str[SCREEN_LIMIT+1];
+    char all[SCREEN_LIMIT+1];
+    str[0] = '\0';
+    all[0] = '\0';
+
+    if(set==NULL || set->n_ids>MAX_NUM_IDS || set->n_ids<=0){
+        sprintf(str, "           ");
+        return all;
+    }
+
+    for(i=0; i<set->n_ids; i++){
+        if(i==0){
+                sprintf(str, "O%2d", (int)set->ids[i]);
+                if(strlen(str) < max){
+                    strcat(all, str);
+                    max -= strlen(str);
+                }else{
+                    strcat(all, "...");
+                }
+        }else{
+            sprintf(str, ", O%2d", (int)set->ids[i]);
+            if(strlen(str) < max-3 && i < set->n_ids-1){
+                max -= strlen(str);
+                strcat(all, str);
+            }else{
+                if(strlen(str) < max && i == set->n_ids -1){
+                    strcat(all, str);
+                }else{
+                    strcat(str, "...");
+                    max -= 3;
+                    for(i=0; i<max; i++){
+                        strcat(str, " ");
+                    }
+                    
+                }
+                break;      
+            }
+        }
+    }
+    return all;
+}*/
 
 /** set_check_id  checks if the given Id is in the set*/
 Bool set_check_id(Set * set, Id id){

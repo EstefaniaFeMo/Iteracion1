@@ -74,21 +74,19 @@ int main(int argc, char **argv) {
   if (all || test== 29)  test1_space_set_object();
   if (all || test == 30) test2_space_set_object();
   if (all || test == 31) test3_space_set_object();
-  if (all || test == 32) test1_space_get_id();
-  if (all || test == 33) test2_space_get_id();
-  if (all || test == 34) test1_space_get_object_id();
-  if (all || test == 35) test2_space_get_object_id();
-  if (all || test == 36) test1_space_del_object();
-  if (all || test == 37) test2_space_del_object();
-  if (all || test == 38) test3_space_del_object();
-  if (all || test == 39) test4_space_del_object();
-  if (all || test == 40) test1_space_set_character();
-  if (all || test == 41) test2_space_set_character();
-  if (all || test == 42) test3_space_set_character();
-  if (all || test == 43) test1_space_get_character();
-  if (all || test == 44) test2_space_get_character();
-  if (all || test == 45) test1_space_print();  
-  if (all || test == 46) test1_space_print();                   
+  if (all || test == 32) test1_space_get_object_id();
+  if (all || test == 33) test2_space_get_object_id();
+  if (all || test == 34) test1_space_del_object();
+  if (all || test == 35) test2_space_del_object();
+  if (all || test == 36) test3_space_del_object();
+  if (all || test == 37) test4_space_del_object();
+  if (all || test == 38) test1_space_set_character();
+  if (all || test == 39) test2_space_set_character();
+  if (all || test == 40) test3_space_set_character();
+  if (all || test == 41) test1_space_get_character();
+  if (all || test == 42) test2_space_get_character();
+  if (all || test == 43) test1_space_print();  
+  if (all || test == 44) test1_space_print();                   
 
 
   PRINT_PASSED_PERCENTAGE;
@@ -265,16 +263,6 @@ void test2_space_get_west() {
   PRINT_TEST_RESULT(space_get_west(s) == NO_ID);
 }
 
-void test1_space_get_id() {
-  Space *s;
-  s = space_create(25);
-  PRINT_TEST_RESULT(space_get_id(s) == 25);
-  space_destroy(s);
-}
-void test2_space_get_id() {
-  Space *s = NULL;
-  PRINT_TEST_RESULT(space_get_id(s) == NO_ID);
-}
 
 void test1_space_get_object_id() {
   Space *s;

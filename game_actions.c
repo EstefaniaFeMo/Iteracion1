@@ -22,26 +22,29 @@
 
 /**
  * @brief recives a pointer to Game in the case that the command that the function that calls this one is unknown.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ * @author Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
+ * @return OK, if everything goes well or ERROR in case there was some mistake
  */
 Status game_actions_unknown(Game *game);
 
 /**
  * @brief recives a pointer to Game in the case that the command that the function that calls this one is exit.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ * @author Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
+ * @return OK, if everything goes well or ERROR in case there was some mistake
  */
 Status game_actions_exit(Game *game);
 
 /**
  * @brief recives a pointer to Game in the case that the command that the function that calls this one is next,
  * and calls to a function that reads which is the space below and sends the player there.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ * @author Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
+ * @return OK, if everything goes well or ERROR in case there was some mistake
  */
 
 Status game_actions_next(Game *game);
@@ -49,9 +52,10 @@ Status game_actions_next(Game *game);
 /**
  * @brief recives a pointer to Game in the case that the command that the function that calls this one is back,
  * and calls to a function that reads which is the space above and sends the player there.
- * @author Estefania Fenoy Montes, Carmen Gómez Escobar
+ * @author Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
+ * @return OK, if everything goes well or ERROR in case there was some mistake
  */
 
 Status game_actions_back(Game *game);
@@ -59,7 +63,7 @@ Status game_actions_back(Game *game);
 /**
  * @brief It recives a pointer to Game in the case that the command that the function that calls this one is take,
  * and checks if the player and the object are in the same location, and if they are, the player takes the object.
- * @author Profesores PPROG, Estefania Fenoy Montes
+ * @author Estefania Fenoy Montes
  *
  * @param game a pointer to the struct called Game.
  * @param object an identifier of the object that we want to be taken
@@ -70,7 +74,7 @@ Status game_actions_take(Game *game, Id object);
 /**
  * @brief In case there is an object that has been taken by the player, the object is dropped in the location of
  * the object.
- * @author Profesores PPROG, Estefania Fenoy Montes
+ * @author Estefania Fenoy Montes
  *
  * @param game a pointer to the struct called Game which contains the current information of the game session.
  * @return OK, if everything goes well or ERROR if there was some mistake
@@ -83,6 +87,7 @@ Status game_actions_drop(Game *game);
  * @author Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
+ * @return OK, if everything goes well or ERROR in case there was some mistake
  */
 
 Status game_actions_left(Game *game);
@@ -93,20 +98,31 @@ Status game_actions_left(Game *game);
  * @author Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
+ * @return OK, if everything goes well or ERROR in case there was some mistake
  */
 
 Status game_actions_rigth(Game *game);
 
 /**
- * @brief recives a pointer to Game in the case that the command that the function that calls this one is attcak,
+ * @brief recives a pointer to Game in the case that the command that the function that calls this one is attack,
  * and starts a figth with the character if it is not friendly.
  * @author Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
+ * @return OK, if everything goes well or ERROR in case there was some mistake
  */
 
 Status game_actions_attack(Game *game);
 
+/**
+ * @brief In case that the character which is in the same space as the player is friendly this functions shows the message of this character.
+ * @author Estefanía Fenoy Montes
+ *
+ * @param game a pointer to the struct called Game.
+ * @return OK, if everything goes well or ERROR in case there was some mistake
+ */
+
+Status game_actions_chat(Game *game);
 
 
 /**
@@ -173,7 +189,7 @@ Status game_actions_update(Game *game, Command *command)
     break;
   }
   command_set_cmd_status(command, cmd_status);
-  game_set_last_command(game, cmd);
+  game_set_last_command(game, command);
   return OK;
 }
 
@@ -227,7 +243,6 @@ Status game_actions_back(Game *game)
   {
     return ERROR;
   }
-
   current_id = space_get_north(game_get_space(game, space_id));
   if (current_id != NO_ID)
   {
@@ -328,6 +343,9 @@ Status game_actions_attack(Game *game){
   return OK;
 }
 
+/** game_actions_chat in case that the command executed is chat, it tests if the character which is in the same space of the player is friendly and if it is,
+ * this character says its message
+*/
 Status game_actions_chat(Game *game){
   Id player_location=game_get_player_location(game);
   Character *c = NULL;

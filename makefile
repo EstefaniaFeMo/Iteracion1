@@ -8,12 +8,16 @@ CLIB= -lscreen -L.
 
 .PHONY: clean_objects clean_program clean all
 
-all: anthill space_test
+all: anthill space_test set_test
 
 anthill: game_loop.o game.o game_actions.o command.o graphic_engine.o space.o game_reader.o object.o player.o character.o
 	$(CC) -o $@ $^ $(CLIB)
 
 space_test: space_test.o space.o set.o
+	$(CC) -o $@ $^ 
+
+set_test: set_test.o set.o
+	$(CC) -o $@ $^ 
 
 #...............................................................................................#
 
@@ -53,6 +57,8 @@ space_test.o: space_test.c space_test.h test.h space.h types.h set.h
 set.o: set.c set.h types.h
 	$(CC) $(CFLAGS) -c $<
 
+set_test.o: set_test.c set_test.h test.h set.h types.h
+	$(CC) $(CFLAGS) -c $<
 #...............................................................................................#
 clean_objects:
 	@echo "Cleaning objects..."
@@ -60,6 +66,6 @@ clean_objects:
 
 clean_program:
 	@echo "Cleaning program..."
-	@rm -f anthill space_test
+	@rm -f anthill space_test set_test
 
 clean: clean_objects clean_program

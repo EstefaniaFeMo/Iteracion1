@@ -16,7 +16,6 @@
 #include "set_test.h"
 #include "test.h"
 
-#define MAX_TESTS 18 /*!<Indicates the maximum number of possible tests*/
 int main(int argc, char **argv) {
   int test = 0;
   int all = 1;
@@ -35,18 +34,23 @@ int main(int argc, char **argv) {
 
   if (all || test == 1) test1_set_create();
   if (all || test == 2) test2_set_create();
-  if (all || test == 3) test1_set_add();
-  if (all || test == 4) test2_set_add();
-  if (all || test == 5) test1_set_return_id();
-  if (all || test == 6) test2_set_return_id();
-  if (all || test == 7) test3_set_return_id();
-  if (all || test == 8) test1_set_del();
-  if (all || test == 9) test2_set_del();
-  if (all || test == 10) test3_set_del();
-  if (all || test == 11) test4_set_del();
-  if (all || test == 12) test1_set_check_id();
-  if (all || test == 13) test2_set_check_id();
-  if (all || test == 14) test3_set_check_id();
+  if (all || test == 3) test1_set_destroy();
+  if (all || test == 4) test2_set_destroy();
+  if (all || test == 5) test1_set_add();
+  if (all || test == 6) test2_set_add();
+  if (all || test == 7) test1_set_return_id();
+  if (all || test == 8) test2_set_return_id();
+  if (all || test == 9) test3_set_return_id();
+  if (all || test == 10) test1_set_del();
+  if (all || test == 11) test2_set_del();
+  if (all || test == 12) test3_set_del();
+  if (all || test == 13) test4_set_del();
+  if (all || test == 14) test1_set_check_id();
+  if (all || test == 15) test2_set_check_id();
+  if (all || test == 16) test3_set_check_id();
+  if (all || test == 17) test1_set_print();
+  if (all || test == 18) test2_set_print();
+  if (all || test == 19) test3_set_print();
 
   PRINT_PASSED_PERCENTAGE;
 
@@ -60,16 +64,25 @@ void test1_set_create() {
   PRINT_TEST_RESULT(result);
   set_destroy(s);
 }
-void test2_space_create() {
+void test2_set_create() {
   Set *s;
   s = set_create();
   PRINT_TEST_RESULT(set_return_id(s, 1) == NO_ID);
   set_destroy(s);
 }
+void test1_set_destroy(){
+  Set *s;
+  s=set_create();
+  PRINT_TEST_RESULT(set_destroy(s)==OK);
+}
+void test2_set_destroy(){
+  Set *s=NULL;
+  PRINT_TEST_RESULT(set_destroy(s)==ERROR);
+}
 
 void test1_set_add() {
   Set *s;
-  s = space_create();
+  s = set_create();
   PRINT_TEST_RESULT(set_add(s, 5) == OK);
   set_destroy(s);
 }
@@ -80,7 +93,7 @@ void test2_set_add() {
 
 void test1_set_return_id() {
   Set *s;
-  s = space_create();
+  s = set_create();
   set_add(s, 4);
   PRINT_TEST_RESULT(set_return_id(s, 0) == 4);
   set_destroy(s);
@@ -140,6 +153,24 @@ void test2_set_check_id(){
   set_destroy(s);
 }
 void test3_set_check_id(){
-  Set *s;
+  Set *s=NULL;
   PRINT_TEST_RESULT(set_check_id(s, 6) == FALSE);
+}
+void test1_set_print(){
+  Set *s;
+  s=set_create();
+  set_add(s, 4);
+  PRINT_TEST_RESULT(set_print(s)==OK);
+  set_destroy(s);
+}
+void test2_set_print(){
+  Set *s;
+  s=set_create();
+  PRINT_TEST_RESULT(set_print(s)==ERROR);
+  set_destroy(s);
+}
+
+void test3_set_print(){
+  Set *s=NULL;
+  PRINT_TEST_RESULT(set_print(s)==ERROR);
 }
