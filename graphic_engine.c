@@ -169,9 +169,21 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
   /* Paint in the description area */
   screen_area_clear(ge->descript);
 
+
   if ((id_act = game_get_player_location(game)) != NO_ID)
   {
-    sprintf(str, "  Player location:%d", (int)id_act);
+    sprintf(str, "  Player: %d (%d)", (int)id_act, player_get_health(game->player));
+    screen_area_puts(ge->descript, str);
+  }
+
+  if (player_get_object(game->player) != NO_ID)
+  {
+    sprintf(str, "  Player object: %d", (int)player_get_object(game->player)); /*In futures iterations perhaps there'll be changes to have the ID of the object since there'd be more objects*/
+    screen_area_puts(ge->descript, str);
+  }
+
+  else if(player_get_object(game->player) == NO_ID){
+    sprintf(str, "  Player has no object");
     screen_area_puts(ge->descript, str);
   }
 
@@ -181,18 +193,11 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
     screen_area_puts(ge->descript, str);
   }
 
-  if (player_get_object(game->player) != NO_ID)
-  {
-    sprintf(str, "  Player object: Yes"); /*In futures iterations perhaps there'll be changes to have the ID of the object since there'd be more objects*/
-    screen_area_puts(ge->descript, str);
-  }
-
  if (command_get_cmd(game_get_last_command(game)) == CHAT && command_get_cmd_status(game_get_last_command(game)) == OK)
   {
     sprintf(str, "  Message: %s", character_get_message(game_get_character(game, space_get_character(space_act)))); /*In futures iterations perhaps there'll be changes to have the ID of the object since there'd be more objects*/
     screen_area_puts(ge->descript, str);
   }
-
 
   /* Paint in the banner area */
   screen_area_puts(ge->banner, "    The anthill game ");
@@ -207,6 +212,13 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
   /* Paint in the feedback area */
   last_cmd = command_get_cmd(game_get_last_command(game));
   sprintf(str, " %s (%s)", cmd_to_str[last_cmd - NO_CMD][CMDL], cmd_to_str[last_cmd - NO_CMD][CMDS]);
+
+  if(command_get_cmd_status(game_get_last_command(game))==ERROR){
+    sprintf(str, "ERROR");
+  }
+  else if(command_get_cmd_status(game_get_last_command(game))==OK){
+    sprintf(str, "OK");
+  }
   screen_area_puts(ge->feedback, str);
 
   /* Dump to the terminal */
