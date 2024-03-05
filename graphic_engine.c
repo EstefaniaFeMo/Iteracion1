@@ -87,7 +87,8 @@ void graphic_engine_destroy(Graphic_engine *ge)
  */
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 {
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, obj_loc = NO_ID;
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, obj_loc = NO_ID, char_loc=NO_ID;
+  int i;
   Space *space_act = NULL;
   char obj = '\0';
   char str[MAX_STRING];
@@ -169,21 +170,51 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
   /* Paint in the description area */
   screen_area_clear(ge->descript);
 
-  if ((id_act = game_get_player_location(game)) != NO_ID)
+  sprintf(str, "  Objects:");
+  screen_area_puts(ge->descript, str);
+
+  for(i=0; i<MAX_OBJECTS; i++)
   {
-    sprintf(str, "  Player location:%d", (int)id_act);
-    screen_area_puts(ge->descript, str);
+    if(obj_loc= game_get_object_location(game, object_get_id(game->objects[i]))!= NO_ID)
+    {
+      sprintf(str, "  O%d: %d\n", (int)object_get_id(game->objects[i]), obj_loc);
+      screen_area_puts(ge->descript, str);
+    }
   }
 
-  if ((obj_loc = game_get_object_location(game)) != NO_ID)
+  sprintf(str, "  Characters:");
+  screen_area_puts(ge->descript, str);
+
+  for(i=0; i<MAX_CHARACTERS; i++){
+    if(char_loc= game_get_character_location(game, character_get_id(game->characters[i]))!= NO_ID)
+    {
+      if(charcater_get_friendly(game->characters[i])==TRUE)
+      {
+        sprintf(str, "     ^0m   :%d (%d)\n", char_loc, (int)character_get_health(game->characters[i]));
+        screen_area_puts(ge->descript, str);
+      }
+      else if(character_get_friendly(game->characters[i]==FALSE))
+      {
+        sprintf(str, "    /\\oo/\\  :%d (%d)\n", char_loc, (int)character_get_health(game->characters[i]));
+        screen_area_puts(ge->descript, str);
+      }
+    }
+  }
+
+  if ((id_act = game_get_player_location(game)) != NO_ID)
   {
-    sprintf(str, "  Object location:%d", (int)obj_loc);
+    sprintf(str, "  Player: %d (%d)", (int)id_act, player_get_health(game->player));
     screen_area_puts(ge->descript, str);
   }
 
   if (player_get_object(game->player) != NO_ID)
   {
-    sprintf(str, "  Player object: Yes"); /*In futures iterations perhaps there'll be changes to have the ID of the object since there'd be more objects*/
+    sprintf(str, "  Player object: %d", (int)player_get_object(game->player)); /*In futures iterations perhaps there'll be changes to have the ID of the object since there'd be more objects*/
+    screen_area_puts(ge->descript, str);
+  }
+
+  else if(player_get_object(game->player) == NO_ID){
+    sprintf(str, "  Player has no object");
     screen_area_puts(ge->descript, str);
   }
 
@@ -193,7 +224,6 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
     screen_area_puts(ge->descript, str);
   }
 
-
   /* Paint in the banner area */
   screen_area_puts(ge->banner, "    The anthill game ");
 
@@ -201,12 +231,19 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
   screen_area_clear(ge->help);
   sprintf(str, " The commands you can use are:");
   screen_area_puts(ge->help, str);
-  sprintf(str, "     next or n, back or b, take or t, drop or d, exit or e");
+  sprintf(str, "     next or n, back or b, take or t, drop or d, exit or e, left o l, rigth o r, attak o a, chat o c");
   screen_area_puts(ge->help, str);
 
   /* Paint in the feedback area */
   last_cmd = command_get_cmd(game_get_last_command(game));
   sprintf(str, " %s (%s)", cmd_to_str[last_cmd - NO_CMD][CMDL], cmd_to_str[last_cmd - NO_CMD][CMDS]);
+
+  if(command_get_cmd_status(game_get_last_command(game))==ERROR){
+    sprintf(str, "ERROR");
+  }
+  else if(command_get_cmd_status(game_get_last_command(game))==OK){
+    sprintf(str, "OK");
+  }
   screen_area_puts(ge->feedback, str);
 
   /* Dump to the terminal */

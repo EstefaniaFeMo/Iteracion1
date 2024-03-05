@@ -102,42 +102,42 @@ Status space_set_south(Space *space, Id id);
 Id space_get_south(Space *space);
 
 /**
- * @brief It sets the id of the space located at the east
+ * @brief It sets the id of the space located at the rigth
  * @author Profesores PPROG
  *
  * @param space a pointer to the space
- * @param id the id number of the space located at the east
+ * @param id the id number of the space located at the rigth
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
-Status space_set_east(Space *space, Id id);
+Status space_set_rigth(Space *space, Id id);
 
 
 /**
- * @brief It gets the id of the space located at the east
+ * @brief It gets the id of the space located at the rigth
  * @author Profesores PPROG
  *
  * @param space a pointer to the space
- * @return the id number of the space located at the east
+ * @return the id number of the space located at the rigth
  */
-Id space_get_east(Space* space);
+Id space_get_rigth(Space* space);
 
 /**
- * @brief It gets the id of the space located at the east
+ * @brief It gets the id of the space located at the left
  * @author Profesores PPROG
  * @param space a pointer to the space
- * @param id the id number of the space located at the west
+ * @param id the id number of the space located at the left
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
-Status space_set_west(Space *space, Id id);
+Status space_set_left(Space *space, Id id);
 
 /**
- * @brief It gets the id of the space located at the west
+ * @brief It gets the id of the space located at the left
  * @author Profesores PPROG
  *
  * @param space a pointer to the space
- * @return the id number of the space located at the west
+ * @return the id number of the space located at the left
  */
-Id space_get_west(Space *space);
+Id space_get_left(Space *space);
 
 /**
  * @brief It sets the ID of an object in the set of objects of space

@@ -125,8 +125,8 @@ void test2_character_set_friendly();
 
 /**
  * @test Test function for character_set_friendly setting
- * @pre pointer to character_friendly =NULL (point to character= NON NULL)
- * @post Ouput==ERROR
+ * @pre boolean value to character_friendly =FALSE (point to character= NON NULL)
+ * @post Ouput==OK
  */
 void test3_character_set_friendly();
 
@@ -194,16 +194,36 @@ void test2_character_print_message();
 
 /**
  * @test Test function for character_print setting
- * @pre pointer to character
+ * @pre pointer to character and character is friendly
  * @post Ouput==OK
  */
 void test1_character_print();
 
 /**
  * @test Test function for character_print setting
- * @pre pointer to character= NULL
- * @post Ouput==ERROR
+ * @pre pointer to character and character is not friendly
+ * @post Ouput==OK
  */
 void test2_character_print();
 
+/**
+ * @test Test function for character_print setting
+ * @pre pointer to character= NULL
+ * @post Ouput==ERROR
+ */
+void test3_character_print();
+
+/**
+ * @test Test function for character_destroy setting
+ * @pre pointer to character
+ * @post Ouput==OK
+ */
+void test1_character_destroy();
+
+/**
+ * @test Test function for character_destroy setting
+ * @pre pointer to character= NULL
+ * @post Ouput==ERROR
+ */
+void test2_character_destroy();
 #endif

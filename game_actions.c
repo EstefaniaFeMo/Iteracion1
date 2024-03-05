@@ -185,6 +185,7 @@ Status game_actions_update(Game *game, Command *command)
   case CHAT:
     cmd_status = game_actions_chat(game);
     break;
+
   default:
     break;
   }
@@ -292,10 +293,10 @@ Status game_actions_drop(Game *game)
   
   return OK;
 }
-
 /** game_actions_left recives a pointer to Game in the case that the command that the function that calls this one is left,
  * and calls to a function that reads which is the space located at the left and sends the player there.*/
-Status game_actions_left(Game *game){
+Status game_actions_left(Game *game)
+{
   Id current_id = NO_ID;
   Id space_id = NO_ID;
 
@@ -306,7 +307,7 @@ Status game_actions_left(Game *game){
     return ERROR;
   }
 
-  current_id = space_get_west(game_get_space(game, space_id));
+  current_id = space_get_left(game_get_space(game, space_id));
   if (current_id != NO_ID)
   {
     game_set_player_location(game, current_id);
@@ -317,7 +318,8 @@ Status game_actions_left(Game *game){
 
 /** game_actions_rigth recives a pointer to Game in the case that the command that the function that calls this one is rigth,
  * and calls to a function that reads which is the space located at the rigth and sends the player there.*/
-Status game_actions_rigth(Game *game){
+Status game_actions_rigth(Game *game)
+{
   Id current_id = NO_ID;
   Id space_id = NO_ID;
 
@@ -328,7 +330,7 @@ Status game_actions_rigth(Game *game){
     return ERROR;
   }
 
-  current_id = space_get_east(game_get_space(game, space_id));
+  current_id = space_get_rigth(game_get_space(game, space_id));
   if (current_id != NO_ID)
   {
     game_set_player_location(game, current_id);
@@ -339,7 +341,44 @@ Status game_actions_rigth(Game *game){
 
 /** game_actions_attack recives a pointer to Game in the case that the command that the function that calls this one is attcak,
  * and starts a figth with the character if it is not friendly.*/
-Status game_actions_attack(Game *game){
+Status game_actions_attack(Game *game)
+{
+  Character *character;
+  Id player_location = NO_ID;
+  Id character_location = NO_ID;
+  int num = rand();
+
+  if (game == NULL)
+  {
+    return ERROR;
+  }
+
+  character = game_get_character(game, game_get_space_id_at(game, player_location));
+  player_location = game_get_player_location(game);
+  character_location = game_get_character_location(game, character_get_id(character));
+
+  if (character_location == NO_ID || player_location == NO_ID)
+  {
+    return ERROR;
+  }
+
+  if (character_location == player_location && character_get_friendly(character) == FALSE)
+  {
+    if (num < 5)
+    {
+      player_set_health(game->player, player_get_health(game->player) - 1);
+    }
+    if (num >= 5)
+    {
+      character_set_health(character, character_get_health(character) - 1);
+    }
+  }
+
+  if (player_get_health(game->player) == 0)
+  {
+    game_actions_exit(game);
+  }
+
   return OK;
 }
 
@@ -358,5 +397,3 @@ Status game_actions_chat(Game *game){
   }
   return OK;
 }
-
-
