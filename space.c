@@ -24,8 +24,8 @@ struct _Space
   char name[WORD_SIZE + 1]; /*!< Name of the space */
   Id north;                 /*!< Id of the space at the north */
   Id south;                 /*!< Id of the space at the south */
-  Id rigth;                  /*!< Id of the space at the rigth */
-  Id left;                  /*!< Id of the space at the left */
+  Id east;                  /*!< Id of the space at the east */
+  Id west;                  /*!< Id of the space at the west */
   Set * objects;            /*!< Set with the IDs of the objects*/
   Id character;             /*!< Id of the character that is in the space */
 };
@@ -51,8 +51,8 @@ Space *space_create(Id id)
   newSpace->name[0] = '\0';
   newSpace->north = NO_ID;
   newSpace->south = NO_ID;
-  newSpace->rigth = NO_ID;
-  newSpace->left = NO_ID;
+  newSpace->east = NO_ID;
+  newSpace->west = NO_ID;
   newSpace->objects = set_create();
   newSpace->character = NO_ID;
   return newSpace;
@@ -160,52 +160,52 @@ Id space_get_south(Space *space)
   return space->south;
 }
 
-
-/** space_set_rigth sets the id of the space located at the rigth 
+/** space_set_east sets the id of the space located at the east 
 */
-Status space_set_rigth(Space *space, Id id)
+Status space_set_east(Space *space, Id id)
 {
   if (!space || id == NO_ID)
   {
     return ERROR;
   }
-  space->rigth = id;
+  space->east = id;
   return OK;
 }
 
-/** space_get_rigth gets the id of the space located at the rigth 
+/** space_get_east gets the id of the space located at the east 
 */
-Id rigth(Space *space)
+Id space_get_east(Space *space)
 {
   if (!space)
   {
     return NO_ID;
   }
-  return space->rigth;
+  return space->east;
 }
 
-/** space_set_left sets the id of the space located at the left 
+/** space_set_west sets the id of the space located at the west 
 */
-Status space_set_left(Space *space, Id id)
+Status space_set_west(Space *space, Id id)
 {
   if (!space || id == NO_ID)
   {
     return ERROR;
   }
-  space->left = id;
+  space->west = id;
   return OK;
 }
 
 /** space_get_west gets the id of the space located at the west 
 */
-Id space_get_left(Space *space)
+Id space_get_west(Space *space)
 {
   if (!space)
   {
     return NO_ID;
   }
-  return space->left;
+  return space->west;
 }
+
 /** space_set_object sets the ID of an object in the set of objects of the space 
 */
 Status space_set_object(Space *space, Id object)
