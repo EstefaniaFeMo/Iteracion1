@@ -213,4 +213,17 @@ void test2_character_print();
  */
 void test3_character_print();
 
+/**
+ * @test Test function for character_destroy setting
+ * @pre pointer to character
+ * @post Ouput==OK
+ */
+void test1_character_destroy();
+
+/**
+ * @test Test function for character_destroy setting
+ * @pre pointer to character= NULL
+ * @post Ouput==ERROR
+ */
+void test2_character_destroy();
 #endif
