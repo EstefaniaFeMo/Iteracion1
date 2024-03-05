@@ -112,7 +112,7 @@ const char *character_get_name(Character *character)
 Status character_set_health(Character *character, int health)
 {
     /* Error Control */
-    if (!character || !health)
+    if (!character || health<=0)
     {
         return ERROR;
     }
@@ -138,7 +138,7 @@ int character_get_health(Character *character)
 Status character_set_friendly(Character *character, Bool friendly)
 {
     /* Error Control */
-    if (!character || !friendly)
+    if (!character )
     {
         return ERROR;
     }
