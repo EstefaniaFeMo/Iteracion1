@@ -62,16 +62,17 @@ int main(int argc, char **argv) {
   if (all || test == 16) test2_character_print_message();
   if (all || test == 17) test1_character_print();
   if (all || test == 18) test2_character_print();
-  if (all || test == 19) test1_character_get_name();
-  if (all || test == 20) test2_character_get_name();
-  if (all || test == 21) test1_character_get_health();
-  if (all || test == 22) test2_character_get_health();
-  if (all || test == 23) test1_character_get_friendly();
-  if (all || test == 24) test2_character_get_friendly();
-  if (all || test == 25) test1_character_get_message();
-  if (all || test == 26) test2_character_get_message();
-  if (all || test == 27) test1_character_get_id();
-  if (all || test == 28) test2_character_get_id();
+  if (all || test == 19) test3_character_print();
+  if (all || test == 20) test1_character_get_name();
+  if (all || test == 21) test2_character_get_name();
+  if (all || test == 22) test1_character_get_health();
+  if (all || test == 23) test2_character_get_health();
+  if (all || test == 24) test1_character_get_friendly();
+  if (all || test == 25) test2_character_get_friendly();
+  if (all || test == 26) test1_character_get_message();
+  if (all || test == 27) test2_character_get_message();
+  if (all || test == 28) test1_character_get_id();
+  if (all || test == 29) test2_character_get_id();
 
   PRINT_PASSED_PERCENTAGE;
 
@@ -238,7 +239,6 @@ void test1_character_print_message(){
   Character *character;
   character = character_create(1);
   character_set_message(character, "adios");
-  character_get_message(character);
   PRINT_TEST_RESULT(character_print_message(character) == OK);
   character_destroy(character);
 }
@@ -252,12 +252,19 @@ void test1_character_print(){
   Character *character;
   character = character_create(1);
   character_set_friendly(character, FALSE);
-  character_get_friendly(character);
-  PRINT_TEST_RESULT(character_print_message(character) == OK);
+  PRINT_TEST_RESULT(character_print(character) == OK);
   character_destroy(character);
 }
 
 void test2_character_print(){
+  Character *character;
+  character = character_create(1);
+  character_set_friendly(character, TRUE);
+  PRINT_TEST_RESULT(character_print(character) == OK);
+  character_destroy(character);
+}
+
+void test3_character_print(){
   Character *character = NULL;
   PRINT_TEST_RESULT(character_print(character) == ERROR);
 }
