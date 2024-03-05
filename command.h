@@ -45,7 +45,7 @@ typedef enum
     LEFT, 
     RIGTH,
     ATTACK,
-    CHAT,
+    CHAT
 } CommandNum;
 
 typedef struct _Command Command;
