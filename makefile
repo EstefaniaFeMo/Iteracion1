@@ -15,7 +15,7 @@ anthill: game_loop.o game.o game_actions.o command.o graphic_engine.o space.o ga
 
 space_test: space_test.o space.o set.o
 
-character_test: character_test.o character.c
+character_test: character_test.o character.o
 
 #...............................................................................................#
 
