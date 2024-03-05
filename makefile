@@ -15,6 +15,8 @@ anthill: game_loop.o game.o game_actions.o command.o graphic_engine.o space.o ga
 
 space_test: space_test.o space.o set.o
 
+character_test: character_test.o character.c
+
 #...............................................................................................#
 
 game_loop.o: game_loop.c command.h game.h space.h types.h game_actions.h graphic_engine.h object.h player.h game_reader.h
@@ -51,6 +53,9 @@ space_test.o: space_test.c space_test.h test.h space.h types.h set.h
 	$(CC) $(CFLAGS) -c $<
 
 set.o: set.c set.h types.h
+	$(CC) $(CFLAGS) -c $<
+
+character_test.o: character_test.c character_test.h character.h types.h
 	$(CC) $(CFLAGS) -c $<
 
 #...............................................................................................#
