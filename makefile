@@ -17,7 +17,10 @@ space_test: space_test.o space.o set.o
 	$(CC) -o $@ $^ 
 
 set_test: set_test.o set.o
-	$(CC) -o $@ $^ 
+	$(CC) -o $@ $^
+
+character_test: character_test.o character.o
+	$(CC) -o $@ $^
 
 #...............................................................................................#
 
@@ -59,6 +62,9 @@ set.o: set.c set.h types.h
 
 set_test.o: set_test.c set_test.h test.h set.h types.h
 	$(CC) $(CFLAGS) -c $<
+
+character_test.o: character_test.c character_test.h test.h types.h
+	$(CC) $(CFLAGS) -c $<
 #...............................................................................................#
 clean_objects:
 	@echo "Cleaning objects..."
@@ -66,6 +72,6 @@ clean_objects:
 
 clean_program:
 	@echo "Cleaning program..."
-	@rm -f anthill space_test set_test
+	@rm -f anthill space_test set_test character_test
 
 clean: clean_objects clean_program
