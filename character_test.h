@@ -125,8 +125,8 @@ void test2_character_set_friendly();
 
 /**
  * @test Test function for character_set_friendly setting
- * @pre pointer to character_friendly =NULL (point to character= NON NULL)
- * @post Ouput==ERROR
+ * @pre boolean value to character_friendly =FALSE (point to character= NON NULL)
+ * @post Ouput==OK
  */
 void test3_character_set_friendly();
 
