@@ -195,7 +195,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
       }
       else if(character_get_friendly(game->characters[i]==FALSE))
       {
-        sprintf(str, "     /|oo/|  :%d (%d)\n", char_loc, (int)character_get_health(game->characters[i]));
+        sprintf(str, "    /\\oo/\\  :%d (%d)\n", char_loc, (int)character_get_health(game->characters[i]));
         screen_area_puts(ge->descript, str);
       }
     }
