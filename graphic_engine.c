@@ -87,7 +87,8 @@ void graphic_engine_destroy(Graphic_engine *ge)
  */
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 {
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, obj_loc = NO_ID;
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, obj_loc = NO_ID, char_loc=NO_ID;
+  int i;
   Space *space_act = NULL;
   char obj = '\0';
   char str[MAX_STRING];
@@ -169,6 +170,36 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
   /* Paint in the description area */
   screen_area_clear(ge->descript);
 
+  sprintf(str, "  Objects:");
+  screen_area_puts(ge->descript, str);
+
+  for(i=0; i<MAX_OBJECTS; i++)
+  {
+    if(obj_loc= game_get_object_location(game, object_get_id(game->objects[i]))!= NO_ID)
+    {
+      sprintf(str, "  O%d: %d\n", (int)object_get_id(game->objects[i]), obj_loc);
+      screen_area_puts(ge->descript, str);
+    }
+  }
+
+  sprintf(str, "  Characters:");
+  screen_area_puts(ge->descript, str);
+
+  for(i=0; i<MAX_CHARACTERS; i++){
+    if(char_loc= game_get_character_location(game, character_get_id(game->characters[i]))!= NO_ID)
+    {
+      if(charcater_get_friendly(game->characters[i])==TRUE)
+      {
+        sprintf(str, "     ^0m   :%d (%d)\n", char_loc, (int)character_get_health(game->characters[i]));
+        screen_area_puts(ge->descript, str);
+      }
+      else if(character_get_friendly(game->characters[i]==FALSE))
+      {
+        sprintf(str, "     /|oo/|  :%d (%d)\n", char_loc, (int)character_get_health(game->characters[i]));
+        screen_area_puts(ge->descript, str);
+      }
+    }
+  }
 
   if ((id_act = game_get_player_location(game)) != NO_ID)
   {
@@ -184,12 +215,6 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 
   else if(player_get_object(game->player) == NO_ID){
     sprintf(str, "  Player has no object");
-    screen_area_puts(ge->descript, str);
-  }
-
-  if ((obj_loc = game_get_object_location(game)) != NO_ID)
-  {
-    sprintf(str, "  Object location:%d", (int)obj_loc);
     screen_area_puts(ge->descript, str);
   }
 
