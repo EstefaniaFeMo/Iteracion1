@@ -24,8 +24,8 @@ struct _Space
   char name[WORD_SIZE + 1]; /*!< Name of the space */
   Id north;                 /*!< Id of the space at the north */
   Id south;                 /*!< Id of the space at the south */
-  Id east;                  /*!< Id of the space at the east */
-  Id west;                  /*!< Id of the space at the west */
+  Id rigth;                  /*!< Id of the space at the rigth */
+  Id left;                  /*!< Id of the space at the left */
   Set * objects;            /*!< Set with the IDs of the objects*/
   Id character;             /*!< Id of the character that is in the space */
 };
@@ -160,52 +160,52 @@ Id space_get_south(Space *space)
   return space->south;
 }
 
-/** space_set_east sets the id of the space located at the east 
+
+/** space_set_rigth sets the id of the space located at the rigth 
 */
-Status space_set_east(Space *space, Id id)
+Status space_set_rigth(Space *space, Id id)
 {
   if (!space || id == NO_ID)
   {
     return ERROR;
   }
-  space->east = id;
+  space->rigth = id;
   return OK;
 }
 
-/** space_get_east gets the id of the space located at the east 
+/** space_get_rigth gets the id of the space located at the rigth 
 */
-Id space_get_east(Space *space)
+Id rigth(Space *space)
 {
   if (!space)
   {
     return NO_ID;
   }
-  return space->east;
+  return space->rigth;
 }
 
-/** space_set_west sets the id of the space located at the west 
+/** space_set_left sets the id of the space located at the left 
 */
-Status space_set_west(Space *space, Id id)
+Status space_set_left(Space *space, Id id)
 {
   if (!space || id == NO_ID)
   {
     return ERROR;
   }
-  space->west = id;
+  space->left = id;
   return OK;
 }
 
 /** space_get_west gets the id of the space located at the west 
 */
-Id space_get_west(Space *space)
+Id space_get_left(Space *space)
 {
   if (!space)
   {
     return NO_ID;
   }
-  return space->west;
+  return space->left;
 }
-
 /** space_set_object sets the ID of an object in the set of objects of the space 
 */
 Status space_set_object(Space *space, Id object)
