@@ -107,7 +107,7 @@ Status game_actions_rigth(Game *game);
 
 Status game_actions_attack(Game *game);
 
-
+Status game_actions_chat(Game *game);
 
 /**
    Game actions implementation
@@ -338,7 +338,7 @@ Status game_actions_attack(Game *game)
     return ERROR;
   }
 
-  character = game_get_character(game, game_get_space(game, player_location));
+  character = game_get_character(game, game_get_space_id_at(game, player_location));
   player_location = game_get_player_location(game);
   character_location = game_get_character_location(game, character_get_id(character));
 
