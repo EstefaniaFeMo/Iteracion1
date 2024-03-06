@@ -124,7 +124,6 @@ Status game_actions_attack(Game *game);
 
 Status game_actions_chat(Game *game);
 
-
 /**
    Game actions implementation
 */
@@ -134,16 +133,17 @@ Status game_actions_chat(Game *game);
  */
 Status game_actions_update(Game *game, Command *command)
 {
-
+  int i;
   CommandNum cmd = command_get_cmd(command);
-  char* args = command_get_args(command);
-  char* toks;
+  char *args = command_get_args(command);
+  char *token = NULL;
+  Bool take_arg;
   Status cmd_status;
 
   switch (cmd)
   {
   case UNKNOWN:
-    cmd_status = game_actions_unknown(game);
+    game_actions_unknown(game);
     break;
 
   case EXIT:
@@ -163,14 +163,33 @@ Status game_actions_update(Game *game, Command *command)
     break;
 
   case TAKE:
+    if (args[0] == 'O')
+    {
+      token = args + 1;
+      i = 0;
 
-    toks = strtok(args, "O");
-    toks = strtok(args, "\n");
-
-    cmd_status = game_actions_take(game, atol(toks));
+      take_arg = TRUE;
+      while (token[i] != '\0')
+      {
+        if (token[i] < '0' || token[i] > '9')
+        {
+          take_arg = FALSE;
+          break;
+        }
+        i++;
+      }
+      if (take_arg == TRUE)
+      {
+        cmd_status = game_actions_take(game, atol(token));
+      }
+    }
+    else
+    {
+      cmd_status = ERROR;
+    }
     break;
 
-   case LEFT:
+  case LEFT:
     cmd_status = game_actions_left(game);
     break;
 
@@ -200,11 +219,11 @@ Status game_actions_update(Game *game, Command *command)
 
 /** game_actions_unknown recives a pointer to Game in the case that the command that the function that calls this one is unknown.
  */
-Status game_actions_unknown(Game *game) {return OK;}
+Status game_actions_unknown(Game *game) { return OK; }
 
 /** game_actions_exit recives a pointer to Game in the case that the command that the function that calls this one is exit.
  */
-Status game_actions_exit(Game *game) {return OK;}
+Status game_actions_exit(Game *game) { return OK; }
 
 /** game_actions_next recives a pointer to Game in the case that the command that the function that calls this one is next,
  * and calls to a function that reads which is the sapce below and sends the player there.
@@ -256,23 +275,28 @@ Status game_actions_back(Game *game)
 /** game_actions_take if there is an object in the same space of player, the player takes that object */
 Status game_actions_take(Game *game, Id object)
 {
-  Space*s;
+  Space *s;
   Id player_location;
 
-  if(object==NO_ID){
+  if (object == NO_ID)
+  {
     return ERROR;
   }
   
-  player_location = game_get_player_location(game);
-  s=game_get_space(game, player_location);
-
-  if(space_check_object(s, object)==FALSE){
+  if(player_get_object(game->player) != NO_ID){
     return ERROR;
   }
 
-    player_set_object(game->player, object);
-    space_del_object(s, object);
+  player_location = game_get_player_location(game);
+  s = game_get_space(game, player_location);
 
+  if (space_check_object(s, object) == FALSE)
+  {
+    return ERROR;
+  }
+
+  player_set_object(game->player, object);
+  space_del_object(s, object);
 
   return OK;
 }
@@ -285,12 +309,12 @@ Status game_actions_drop(Game *game)
   {
     return ERROR;
   }
-  if(space_set_object(game_get_space(game, player_location), object)==ERROR){
-      return ERROR;
+  if (space_set_object(game_get_space(game, player_location), object) == ERROR)
+  {
+    return ERROR;
   }
-    player_set_object(game->player, NO_ID);
-    
-  
+  player_set_object(game->player, NO_ID);
+
   return OK;
 }
 /** game_actions_left recives a pointer to Game in the case that the command that the function that calls this one is left,
@@ -307,7 +331,7 @@ Status game_actions_left(Game *game)
     return ERROR;
   }
 
-  current_id = space_get_left(game_get_space(game, space_id));
+  current_id = space_get_west(game_get_space(game, space_id));
   if (current_id != NO_ID)
   {
     game_set_player_location(game, current_id);
@@ -330,7 +354,7 @@ Status game_actions_rigth(Game *game)
     return ERROR;
   }
 
-  current_id = space_get_rigth(game_get_space(game, space_id));
+  current_id = space_get_east(game_get_space(game, space_id));
   if (current_id != NO_ID)
   {
     game_set_player_location(game, current_id);
@@ -384,15 +408,18 @@ Status game_actions_attack(Game *game)
 
 /** game_actions_chat in case that the command executed is chat, it tests if the character which is in the same space of the player is friendly and if it is,
  * this character says its message
-*/
-Status game_actions_chat(Game *game){
-  Id player_location=game_get_player_location(game);
+ */
+Status game_actions_chat(Game *game)
+{
+  Id player_location = game_get_player_location(game);
   Character *c = NULL;
-  if(space_get_character(game_get_space(game, player_location)) == NO_ID){
+  if (space_get_character(game_get_space(game, player_location)) == NO_ID)
+  {
     return ERROR;
   }
-  c=game_get_character(game, space_get_character(game_get_space(game, player_location)));
-  if(character_get_friendly(c)==FALSE){
+  c = game_get_character(game, space_get_character(game_get_space(game, player_location)));
+  if (character_get_friendly(c) == FALSE)
+  {
     return ERROR;
   }
   return OK;

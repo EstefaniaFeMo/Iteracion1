@@ -12,6 +12,7 @@
 #define GRAPHIC_ENGINE_H
 
 #include "game.h"
+#include "set.h"
 
 #define MAX_STRING 255 /*!<Indicates the maximum number of characters*/
 
@@ -48,5 +49,7 @@ void graphic_engine_destroy(Graphic_engine *ge);
  * @param ge a pointer to the structure Graphic_engine
  */
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game);
+
+char* graphic_engine_print_objects(Set *set);
 
 #endif

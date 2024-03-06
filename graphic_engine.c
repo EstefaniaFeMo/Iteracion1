@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "command.h"
 #include "libscreen.h"
@@ -87,13 +88,14 @@ void graphic_engine_destroy(Graphic_engine *ge)
  */
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 {
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, obj_loc = NO_ID, char_loc=NO_ID;
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, obj_loc = NO_ID, char_loc = NO_ID;
   int i;
   Space *space_act = NULL;
-  char obj = '\0';
+  char *obj;
   char str[MAX_STRING];
   CommandNum last_cmd = UNKNOWN;
   extern char *cmd_to_str[N_CMD][N_CMDT];
+  Set *set = NULL;
 
   /* Paint the in the map area */
   screen_area_clear(ge->map);
@@ -103,20 +105,24 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
     id_back = space_get_north(space_act);
     id_next = space_get_south(space_act);
 
-    if (game_get_object_location(game) == id_back)
-      obj = 'O' +;
+    set = space_get_objects(game_get_space(game, id_back));
+    if (set != NULL)
+      obj = graphic_engine_print_objects(set);
     else
-      obj = ' ';
+      obj = "           ";
 
     if (id_back != NO_ID)
     {
-      if((int)id_back >= 100){
+      if ((int)id_back >= 100)
+      {
         sprintf(str, "  |        %2d|", (int)id_back);
-      }else{
+      }
+      else
+      {
         sprintf(str, "  |         %2d|", (int)id_back);
       }
       screen_area_puts(ge->map, str);
-      sprintf(str, "  |     %c     |", obj);
+      sprintf(str, "  |%s|", obj);
       screen_area_puts(ge->map, str);
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
@@ -124,31 +130,36 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
       screen_area_puts(ge->map, str);
     }
 
-    if (game_get_object_location(game) == id_act)
-      obj = '*';
+    set = space_get_objects(game_get_space(game, id_act));
+    if (set != NULL)
+      obj = graphic_engine_print_objects(set);
     else
-      obj = ' ';
+      obj = "           ";
 
     if (id_act != NO_ID)
     {
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
-      if((int)id_act >= 100){
+      if ((int)id_act >= 100)
+      {
         sprintf(str, "  | m0^    %2d|", (int)id_act);
-      }else{
+      }
+      else
+      {
         sprintf(str, "  | m0^     %2d|", (int)id_act);
       }
       screen_area_puts(ge->map, str);
-      sprintf(str, "  |     %c     |", obj);
+      sprintf(str, "  |%s|", obj);
       screen_area_puts(ge->map, str);
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
     }
 
-    if (game_get_object_location(game) == id_next)
-      obj = '*';
+    set = space_get_objects(game_get_space(game, id_next));
+    if (set != NULL)
+      obj = graphic_engine_print_objects(set);
     else
-      obj = ' ';
+      obj = "           ";
 
     if (id_next != NO_ID)
     {
@@ -156,13 +167,16 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
       screen_area_puts(ge->map, str);
       sprintf(str, "  +-----------+");
       screen_area_puts(ge->map, str);
-      if((int)id_next >= 100){
+      if ((int)id_next >= 100)
+      {
         sprintf(str, "  |        %2d|", (int)id_next);
-      }else{
+      }
+      else
+      {
         sprintf(str, "  |         %2d|", (int)id_next);
       }
       screen_area_puts(ge->map, str);
-      sprintf(str, "  |     %c     |", obj);
+      sprintf(str, "  |%s|", obj);
       screen_area_puts(ge->map, str);
     }
   }
@@ -173,11 +187,11 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
   sprintf(str, "  Objects:");
   screen_area_puts(ge->descript, str);
 
-  for(i=0; i<MAX_OBJECTS; i++)
+  for (i = 0; i < MAX_OBJECTS; i++)
   {
-    if(obj_loc= game_get_object_location(game, object_get_id(game->objects[i]))!= NO_ID)
+    if ((obj_loc = game_get_object_location(game, object_get_id(game->objects[i]))) != NO_ID)
     {
-      sprintf(str, "  O%d: %d\n", (int)object_get_id(game->objects[i]), obj_loc);
+      sprintf(str, "  O%d: %d", (int)object_get_id(game->objects[i]), (int)obj_loc);
       screen_area_puts(ge->descript, str);
     }
   }
@@ -185,17 +199,18 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
   sprintf(str, "  Characters:");
   screen_area_puts(ge->descript, str);
 
-  for(i=0; i<MAX_CHARACTERS; i++){
-    if(char_loc= game_get_character_location(game, character_get_id(game->characters[i]))!= NO_ID)
+  for (i = 0; i < MAX_CHARACTERS; i++)
+  {
+    if ((char_loc = game_get_character_location(game, character_get_id(game->characters[i]))) != NO_ID)
     {
-      if(charcater_get_friendly(game->characters[i])==TRUE)
+      if (character_get_friendly(game->characters[i]) == TRUE)
       {
-        sprintf(str, "     ^0m   :%d (%d)\n", char_loc, (int)character_get_health(game->characters[i]));
+        sprintf(str, "     ^0m   :%d (%d)\n", (int)char_loc, (int)character_get_health(game->characters[i]));
         screen_area_puts(ge->descript, str);
       }
-      else if(character_get_friendly(game->characters[i]==FALSE))
+      else if (character_get_friendly(game->characters[i]) == FALSE)
       {
-        sprintf(str, "    /\\oo/\\  :%d (%d)\n", char_loc, (int)character_get_health(game->characters[i]));
+        sprintf(str, "    /\\oo/\\  :%d (%d)\n", (int)char_loc, (int)character_get_health(game->characters[i]));
         screen_area_puts(ge->descript, str);
       }
     }
@@ -213,12 +228,13 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
     screen_area_puts(ge->descript, str);
   }
 
-  else if(player_get_object(game->player) == NO_ID){
+  else if (player_get_object(game->player) == NO_ID)
+  {
     sprintf(str, "  Player has no object");
     screen_area_puts(ge->descript, str);
   }
 
- if (command_get_cmd(game_get_last_command(game)) == CHAT && command_get_cmd_status(game_get_last_command(game)) == OK)
+  if (command_get_cmd(game_get_last_command(game)) == CHAT && command_get_cmd_status(game_get_last_command(game)) == OK)
   {
     sprintf(str, "  Message: %s", character_get_message(game_get_character(game, space_get_character(space_act)))); /*In futures iterations perhaps there'll be changes to have the ID of the object since there'd be more objects*/
     screen_area_puts(ge->descript, str);
@@ -236,17 +252,80 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 
   /* Paint in the feedback area */
   last_cmd = command_get_cmd(game_get_last_command(game));
-  sprintf(str, " %s (%s)", cmd_to_str[last_cmd - NO_CMD][CMDL], cmd_to_str[last_cmd - NO_CMD][CMDS]);
-
-  if(command_get_cmd_status(game_get_last_command(game))==ERROR){
-    sprintf(str, "ERROR");
-  }
-  else if(command_get_cmd_status(game_get_last_command(game))==OK){
-    sprintf(str, "OK");
+  sprintf(str, " %s (%s): ", cmd_to_str[last_cmd - NO_CMD][CMDL], cmd_to_str[last_cmd - NO_CMD][CMDS]);
+  if(last_cmd != UNKNOWN && last_cmd != NO_CMD){
+    if(command_get_cmd_status(game_get_last_command(game))== ERROR){
+      strcat(str, "ERROR");
+    }else{
+      strcat(str, "OK");
+    }
   }
   screen_area_puts(ge->feedback, str);
 
   /* Dump to the terminal */
   screen_paint();
   printf("prompt:> ");
+}
+
+char *graphic_engine_print_objects(Set *set)
+{
+  int i;
+  int max;
+
+  char *str = malloc(sizeof(char) * 100);
+  char *all = malloc(sizeof(char) * 100);
+
+  if (set == NULL)
+  {
+    return NULL;
+  }
+  str[0] = '\0';
+  all[0] = '\0';
+  max = SCREEN_LIMIT;
+
+  if (set_get_n_ids(set) <= 0)
+  {
+    strcpy(all, "           ");
+  }
+  else
+  {
+    for (i = 0; i < set_get_n_ids(set); i++)
+    {
+      sprintf(str, "O%ld", (long)set_get_ids(set, i));
+
+      if (i == 0)
+      {
+        strcpy(all, str);
+      }
+      else
+      {
+        if (strlen(str) + 2 + strlen(all) <= max - 3)
+        {
+          strcat(all, ", ");
+          strcat(all, str);
+        }
+        else
+        {
+          if (strlen(str) + 2 + strlen(all) <= max && i==(long)set_get_n_ids(set)-1 )
+          {
+            strcat(all, ", ");
+            strcat(all, str);
+          }
+          else
+          {
+            if(strlen(str) + 2 + strlen(all) <= max && i<(long)set_get_n_ids(set)-1)
+            strcat(all, "...");
+          }
+          break;
+        }
+      }
+    }
+  }
+
+  for (i = strlen(all); i < max; i++)
+  {
+    strcat(all, " ");
+  }
+  free(str);
+  return all;
 }

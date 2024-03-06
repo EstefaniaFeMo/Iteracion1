@@ -14,6 +14,7 @@
 #include "command.h"
 #include "game.h"
 #include "types.h"
+#include "player.h"
 
 /**
  * @brief It recives the new command and for each type of command, calls a new function. At the end it

@@ -104,7 +104,6 @@ void game_loop_run(Game game, Graphic_engine *gengine)
     graphic_engine_paint_game(gengine, &game);
     command = command_get_user_input();
     game_actions_update(&game, command);
-    command_destroy(command);
   }
 }
 

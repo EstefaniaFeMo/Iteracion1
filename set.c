@@ -58,6 +58,22 @@ Status set_destroy(Set *set){
 
     return OK;
 }
+
+Id set_get_ids(Set *set, int position){
+    if(position >= set->n_ids || position < 0 || set == NULL){
+        return NO_ID;
+    }
+
+    return set->ids[position];
+}
+
+int set_get_n_ids(Set *set){
+    if(set == NULL){
+        return -1;
+    }
+
+    return set->n_ids;
+}
 /** set_add includes in the array of IDs the given ID
  */
 Status set_add(Set *set, Id id){
@@ -117,49 +133,7 @@ Status set_print(Set *set){
     return OK;
 }
 
-/*char* set_print_all(Set *set){
-    int max, i;
-    char str[SCREEN_LIMIT+1];
-    char all[SCREEN_LIMIT+1];
-    str[0] = '\0';
-    all[0] = '\0';
 
-    if(set==NULL || set->n_ids>MAX_NUM_IDS || set->n_ids<=0){
-        sprintf(str, "           ");
-        return all;
-    }
-
-    for(i=0; i<set->n_ids; i++){
-        if(i==0){
-                sprintf(str, "O%2d", (int)set->ids[i]);
-                if(strlen(str) < max){
-                    strcat(all, str);
-                    max -= strlen(str);
-                }else{
-                    strcat(all, "...");
-                }
-        }else{
-            sprintf(str, ", O%2d", (int)set->ids[i]);
-            if(strlen(str) < max-3 && i < set->n_ids-1){
-                max -= strlen(str);
-                strcat(all, str);
-            }else{
-                if(strlen(str) < max && i == set->n_ids -1){
-                    strcat(all, str);
-                }else{
-                    strcat(str, "...");
-                    max -= 3;
-                    for(i=0; i<max; i++){
-                        strcat(str, " ");
-                    }
-                    
-                }
-                break;      
-            }
-        }
-    }
-    return all;
-}*/
 
 /** set_check_id  checks if the given Id is in the set*/
 Bool set_check_id(Set * set, Id id){

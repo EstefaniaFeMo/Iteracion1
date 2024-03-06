@@ -233,6 +233,13 @@ Status space_del_object(Space *space, Id object)
   return OK;
 }
 
+Set *space_get_objects(Space *space){
+  if(!space){
+    return NULL;
+  }
+  return space->objects;
+}
+
 /** space_get_object_id gets the identifier of a particular object that is in the space 
  * with the given position*/
 Id space_get_object_id(Space *space, int position)

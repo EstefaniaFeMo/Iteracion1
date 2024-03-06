@@ -67,21 +67,20 @@ Status game_create_from_file(Game *game, char *filename)
     return ERROR;
   }
 
+  if(game_reader_load_objects(game, filename) == ERROR){
+    return ERROR;
+  }
+
   /* Creates the player, all the objects and the characters with the id 0 */
   game->player = player_create(ID_PLAYER);
   /*Puede que haya que verlo en función de lo que se haga en gamer_reader*/
-  for(i=0; i<game->n_objects; i++){
-    game->objects[i]= object_create(ID_OBJECT);
-  }
   for(i=0; i<game->n_characters; i++){
     game->characters[i]= character_create(ID_CHARACTER);
   }
 
   /* The player, the objects, and the characters are located in the first space */
   game_set_player_location(game, game_get_space_id_at(game, 0));
-  for(i=0; i<game->n_objects; i++){
-    game_set_object_location(game, game_get_space_id_at(game, 0), object_get_id(game->objects[i]));
-  }
+
   for(i=0; i<game->n_characters; i++){
     game_set_character_location(game, game_get_space_id_at(game, 0), character_get_id(game->characters[i]));
   }
@@ -107,7 +106,7 @@ Status game_destroy(Game *game)
     character_destroy(game->characters[i]);
   }
   player_destroy(game->player);
-
+  command_destroy(game->last_cmd);
   return OK;
 }
 
@@ -324,7 +323,7 @@ Status game_add_space(Game *game, Space *space)
 /*game_add_object adds a new object in the game->objects array 
 */
 Status game_add_object(Game *game, Object *object){
-  if(game->objects==NULL || (game->n_objects)){
+  if(game->objects==NULL || game->n_objects<0 || game->n_objects>=MAX_OBJECTS){
     return ERROR;
   }
 

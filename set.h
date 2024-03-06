@@ -39,6 +39,10 @@ Set * set_create();
  */
 Status set_destroy(Set *set);
 
+Id set_get_ids(Set *set, int position);
+
+int set_get_n_ids(Set *set);
+
 /**
  * @brief It adds in the array of IDs in the last position of it the given ID 
  * when the parameters are appropiate and if the capacity of the array is not full.

@@ -52,12 +52,11 @@ Command *command_get_user_input()
   Command *command;
   char input[CMD_LENGHT] = "", *token = NULL;
   int i = UNKNOWN - NO_CMD + 1;
-
   command=command_create();
 
   if (fgets(input, CMD_LENGHT, stdin))
   {
-    token = strtok(input, " ");
+    token = strtok(input, " \n");
     command->cmd = UNKNOWN;
     while (token && command->cmd == UNKNOWN && i < N_CMD)
     {
@@ -70,9 +69,9 @@ Command *command_get_user_input()
         i++;
       }
     }
-
-    token = strtok(input, "\n");
-    strcpy(command->args, token);
+    token = strtok(NULL, " \n");
+    if(token)
+      strcpy(command->args, token);
 
   }
 

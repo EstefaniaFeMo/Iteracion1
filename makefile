@@ -10,7 +10,7 @@ CLIB= -lscreen -L.
 
 all: anthill space_test set_test
 
-anthill: game_loop.o game.o game_actions.o command.o graphic_engine.o space.o game_reader.o object.o player.o character.o
+anthill: game_loop.o game.o game_actions.o command.o graphic_engine.o space.o game_reader.o object.o player.o character.o set.o
 	$(CC) -o $@ $^ $(CLIB)
 
 space_test: space_test.o space.o set.o
@@ -36,7 +36,7 @@ game.o: game.c game.h game_reader.h command.h space.h types.h object.h player.h
 game_actions.o: game_actions.c game_actions.h command.h game.h space.h types.h object.h player.h game_reader.h
 	$(CC) $(CFLAGS) -c $<
 
-graphic_engine.o: graphic_engine.c graphic_engine.h game.h command.h space.h types.h libscreen.h object.h player.h game_reader.h
+graphic_engine.o: graphic_engine.c graphic_engine.h game.h command.h space.h types.h libscreen.h object.h player.h game_reader.h set.h
 	$(CC) $(CFLAGS) -c $<
 
 space.o: space.c space.h types.h set.h

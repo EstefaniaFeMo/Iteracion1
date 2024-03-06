@@ -150,6 +150,21 @@ Id player_get_object(Player *player)
     return player->object;
 }
 
+Status player_set_health(Player *player, int health){
+    if(!player){
+        return ERROR;
+    }
+    player->health = health;
+    return OK;
+}
+
+int player_get_health(Player *player){
+    if(!player){
+        return -1;
+    }
+    return player->health;
+}
+
 /** player_print, prints the id of the player 
 */
 Status player_print(Player *player)

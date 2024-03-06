@@ -96,7 +96,6 @@ Status game_reader_load_objects(Game *game, char *filename)
   Id id = NO_ID, location = NO_ID;
   Object *object = NULL;
   Status status = OK;
-  Set *set;
 
   /* Error control of the filename*/
   if (!filename)
