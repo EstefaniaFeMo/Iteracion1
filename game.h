@@ -25,6 +25,8 @@
 #define ID_OBJECT 0 /*!<Macro with the id of the object when it is initialized*/
 #define ID_CHARACTER1 0 /*!<Macro with the id of the character when it is initialized*/
 #define ID_CHARACTER2 1 /*!<Macro with the id of the character when it is initialized*/
+#define LOC_CHARACTER1 122 /*!<Macro with the location of the character when it is initialized*/
+#define LOC_CHARACTER2 13 /*!<Macro with the location of the character when it is initialized*/
 
 #define MAX_OBJECTS 5 /*!<Macro with the maximum number of objects*/
 
@@ -90,12 +92,19 @@ Status game_destroy(Game *game);
  * @author Profesores PPROG
  *
  * @param game a pointer to the struct that contains the information of the current game session
- * @param cmd the command which will be executed 
+ * @param id the id that will be searched
  * @return NULL if the ID is not declared, or doesn't match with any of the ID of the spaces. 
  * @return game->spaces[i] if the spaces[i] ID match with the given ID.
  */
 Space *game_get_space(Game *game, Id id);
 
+/**
+ * @brief It gets a player of the game session.
+ * @author Estefanía Fenoy Montes
+ *
+ * @param game a pointer to the struct that contains the information of the current game session
+ * @return a pointer to the player, game->players.
+ */
 Player *game_get_player(Game *game);
 
 /**
@@ -141,6 +150,18 @@ Id game_get_object_location(Game *game, Id object);
  */
 Status game_set_object_location(Game *game, Id space, Id object);
 
+/**
+ * @brief It gets as arguments the current game session and an ID, which is used to get the position
+ * of the ID. First, it checks if the given ID is initialized but not set, if this is the case returns NULL.
+ * If not, it compares every characters ID from the array game->characters[] with the given ID. In case it matches,
+ * the function returns the value of the characters. If the ID doesn't match with any ID, returns NULL.
+ * @author Profesores PPROG
+ *
+ * @param game a pointer to the struct that contains the information of the current game session
+ * @param id the id that will be searched
+ * @return NULL if the ID is not declared, or doesn't match with any of the ID of the characters. 
+ * @return game->characters[i] if the characters[i] ID match with the given ID.
+ */
 Character *game_get_character(Game *game, Id id);
 
 /**
@@ -229,7 +250,7 @@ Status game_add_space(Game *game, Space *space);
 
 /**
  * @brief It adds a new object in the last position available of the array and increases the number of objects by one
- * @author Carmen Gómez Escobar
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct.
  * @param object a pointer to the object that will be added
@@ -259,6 +280,18 @@ Status game_add_character(Game *game, Character *character);
  */
 Id game_get_space_id_at(Game *game, int position);
 
+/**
+ * @brief It creates a new character whit th information given in the arguments
+ * @author Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct, Game and it uses it to get access to the game->spaces IDs
+ * @param location the position we want to get the id
+ * @param friendly the boolean value for its friendly status
+ * @param id the id of the character that is going to be set
+ * @param name the name of the character that is going to be set
+ * @param message the message of the character set
+ * @return the new character
+ */
 Character *game_create_predesigned_characters(Game *game, Id location, Bool friendly, Id id, char *name, char *message);
 
 #endif

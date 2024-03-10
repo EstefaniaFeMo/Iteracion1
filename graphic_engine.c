@@ -117,20 +117,31 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 
     if (id_back != NO_ID)
     {
-      if ((int)id_back >= 100)
-      {
-        sprintf(str, "  |      %s%2d|", charac, (int)id_back);
+      if(space_get_west(game_get_space(game, id_back))!=NO_ID && space_get_east(game_get_space(game, id_back))==NO_ID){
+        sprintf(str, "<< |     %s %2d|  ", charac, (int)id_back);
       }
-      else
-      {
-        sprintf(str, "  |      %s %2d|", charac, (int)id_back);
+      else if(space_get_east(game_get_space(game, id_back))!=NO_ID && space_get_west(game_get_space(game, id_back))==NO_ID ){
+        sprintf(str, "   |     %s %2d| >>", charac, (int)id_back);
+      }
+      else if(space_get_east(game_get_space(game, id_back))!=NO_ID && space_get_west(game_get_space(game, id_back))!=NO_ID ){
+        sprintf(str, "<< |     %s %2d| >>", charac, (int)id_back);
+      }
+      else if (space_get_east(game_get_space(game, id_back))==NO_ID && space_get_west(game_get_space(game, id_back))==NO_ID ){
+        if ((int)id_back >= 100)
+        {
+          sprintf(str, "   |      %s%2d|", charac, (int)id_back);
+        }
+        else
+        {
+          sprintf(str, "   |      %s %2d|", charac, (int)id_back);
+        }
       }
       screen_area_puts(ge->map, str);
-      sprintf(str, "  |               |");
+      sprintf(str, "   |               |");
       screen_area_puts(ge->map, str);
-      sprintf(str, "  |%s|", obj);
+      sprintf(str, "   |%s|", obj);
       screen_area_puts(ge->map, str);
-      sprintf(str, "  +---------------+");
+      sprintf(str, "   +---------------+");
       screen_area_puts(ge->map, str);
       sprintf(str, "          ^");
       screen_area_puts(ge->map, str);
@@ -146,23 +157,41 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 
     if (id_act != NO_ID)
     {
-      sprintf(str, "  +---------------+");
+      sprintf(str, "   +---------------+");
       screen_area_puts(ge->map, str);
-      if ((int)id_act >= 100)
-      {
-        sprintf(str, "  | m0^  %s%2d|", charac, (int)id_act);
+      if(space_get_west(game_get_space(game, id_act))!=NO_ID && space_get_east(game_get_space(game, id_act))==NO_ID){
+          if ((int)id_next >= 100)
+        {
+          sprintf(str, "<< |      %s%2d|", charac, (int)id_act);
+        }
+        else
+        {
+          sprintf(str, "<< |      %s %2d|", charac, (int)id_act);
+        }
       }
-      else
-      {
-        sprintf(str, "  | m0^  %s %2d|", charac, (int)id_act);
+      else if(space_get_east(game_get_space(game, id_act))!=NO_ID && space_get_west(game_get_space(game, id_act))==NO_ID ){
+        sprintf(str, "   | m0^ %s %2d| >>", charac, (int)id_act);
+      }
+      else if(space_get_east(game_get_space(game, id_act))!=NO_ID && space_get_west(game_get_space(game, id_act))!=NO_ID ){
+        sprintf(str, "<< | m0^ %s %2d| >>", charac, (int)id_act);
+      }
+      else if (space_get_east(game_get_space(game, id_act))==NO_ID && space_get_west(game_get_space(game, id_act))==NO_ID ){
+        if ((int)id_act >= 100)
+        {
+          sprintf(str, "   | m0^  %s%2d|", charac, (int)id_act);
+        }
+        else
+        {
+          sprintf(str, "   | m0^  %s %2d|", charac, (int)id_act);
+        }
       }
       screen_area_puts(ge->map, str);
-      sprintf(str, "  |               |");
+      sprintf(str, "   |               |");
       screen_area_puts(ge->map, str);
-      sprintf(str, "  |%s|", obj);
+      sprintf(str, "   |%s|", obj);
       
       screen_area_puts(ge->map, str);
-      sprintf(str, "  +---------------+");
+      sprintf(str, "   +---------------+");
       screen_area_puts(ge->map, str);
     }
 
@@ -176,22 +205,40 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 
     if (id_next != NO_ID)
     {
-      sprintf(str, "          v");
+      sprintf(str, "           v");
       screen_area_puts(ge->map, str);
-      sprintf(str, "  +---------------+");
+      sprintf(str, "   +---------------+");
       screen_area_puts(ge->map, str);
-      if ((int)id_next >= 100)
-      {
-        sprintf(str, "  |      %s%2d|", charac, (int)id_next);
+      if(space_get_west(game_get_space(game, id_next))!=NO_ID && space_get_east(game_get_space(game, id_next))==NO_ID){
+        if ((int)id_next >= 100)
+        {
+          sprintf(str, "<< |      %s%2d|", charac, (int)id_next);
+        }
+        else
+        {
+          sprintf(str, "<< |      %s %2d|", charac, (int)id_next);
+        }
       }
-      else
-      {
-        sprintf(str, "  |      %s %2d|", charac, (int)id_next);
+      else if(space_get_east(game_get_space(game, id_next))!=NO_ID && space_get_west(game_get_space(game, id_next))==NO_ID ){
+        sprintf(str, "   |     %s %2d| >>", charac, (int)id_next);
+      }
+      else if(space_get_east(game_get_space(game, id_next))!=NO_ID && space_get_west(game_get_space(game, id_next))!=NO_ID ){
+        sprintf(str, "<< |     %s %2d| >>", charac, (int)id_next);
+      }
+      else if (space_get_east(game_get_space(game, id_next))==NO_ID && space_get_west(game_get_space(game, id_next))==NO_ID ){
+        if ((int)id_next >= 100)
+        {
+          sprintf(str, "   |      %s%2d|", charac, (int)id_next);
+        }
+        else
+        {
+          sprintf(str, "   |      %s %2d|", charac, (int)id_next);
+        }
       }
       screen_area_puts(ge->map, str);
-      sprintf(str, "  |               |");
+      sprintf(str, "   |               |");
       screen_area_puts(ge->map, str);
-      sprintf(str, "  |%s|", obj);
+      sprintf(str, "   |%s|", obj);
       screen_area_puts(ge->map, str);
     }
   }
@@ -309,6 +356,8 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
     printf("prompt:> ");
 }
 
+/* graphic_engine_print_objects paints all the objects in a determinated space
+*/
 char *graphic_engine_print_objects(Set *set)
 {
   int i;
@@ -372,6 +421,8 @@ char *graphic_engine_print_objects(Set *set)
   return all;
 }
 
+/* graphic_engine_print_characters paints all the characters in a determinated space
+*/
 char *graphic_engine_print_characters(Game *game, Id id_location)
 {
   int i; 
@@ -413,3 +464,4 @@ char *graphic_engine_print_characters(Game *game, Id id_location)
   }
   return print;
 }
+

@@ -80,8 +80,8 @@ Status game_create_from_file(Game *game, char *filename)
 
   /*Puede que haya que verlo en función de lo que se haga en gamer_reader*/
   if(game->n_characters<=MAX_CHARACTERS){
-    game->characters[game->n_characters]=game_create_predesigned_characters(game, 122, TRUE, ID_CHARACTER1, "Ant", "Hi ant!");
-    game->characters[game->n_characters]=game_create_predesigned_characters(game, 13, FALSE, ID_CHARACTER2, "Spider", "Hi ant!");
+    game->characters[game->n_characters]=game_create_predesigned_characters(game, LOC_CHARACTER1, TRUE, ID_CHARACTER1, "Ant", "Hi ant!");
+    game->characters[game->n_characters]=game_create_predesigned_characters(game, LOC_CHARACTER2, FALSE, ID_CHARACTER2, "Spider", "Hi ant!");
   }
 
   /* The player, the objects, and the characters are located in the first space */
@@ -134,6 +134,8 @@ Space *game_get_space(Game *game, Id id)
   return NULL;
 }
 
+/*game_get_player returns a pionter to the player
+*/
 Player *game_get_player(Game *game){
   return game->player;
 }
@@ -199,6 +201,8 @@ Status game_set_object_location(Game *game, Id space, Id object)
   return OK;
 }
 
+/*game_get_character returns a pointer to the character with the given id
+*/
 Character *game_get_character(Game *game, Id id)
 {
   int i = 0;
@@ -235,6 +239,7 @@ Id game_get_character_location(Game *game, Id character)
   }
   return NO_ID;
 }
+
 /*game_set_character_location sets the value of the variable character_location with the given ID in the given space.
 */
 Status game_set_character_location(Game *game, Id space, Id character)
@@ -305,6 +310,8 @@ void game_print(Game *game)
   printf("=> Player location: %ld\n", game_get_player_location(game));
 }
 
+/*game_add_character adds a new character in the last position available of the array and increases the 
+number of characters by one */
 Status game_add_character(Game *game, Character *character){
   
   /*Error control*/
@@ -318,7 +325,6 @@ Status game_add_character(Game *game, Character *character){
 
   return OK;
 }
-
 
 /*game_add_space adds a new space in the game->spaces array 
 */
@@ -362,7 +368,8 @@ Id game_get_space_id_at(Game *game, int position)
   return space_get_id(game->spaces[position]);
 }
 
-/*game_reader_load_characters downloads the characters defined in a file */
+/*game_create_predesigned_characters creates a new character whit th information given in the arguments
+*/
 Character *game_create_predesigned_characters(Game *game, Id location, Bool friendly, Id id, char *name, char *message)
 {
   Character *character = NULL;

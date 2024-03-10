@@ -339,6 +339,9 @@ Status game_actions_left(Game *game)
   {
     game_set_player_location(game, current_id);
   }
+  else if(current_id==NO_ID){
+    return ERROR;
+  }
 
   return OK;
 }
@@ -361,6 +364,9 @@ Status game_actions_rigth(Game *game)
   if (current_id != NO_ID)
   {
     game_set_player_location(game, current_id);
+  }
+  else if(current_id==NO_ID){
+    return ERROR;
   }
 
   return OK;

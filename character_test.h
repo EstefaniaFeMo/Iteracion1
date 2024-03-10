@@ -226,4 +226,6 @@ void test1_character_destroy();
  * @post Ouput==ERROR
  */
 void test2_character_destroy();
+
 #endif
+

@@ -50,8 +50,23 @@ void graphic_engine_destroy(Graphic_engine *ge);
  */
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game);
 
+/**
+ * @brief It paints all the objects in a determinated space
+ * @author Carmen Gómez Escobar
+ *
+ * @param set it points to a set of objects y and uses it to check if the space should be printed in that space or not
+ * @return char a string whit the objects
+ */
 char* graphic_engine_print_objects(Set *set);
 
+/**
+ * @brief It paints all the characters in a determinated space
+ * @author Carmen Gómez Escobar
+ *
+ * @param game it points to the game structure where the characters are located
+ * @param id the id of the space in which the characters should be printed
+ * @return char a string whit the characters
+ */
 char *graphic_engine_print_characters(Game *game, Id id);
 
 #endif
