@@ -59,14 +59,8 @@ Status set_destroy(Set *set){
     return OK;
 }
 
-Id set_get_ids(Set *set, int position){
-    if(position >= set->n_ids || position < 0 || set == NULL){
-        return NO_ID;
-    }
 
-    return set->ids[position];
-}
-
+/*set_get_n_ids */
 int set_get_n_ids(Set *set){
     if(set == NULL){
         return -1;

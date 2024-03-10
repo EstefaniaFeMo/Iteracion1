@@ -11,7 +11,7 @@
 #ifndef SET_TEST_H
 #define SET_TEST_H
 
-#define MAX_TESTS 20 /*!<Indicates the maximum number of possible tests*/
+#define MAX_TESTS 22 /*!<Indicates the maximum number of possible tests*/
 /**
  * @test Test set creation
  * @pre Non
@@ -55,6 +55,8 @@ void test2_set_print();
 
 void test3_set_print();
 
+void test1_get_n_ids();
 
+void test2_get_n_ids();
 
 #endif

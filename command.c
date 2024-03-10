@@ -2,7 +2,7 @@
  * @brief It implements the command interpreter
  *
  * @file command.c
- * @author Profesores PPROG, Carmen Gómez Escobar
+ * @author Profesores PPROG, Estefanía Fenoy Montes, Carmen Gómez Escobar
  * @version 3.5
  * @date 6-02-2024
  * @copyright GNU Public License
@@ -25,9 +25,9 @@
  * This struct stores all the information of a command.
  */
 struct _Command{
-  CommandNum cmd;
-  char args[CMD_LENGHT];
-  Status status;
+  CommandNum cmd; /*!<The command itself indicated in the list of CommandNum*/
+  char args[CMD_LENGHT]; /*!<An argument to contain the information given apart of the command*/
+  Status status; /*!<The status of the command if its call is correct, status Ok, otherwise status ERROR*/
 };
 
 
@@ -46,7 +46,7 @@ Command * command_create(){
   command->status=ERROR;
   return command;
 }
-/** command_get_user_input reads a command recived from the user input and gives the asociated value defined in the Command struct. */
+/** command_get_user_input reads a command recived from the user input and gives the asociated values defining the Command struct */
 Command *command_get_user_input()
 {
   Command *command;
@@ -78,6 +78,7 @@ Command *command_get_user_input()
   return command;
 }
 
+/*command_get_cmd gest the exact command which is a number in the list of commands that will be executed*/
 CommandNum command_get_cmd(Command *command){
   if(command == NULL){
     return NO_CMD;
@@ -85,7 +86,7 @@ CommandNum command_get_cmd(Command *command){
 
   return command->cmd;
 }
-
+/*command_get_args gest the argument that goes with the command*/
 char* command_get_args(Command* command){
   if(command == NULL){
     return NULL;
@@ -93,12 +94,15 @@ char* command_get_args(Command* command){
 
   return command->args;
 }
+/*command_get_status gest the status of the command whether it will be executes it will be OK otherwise it 
+will be ERROR*/
 Status command_get_cmd_status(Command *command){
   if(command==NULL){
     return ERROR;
   }
   return command->status;
 }
+/*command_set_cmd_status sets the status of the command of the list*/
 Status command_set_cmd_status(Command *command, Status status){
   if(command==NULL){
     return ERROR;
@@ -106,7 +110,7 @@ Status command_set_cmd_status(Command *command, Status status){
   command->status=status;
   return OK;
 }
-
+/*command_destroy frees the memory of the structure command which contains all the information related to command*/
 Status command_destroy(Command *command){
   if(command==NULL){
     return ERROR;

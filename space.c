@@ -30,8 +30,7 @@ struct _Space
   Id character;             /*!< Id of the character that is in the space */
 };
 
-/** space_create allocates memory for a new space and initializes its members 
-*/
+/** space_create allocates memory for a new space and initializes its members */
 Space *space_create(Id id)
 {
   Space *newSpace = NULL;
@@ -58,8 +57,7 @@ Space *space_create(Id id)
   return newSpace;
 }
 
-/** space_destroy destroys a space, freeing the allocated memory 
-*/
+/** space_destroy destroys a space, freeing the allocated memory */
 Status space_destroy(Space *space)
 {
   if (!space)
@@ -76,8 +74,7 @@ Status space_destroy(Space *space)
   return OK;
 }
 
-/** space_get_id gets the id of a space 
-*/
+/** space_get_id gets the id of a space */
 Id space_get_id(Space *space)
 {
   if (!space)
@@ -87,8 +84,7 @@ Id space_get_id(Space *space)
   return space->id;
 }
 
-/** space_set_name sets the name of a space 
-*/
+/** space_set_name sets the name of a space */
 Status space_set_name(Space *space, char *name)
 {
   if (!space || !name)
@@ -103,8 +99,7 @@ Status space_set_name(Space *space, char *name)
   return OK;
 }
 
-/** space_get_name gets the name of a space 
-*/
+/** space_get_name gets the name of a space */
 const char *space_get_name(Space *space)
 {
   if (!space)
@@ -114,8 +109,7 @@ const char *space_get_name(Space *space)
   return space->name;
 }
 
-/** space_set_north sets the id of the space located at the north 
-*/
+/** space_set_north sets the id of the space located at the north */
 Status space_set_north(Space *space, Id id)
 {
   if (!space || id == NO_ID)
@@ -126,8 +120,7 @@ Status space_set_north(Space *space, Id id)
   return OK;
 }
 
-/** space_get_north gets the id of the space located at the north 
-*/
+/** space_get_north gets the id of the space located at the north */
 Id space_get_north(Space *space)
 {
   if (!space)
@@ -137,8 +130,7 @@ Id space_get_north(Space *space)
   return space->north;
 }
 
-/** space_set_south sets the id of the space located at the south 
-*/
+/** space_set_south sets the id of the space located at the south */
 Status space_set_south(Space *space, Id id)
 {
   if (!space || id == NO_ID)
@@ -149,8 +141,7 @@ Status space_set_south(Space *space, Id id)
   return OK;
 }
 
-/** space_get_south gets the id of the space located at the south 
-*/
+/** space_get_south gets the id of the space located at the south */
 Id space_get_south(Space *space)
 {
   if (!space)
@@ -160,8 +151,7 @@ Id space_get_south(Space *space)
   return space->south;
 }
 
-/** space_set_east sets the id of the space located at the east 
-*/
+/** space_set_east sets the id of the space located at the east */
 Status space_set_east(Space *space, Id id)
 {
   if (!space || id == NO_ID)
@@ -172,8 +162,7 @@ Status space_set_east(Space *space, Id id)
   return OK;
 }
 
-/** space_get_east gets the id of the space located at the east 
-*/
+/** space_get_east gets the id of the space located at the east */
 Id space_get_east(Space *space)
 {
   if (!space)
@@ -183,8 +172,7 @@ Id space_get_east(Space *space)
   return space->east;
 }
 
-/** space_set_west sets the id of the space located at the west 
-*/
+/** space_set_west sets the id of the space located at the west */
 Status space_set_west(Space *space, Id id)
 {
   if (!space || id == NO_ID)
@@ -195,8 +183,7 @@ Status space_set_west(Space *space, Id id)
   return OK;
 }
 
-/** space_get_west gets the id of the space located at the west 
-*/
+/** space_get_west gets the id of the space located at the west */
 Id space_get_west(Space *space)
 {
   if (!space)
@@ -206,8 +193,7 @@ Id space_get_west(Space *space)
   return space->west;
 }
 
-/** space_set_object sets the ID of an object in the set of objects of the space 
-*/
+/** space_set_object sets the ID of an object in the set of objects of the space */
 Status space_set_object(Space *space, Id object)
 {
   if (!space)
@@ -219,8 +205,7 @@ Status space_set_object(Space *space, Id object)
   }
   return OK;
 }
-/** space_del_object deletes the ID of an object in the set of objects of the space 
-*/
+/** space_del_object deletes the ID of an object in the set of objects of the space */
 Status space_del_object(Space *space, Id object)
 {
   if (!space)
@@ -232,7 +217,7 @@ Status space_del_object(Space *space, Id object)
   }
   return OK;
 }
-
+/** space_get_object obtains the set of objets in the given space space*/
 Set *space_get_objects(Space *space){
   if(!space){
     return NULL;

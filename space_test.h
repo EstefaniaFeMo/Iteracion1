@@ -11,7 +11,7 @@
 #ifndef SPACE_TEST_H
 #define SPACE_TEST_H
 
-#define MAX_TESTS 45 /*!<Indicates the maximum number of possible tests*/
+#define MAX_TESTS 47 /*!<Indicates the maximum number of possible tests*/
 /**
  * @test Test space creation
  * @pre Space ID 
@@ -93,5 +93,7 @@ void test1_space_destroy();
 void test2_space_destroy();
 void test1_space_print();
 void test2_space_print();
+void test1_space_get_objects();
+void test2_space_get_objects();
 
 #endif

@@ -291,7 +291,7 @@ char *graphic_engine_print_objects(Set *set)
   {
     for (i = 0; i < set_get_n_ids(set); i++)
     {
-      sprintf(str, "O%ld", (long)set_get_ids(set, i));
+      sprintf(str, "O%ld", (long)set_return_id(set, i));
 
       if (i == 0)
       {

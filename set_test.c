@@ -51,7 +51,8 @@ int main(int argc, char **argv) {
   if (all || test == 17) test1_set_print();
   if (all || test == 18) test2_set_print();
   if (all || test == 19) test3_set_print();
-
+if (all || test == 20) test1_get_n_ids();
+  if (all || test == 21) test2_get_n_ids();
   PRINT_PASSED_PERCENTAGE;
 
   return 1;
@@ -174,3 +175,14 @@ void test3_set_print(){
   Set *s=NULL;
   PRINT_TEST_RESULT(set_print(s)==ERROR);
 }
+void test1_get_n_ids(){
+  Set *s;
+  s=set_create();
+  set_add(s, 4);
+  PRINT_TEST_RESULT(set_get_n_ids(s)==1);
+  set_destroy(s);
+}
+void test2_get_n_ids(){
+  Set *s=NULL;
+  PRINT_TEST_RESULT(set_get_n_ids(s)==-1);
+} 

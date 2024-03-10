@@ -10,7 +10,7 @@
 #ifndef SET_H
 #define SET_H
 
-#define MAX_NUM_IDS  8 /*!Macro with the maximum value of ID's*/
+#define MAX_NUM_IDS  8 /*!Macro with the maximum value of IDs*/
 
 #include "types.h"
 /**
@@ -39,8 +39,13 @@ Set * set_create();
  */
 Status set_destroy(Set *set);
 
-Id set_get_ids(Set *set, int position);
-
+/**
+ * @brief It gets the number of IDs of the set 
+ * @author Estefanía Fenoy Montes
+ *
+ * @param set a pointer to the set of identifiers
+ * @return set->n_ids, return the number of IDs in the set
+ */
 int set_get_n_ids(Set *set);
 
 /**

@@ -159,6 +159,13 @@ Status space_set_object(Space *space, Id object);
  */
 Status space_del_object(Space *space, Id object);
 
+/**
+ * @brief It obtains the set of objets in the given space
+ * @author Profesores PPROG, Estefanía Fenoy Montes
+ *
+ * @param space a pointer to the space
+ * @return space->objects, the set of objects in the space
+ */
 Set *space_get_objects(Space *space);
 
 /**

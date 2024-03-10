@@ -86,7 +86,9 @@ int main(int argc, char **argv) {
   if (all || test == 41) test1_space_get_character();
   if (all || test == 42) test2_space_get_character();
   if (all || test == 43) test1_space_print();  
-  if (all || test == 44) test1_space_print();                   
+  if (all || test == 44) test1_space_print(); 
+  if (all || test == 45) test1_space_get_objects();
+  if (all || test == 46) test2_space_get_objects();              
 
 
   PRINT_PASSED_PERCENTAGE;
@@ -365,7 +367,17 @@ void test2_space_print(){
   Space *s=NULL;
   PRINT_TEST_RESULT(space_print(s)==ERROR);
 }
-
+void test1_space_get_objects(){
+  Space *s;
+  s=space_create(4);
+  PRINT_TEST_RESULT(space_get_objects(s)!=NULL);
+  space_destroy(s);
+}
+void test2_space_get_objects(){
+  Space *s=NULL;
+  PRINT_TEST_RESULT(space_get_objects(s)==NULL);
+  space_destroy(s);
+}
 
 
 
