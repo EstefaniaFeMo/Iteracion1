@@ -52,4 +52,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game);
 
 char* graphic_engine_print_objects(Set *set);
 
+char *graphic_engine_print_characters(Game *game, Id id);
+
 #endif
+

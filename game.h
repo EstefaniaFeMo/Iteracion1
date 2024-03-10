@@ -23,11 +23,12 @@
 
 #define ID_PLAYER 0 /*!<Macro with the id of player */
 #define ID_OBJECT 0 /*!<Macro with the id of the object when it is initialized*/
-#define ID_CHARACTER 0 /*!<Macro with the id of the character when it is initialized*/
+#define ID_CHARACTER1 0 /*!<Macro with the id of the character when it is initialized*/
+#define ID_CHARACTER2 1 /*!<Macro with the id of the character when it is initialized*/
 
 #define MAX_OBJECTS 5 /*!<Macro with the maximum number of objects*/
 
-#define MAX_CHARACTERS 4 /*!<Macro with the maximum number of players*/
+#define MAX_CHARACTERS 2 /*!<Macro with the maximum number of players*/
 
 
 /**
@@ -94,6 +95,8 @@ Status game_destroy(Game *game);
  * @return game->spaces[i] if the spaces[i] ID match with the given ID.
  */
 Space *game_get_space(Game *game, Id id);
+
+Player *game_get_player(Game *game);
 
 /**
  * @brief The function returns the value of the variable player_location of the current game
@@ -229,11 +232,22 @@ Status game_add_space(Game *game, Space *space);
  * @author Carmen Gómez Escobar
  *
  * @param game a pointer to the struct.
- * @param object a pointer to the space that will be added
+ * @param object a pointer to the object that will be added
  * @return status==OK, if the function has worked correctly
  * @return status==ERROR, if a mistken has happened
  */
 Status game_add_object(Game *game, Object *object);
+
+/**
+ * @brief It adds a new character in the last position available of the array and increases the number of characters by one
+ * @author Carmen Gómez Escobar
+ *
+ * @param game a pointer to the struct.
+ * @param object a pointer to the character that will be added
+ * @return status==OK, if the function has worked correctly
+ * @return status==ERROR, if a mistken has happened
+ */
+Status game_add_character(Game *game, Character *character);
 
 /**
  * @brief It gives the ID of the position of the given parameter
@@ -245,5 +259,7 @@ Status game_add_object(Game *game, Object *object);
  */
 Id game_get_space_id_at(Game *game, int position);
 
+Character *game_create_predesigned_characters(Game *game, Id location, Bool friendly, Id id, char *name, char *message);
 
 #endif
+

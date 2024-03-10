@@ -150,15 +150,17 @@ Id player_get_object(Player *player)
     return player->object;
 }
 
-Status player_set_health(Player *player, int health){
-    if(!player){
+Status player_set_health(Player *player, int health)
+{
+    if(!player || health<0){
         return ERROR;
     }
     player->health = health;
     return OK;
 }
 
-int player_get_health(Player *player){
+int player_get_health(Player *player)
+{
     if(!player){
         return -1;
     }

@@ -11,6 +11,9 @@
 #ifndef GAME_ACTIONS_H
 #define GAME_ACTIONS_H
 
+#define MAX_RAND 10
+#define MIN_RAND 0
+
 #include "command.h"
 #include "game.h"
 #include "types.h"

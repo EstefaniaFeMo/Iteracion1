@@ -74,13 +74,9 @@ Status game_create_from_file(Game *game, char *filename)
   /* Creates the player, all the objects and the characters with the id 0 */
   game->player = player_create(ID_PLAYER);
 
-  if(game->player==NULL){
-    return ERROR;
-  }
-
   /*Puede que haya que verlo en función de lo que se haga en gamer_reader*/
   if(game->n_characters<=MAX_CHARACTERS){
-    game->characters[game->n_characters]=game_create_predesigned_characters(game, 122, TRUE, ID_CHARACTER1, "Ant", "Hi ant!");
+    game->characters[(game->n_characters)-1]=game_create_predesigned_characters(game, 12, TRUE, ID_CHARACTER1, "Ant", "Hi ant!");
     game->characters[game->n_characters]=game_create_predesigned_characters(game, 13, FALSE, ID_CHARACTER2, "Spider", "Hi ant!");
   }
 
@@ -132,10 +128,6 @@ Space *game_get_space(Game *game, Id id)
   }
   /*If the ID is not equal to any space, return NULL*/
   return NULL;
-}
-
-Player *game_get_player(Game *game){
-  return game->player;
 }
 
 /*game_get_player_location returns the value of the variable player_location of the current game
@@ -319,6 +311,9 @@ Status game_add_character(Game *game, Character *character){
   return OK;
 }
 
+/**
+   Implementation of private functions
+*/
 
 /*game_add_space adds a new space in the game->spaces array 
 */

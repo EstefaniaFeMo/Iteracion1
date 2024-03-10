@@ -99,12 +99,16 @@ void game_loop_run(Game game, Graphic_engine *gengine)
 {
   Command *command = NULL;
 
-  while ((command_get_cmd(command) != EXIT) && (game_get_finished(&game) == FALSE))
+  while ((game_get_finished(&game) == FALSE))
   {
-    graphic_engine_paint_game(gengine, &game);
-    command = command_get_user_input();
-    game_actions_update(&game, command);
+    if ((command_get_cmd(command) != EXIT))
+    {
+      graphic_engine_paint_game(gengine, &game);
+      command = command_get_user_input();
+      game_actions_update(&game, command);
+    }
   }
+  graphic_engine_paint_game(gengine, &game);
 }
 
 /**
@@ -112,8 +116,7 @@ void game_loop_run(Game game, Graphic_engine *gengine)
  */
 void game_loop_cleanup(Game game, Graphic_engine *gengine)
 {
-  
+
   game_destroy(&game);
   graphic_engine_destroy(gengine);
-
 }

@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "game.h"
 
@@ -147,6 +148,7 @@ Status game_actions_update(Game *game, Command *command)
     break;
 
   case EXIT:
+    game_set_finished(game, TRUE);
     cmd_status = game_actions_exit(game);
     break;
 
@@ -240,10 +242,11 @@ Status game_actions_next(Game *game)
   }
 
   current_id = space_get_south(game_get_space(game, space_id));
-  if (current_id != NO_ID)
+  if (current_id == NO_ID)
   {
-    game_set_player_location(game, current_id);
+    return ERROR;
   }
+    game_set_player_location(game, current_id);
 
   return OK;
 }
@@ -264,11 +267,11 @@ Status game_actions_back(Game *game)
     return ERROR;
   }
   current_id = space_get_north(game_get_space(game, space_id));
-  if (current_id != NO_ID)
+  if (current_id == NO_ID)
   {
-    game_set_player_location(game, current_id);
+    return ERROR;
   }
-
+    game_set_player_location(game, current_id);
   return OK;
 }
 
@@ -367,41 +370,45 @@ Status game_actions_rigth(Game *game)
  * and starts a figth with the character if it is not friendly.*/
 Status game_actions_attack(Game *game)
 {
-  Character *character;
-  Id player_location = NO_ID;
-  Id character_location = NO_ID;
-  int num = rand();
+  Id player_location = game_get_player_location(game);
+  Character *c = NULL;
+  int num= 0;
 
-  if (game == NULL)
+  srand(time (NULL));
+
+  if (space_get_character(game_get_space(game, player_location)) == NO_ID)
+  {
+    return ERROR;
+  }
+  
+  c = game_get_character(game, space_get_character(game_get_space(game, player_location)));
+  
+  if (character_get_friendly(c) == TRUE || character_get_health(c) <= 0)
   {
     return ERROR;
   }
 
-  character = game_get_character(game, game_get_space_id_at(game, player_location));
-  player_location = game_get_player_location(game);
-  character_location = game_get_character_location(game, character_get_id(character));
+  if (game_get_character_location(game, space_get_character(game_get_space(game, player_location))) == player_location){
 
-  if (character_location == NO_ID || player_location == NO_ID)
-  {
-    return ERROR;
-  }
+    if(character_get_friendly(c) == FALSE){
 
-  if (character_location == player_location && character_get_friendly(character) == FALSE)
-  {
-    if (num < 5)
-    {
-      player_set_health(game->player, player_get_health(game->player) - 1);
-    }
-    if (num >= 5)
-    {
-      character_set_health(character, character_get_health(character) - 1);
+      num= rand() % (MAX_RAND - MIN_RAND + 1) + MIN_RAND;
+      if (num < 1)
+      {
+        player_set_health(game->player, player_get_health(game->player) - 1);
+      }
+      else if (num >= 1)
+      {
+        character_set_health(c, character_get_health(c) - 1);
+      }
     }
   }
 
-  if (player_get_health(game->player) == 0)
+  if(player_get_health(game->player) <= 0)
   {
-    game_actions_exit(game);
+    game_set_finished(game, TRUE);
   }
+
 
   return OK;
 }

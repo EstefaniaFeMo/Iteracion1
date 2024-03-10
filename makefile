@@ -8,7 +8,7 @@ CLIB= -lscreen -L.
 
 .PHONY: clean_objects clean_program clean all
 
-all: anthill space_test set_test
+all: anthill space_test set_test character_test
 
 anthill: game_loop.o game.o game_actions.o command.o graphic_engine.o space.o game_reader.o object.o player.o character.o set.o
 	$(CC) -o $@ $^ $(CLIB)
