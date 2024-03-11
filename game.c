@@ -170,6 +170,14 @@ Status game_set_player_location(Game *game, Id id)
   return OK;
 }
 
+/*game_get_object_at gets an object of the array of object of the game session by its position*/
+Object * game_get_object_at(Game *game, int position){
+  if(position<=0 || position>=game->n_objects){
+    return NULL;
+  }
+  return game->objects[position];
+}
+
 /*game_get_object_location returns the value of the ID location of a given object in the current game
  */
 Id game_get_object_location(Game *game, Id object)

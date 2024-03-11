@@ -13,7 +13,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 #include "game.h"
 
@@ -380,8 +379,6 @@ Status game_actions_attack(Game *game)
   Id player_location = game_get_player_location(game);
   Character *c = NULL;
   int num= 0;
-
-  srand(time (NULL));
 
   if (space_get_character(game_get_space(game, player_location)) == NO_ID)
   {

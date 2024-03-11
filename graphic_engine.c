@@ -316,10 +316,10 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 
   for (i = blankcounter = 0; i < MAX_OBJECTS; i++)
   {
-    if ((obj_loc = game_get_object_location(game, object_get_id(game->objects[i]))) != NO_ID)
+    if ((obj_loc = game_get_object_location(game, object_get_id(game_get_object_at(game, i)))) != NO_ID)
     {
       blankcounter++;
-      sprintf(str, "    O%d: %d", (int)object_get_id(game->objects[i]), (int)obj_loc);
+      sprintf(str, "    O%d: %d", (int)object_get_id(game_get_object_at(game, i)), (int)obj_loc);
       screen_area_puts(ge->descript, str);
     }
   }

@@ -129,6 +129,16 @@ Id game_get_player_location(Game *game);
 Status game_set_player_location(Game *game, Id id);
 
 /**
+ * @brief It gives the object of the position of the given parameter
+ * @author Estefanía Fenoy Montes
+ *
+ * @param game a pointer to the struct, Game and it uses it to get access to the game->objects 
+ * @param position the position we want to get the object
+ * @return the object of the game at the position given.
+ */
+Object * game_get_object_at(Game *game, int position);
+
+/**
  * @brief The function returns the Id of the space in which is the given object
  * @author Estefanía Fenoy Montes
  *
@@ -164,6 +174,14 @@ Status game_set_object_location(Game *game, Id space, Id object);
  */
 Character *game_get_character(Game *game, Id id);
 
+/**
+ * @brief It gives the ID of the character of the given position
+ * @author Estefanía Fenoy
+ *
+ * @param game a pointer to the struct, Game and it uses it to get access to the game->spaces IDs
+ * @param position the position in which the character that we want to get the id is
+ * @return the ID of the character at the position given.
+ */
 Id game_get_character_id_at(Game *game, int position);
 
 /**

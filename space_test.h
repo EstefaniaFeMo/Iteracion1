@@ -2,7 +2,7 @@
  * @brief It declares the tests for the space module
  * 
  * @file space_test.h
- * @author Profesores Pprog
+ * @author Profesores Pprog, Estefanía Fenoy Montes
  * @version 2.0 
  * @date 09-03-2021
  * @copyright GNU Public License
