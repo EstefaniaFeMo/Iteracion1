@@ -268,10 +268,9 @@ void test2_space_get_west() {
 
 void test1_space_get_object_id() {
   Space *s;
-  int i=0;
   s = space_create(25);
   space_set_object(s, 12);
-  PRINT_TEST_RESULT(space_get_object_id(s, i) == 12);
+  PRINT_TEST_RESULT(space_get_object_id(s, 0) == 12);
   space_destroy(s);
 }
 
