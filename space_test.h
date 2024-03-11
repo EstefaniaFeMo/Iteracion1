@@ -46,35 +46,137 @@ void test2_space_set_name();
  * @post Output==ERROR
  */
 void test3_space_set_name();
+
+/**
+ * @test Test function for space_set_north setting
+ * @pre id of the space located at the north = 4 (point to space = NON NULL) 
+ * @post Output==OK
+ */
 void test1_space_set_north();
+
+/**
+ * @test Test function for space_set_north setting
+ * @pre pointer to space = NULL 
+ * @post Output==ERROR
+ */
 void test2_space_set_north();
-void test3_space_set_north();
-void test4_space_set_north();
+
+/**
+ * @test Test function for space_set_south setting
+ * @pre id of the space located at the south = 4 (point to space = NON NULL) 
+ * @post Output==OK
+ */
 void test1_space_set_south();
+
+/**
+ * @test Test function for space_set_south setting
+ * @pre pointer to space = NULL 
+ * @post Output==ERROR
+ */
 void test2_space_set_south();
-void test3_space_set_south();
-void test4_space_set_south();
+
+/**
+ * @test Test function for space_set_east setting
+ * @pre id of the space located at the east = 4 (point to space = NON NULL) 
+ * @post Output==OK
+ */
 void test1_space_set_east();
+
+/**
+ * @test Test function for space_set_east setting
+ * @pre pointer to space = NULL 
+ * @post Output==ERROR
+ */
 void test2_space_set_east();
-void test3_space_set_east();
-void test4_space_set_east();
+
+/**
+ * @test Test function for space_set_west setting
+ * @pre id of the space located at the west = 4 (point to space = NON NULL) 
+ * @post Output==OK
+ */
 void test1_space_set_west();
+
+
+/**
+ * @test Test function for space_set_west setting
+ * @pre pointer to space = NULL 
+ * @post Output==ERROR
+ */
 void test2_space_set_west();
-void test3_space_set_west();
-void test4_space_set_west();
+
 void test1_space_set_object();
 void test2_space_set_object();
 void test3_space_set_object();
+
+/**
+ * @test Test function for space_get_name setting
+ * @pre string with a name of the space (point to space = NON NULL)
+ * @post name of the space == given name
+ */
 void test1_space_get_name();
+/**
+ * @test Test function for space_get_name setting
+ * @pre pointer to space = NULL
+ * @post Output==NULL
+ */
 void test2_space_get_name();
+
+/**
+ * @test Test function for space_get_north setting
+ * @pre identifier of the space located at the north (point to space = NON NULL)
+ * @post the given id of the space in the nort == 4
+ */
 void test1_space_get_north();
+
+/**
+ * @test Test function for space_get_north setting
+ * @pre pointer to space = NULL
+ * @post Output==NO_ID
+ */
 void test2_space_get_north();
+
+/**
+ * @test Test function for space_get_south setting
+ * @pre identifier of the space located at the south (point to space = NON NULL)
+ * @post the given id of the space in the south == 2
+ */
 void test1_space_get_south();
+
+/**
+ * @test Test function for space_get_south setting
+ * @pre pointer to space = NULL
+ * @post Output==NO_ID
+ */
 void test2_space_get_south();
+
+/**
+ * @test Test function for space_get_east setting
+ * @pre identifier of the space located at the east (point to space = NON NULL)
+ * @post the given id of the space in the east == 1
+ */
 void test1_space_get_east();
+
+/**
+ * @test Test function for space_get_east setting
+ * @pre pointer to space = NULL
+ * @post Output==NO_ID
+ */
 void test2_space_get_east();
+
+/**
+ * @test Test function for space_get_west setting
+ * @pre identifier of the space located at the west (point to space = NON NULL)
+ * @post the given id of the space in the west == 6
+ */
 void test1_space_get_west();
+
+/**
+ * @test Test function for space_get_west setting
+ * @pre pointer to space = NULL
+ * @post Output==NO_ID
+ */
 void test2_space_get_west();
+
 void test1_space_check_object();
 void test2_space_check_object();
 void test3_space_check_object();
