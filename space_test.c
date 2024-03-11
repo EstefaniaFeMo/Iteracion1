@@ -95,7 +95,7 @@ int main(int argc, char **argv) {
 
   return 1;
 }
-
+/** Test function for space_create setting */
 void test1_space_create() {
   int result;
   Space *s;
@@ -105,6 +105,7 @@ void test1_space_create() {
   space_destroy(s);
 }
 
+/** Test function for space_create setting */
 void test2_space_create() {
   Space *s;
   s = space_create(4);
@@ -112,6 +113,7 @@ void test2_space_create() {
   space_destroy(s);
 }
 
+/** Test function for space_set_name setting */
 void test1_space_set_name() {
   Space *s;
   s = space_create(5);
@@ -119,11 +121,13 @@ void test1_space_set_name() {
   space_destroy(s);
 }
 
+/** Test function for space_set_name setting */
 void test2_space_set_name() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_set_name(s, "hola") == ERROR);
 }
 
+/** Test function for space_set_name setting */
 void test3_space_set_name() {
   Space *s;
   s = space_create(5);
@@ -131,6 +135,7 @@ void test3_space_set_name() {
   space_destroy(s);
 }
 
+/** Test function for space_set_north setting */
 void test1_space_set_north() {
   Space *s;
   s = space_create(5);
@@ -138,11 +143,13 @@ void test1_space_set_north() {
   space_destroy(s);
 }
 
+/** Test function for space_set_north setting */
 void test2_space_set_north() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_set_north(s, 4) == ERROR);
 }
 
+/** Test function for space_set_south setting */
 void test1_space_set_south() {
   Space *s;
   s = space_create(5);
@@ -150,11 +157,13 @@ void test1_space_set_south() {
   space_destroy(s);
 }
 
+/** Test function for space_set_south setting */
 void test2_space_set_south() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_set_south(s, 4) == ERROR);
 }
 
+/** Test function for space_set_east setting */
 void test1_space_set_east() {
   Space *s;
   s = space_create(5);
@@ -162,11 +171,13 @@ void test1_space_set_east() {
   space_destroy(s);
 }
 
+/** Test function for space_set_east setting */
 void test2_space_set_east() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_set_east(s, 4) == ERROR);
 }
 
+/** Test function for space_set_west setting */
 void test1_space_set_west() {
   Space *s;
   s = space_create(5);
@@ -174,12 +185,14 @@ void test1_space_set_west() {
   space_destroy(s);
 }
 
+/** Test function for space_set_west setting */
 void test2_space_set_west() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_set_west(s, 4) == ERROR);
 }
 
 
+/** Test function for space_get_name setting */
 void test1_space_get_name() {
   Space *s;
   s = space_create(1);
@@ -188,11 +201,13 @@ void test1_space_get_name() {
   space_destroy(s);
 }
 
+/** Test function for space_get_name setting */
 void test2_space_get_name() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_get_name(s) == NULL);
 }
 
+/** Test function for space_check_object setting */
 void test1_space_check_object() {
   Space *s;
   s = space_create(1);
@@ -200,6 +215,7 @@ void test1_space_check_object() {
   space_destroy(s);
 }
 
+/** Test function for space_check_object setting */
 void test2_space_check_object() {
   Space *s;
   s = space_create(1);
@@ -208,11 +224,13 @@ void test2_space_check_object() {
   space_destroy(s);
 }
 
+/** Test function for space_check_object setting */
 void test3_space_check_object() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_check_object(s, 30) == FALSE);
 }
 
+/** Test function for space_get_north setting */
 void test1_space_get_north() {
   Space *s;
   s = space_create(5);
@@ -221,11 +239,13 @@ void test1_space_get_north() {
   space_destroy(s);
 }
 
+/** Test function for space_get_north setting */
 void test2_space_get_north() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_get_north(s) == NO_ID);
 }
 
+/** Test function for space_get_south setting */
 void test1_space_get_south() {
   Space *s;
   s = space_create(5);
@@ -234,11 +254,13 @@ void test1_space_get_south() {
   space_destroy(s);
 }
 
+/** Test function for space_get_south setting */
 void test2_space_get_south() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_get_south(s) == NO_ID);
 }
 
+/** Test function for space_get_east setting */
 void test1_space_get_east() {
   Space *s;
   s = space_create(5);
@@ -247,11 +269,13 @@ void test1_space_get_east() {
   space_destroy(s);
 }
 
+/** Test function for space_get_east setting */
 void test2_space_get_east() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_get_east(s) == NO_ID);
 }
 
+/** Test function for space_get_west setting */
 void test1_space_get_west() {
   Space *s;
   s = space_create(5);
@@ -260,12 +284,13 @@ void test1_space_get_west() {
   space_destroy(s);
 }
 
+/** Test function for space_get_west setting */
 void test2_space_get_west() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_get_west(s) == NO_ID);
 }
 
-
+/** Test function for space_get_object_id setting */
 void test1_space_get_object_id() {
   Space *s;
   s = space_create(25);
@@ -274,26 +299,35 @@ void test1_space_get_object_id() {
   space_destroy(s);
 }
 
+/** Test function for space_get_object_id setting */
 void test2_space_get_object_id() {
   Space *s = NULL;
   PRINT_TEST_RESULT(space_get_object_id(s, 0) == NO_ID);
 }
+
+/** Test function for space_set_object setting */
 void test1_space_set_object(){
   Space *s;
   s=space_create(5);
   PRINT_TEST_RESULT(space_set_object(s, 4)==OK);
   space_destroy(s);
 }
+
+/** Test function for space_set_object setting */
 void test2_space_set_object(){
   Space *s=NULL;
   PRINT_TEST_RESULT(space_set_object(s, 4)==ERROR);
 }
+
+/** Test function for space_set_object setting */
 void test3_space_set_object(){
   Space *s;
   s=space_create(5);
   PRINT_TEST_RESULT(space_set_object(s, NO_ID)==ERROR);
   space_destroy(s);
 }
+
+/** Test function for space_del_object setting */
 void test1_space_del_object(){
   Space *s;
   s=space_create(5);
@@ -301,6 +335,8 @@ void test1_space_del_object(){
   PRINT_TEST_RESULT(space_del_object(s, 3)==OK);
   space_destroy(s);
 }
+
+/** Test function for space_del_object setting */
 void test2_space_del_object(){
   Space *s;
   s=space_create(5);
@@ -308,10 +344,14 @@ void test2_space_del_object(){
   PRINT_TEST_RESULT(space_del_object(s, 2)==ERROR);
   space_destroy(s);
 }
+
+/** Test function for space_del_object setting */
 void test3_space_del_object(){
   Space *s=NULL;
   PRINT_TEST_RESULT(space_del_object(s, 3)==ERROR);
 }
+
+/** Test function for space_del_object setting */
 void test4_space_del_object(){
   Space *s;
   s=space_create(5);
@@ -319,16 +359,21 @@ void test4_space_del_object(){
   space_destroy(s);
 }
 
+/** Test function for space_set_character setting */
 void test1_space_set_character(){
   Space *s;
   s=space_create(5);
   PRINT_TEST_RESULT(space_set_character(s, 4)==OK);
   space_destroy(s);
 }
+
+/** Test function for space_set_character setting */
 void test2_space_set_character(){
   Space *s=NULL;
   PRINT_TEST_RESULT(space_set_character(s, 4)==ERROR);
 }
+
+/** Test function for space_set_character setting */
 void test3_space_set_character(){
   Space *s=NULL;
   s=space_create(4);
@@ -336,6 +381,7 @@ void test3_space_set_character(){
   space_destroy(s);
 }
 
+/** Test function for space_get_character setting */
 void test1_space_get_character(){
   Space *s;
   s=space_create(5);
@@ -343,35 +389,49 @@ void test1_space_get_character(){
   PRINT_TEST_RESULT(space_get_character(s)==4);
   space_destroy(s);
 }
+
+/** Test function for space_get_character setting */
 void test2_space_get_character(){
   Space *s=NULL;
   PRINT_TEST_RESULT(space_get_character(s)==NO_ID);
 }
+
+/** Test function for space_destroy setting */
 void test1_space_destroy(){
   Space *s;
   s=space_create(5);
   PRINT_TEST_RESULT(space_destroy(s)==OK);
 }
+
+/** Test function for space_destroy setting */
 void test2_space_destroy(){
   Space *s=NULL;
   PRINT_TEST_RESULT(space_destroy(s)==ERROR);
 }
+
+/** Test function for space_print setting */
 void test1_space_print(){
   Space *s;
   s=space_create(4);
   PRINT_TEST_RESULT(space_print(s)==OK);
   space_destroy(s);
 }
+
+/** Test function for space_print setting */
 void test2_space_print(){
   Space *s=NULL;
   PRINT_TEST_RESULT(space_print(s)==ERROR);
 }
+
+/** Test function for space_get_objects setting */
 void test1_space_get_objects(){
   Space *s;
   s=space_create(4);
   PRINT_TEST_RESULT(space_get_objects(s)!=NULL);
   space_destroy(s);
 }
+
+/** Test function for space_get_objects setting */
 void test2_space_get_objects(){
   Space *s=NULL;
   PRINT_TEST_RESULT(space_get_objects(s)==NULL);
