@@ -15,7 +15,7 @@
 #include <string.h>
 
 /*game_reader_load_spaces downloads the spaces defined in a file
-*/
+ */
 Status game_reader_load_spaces(Game *game, char *filename)
 {
   /*Initialization of the variables*/

@@ -31,7 +31,7 @@ struct _Command{
 };
 
 
-char *cmd_to_str[N_CMD][N_CMDT] = {{"", "No command"}, {"", "Unknown"}, {"e", "Exit"}, {"n", "Next"}, {"b", "Back"}, {"t", "Take"}, {"d", "Drop"}, {"l", "Left"}, {"r", "Rigth"}, {"a", "Attack"}, {"c", "Chat"}};
+char *cmd_to_str[N_CMD][N_CMDT] = {{"", "No command"}, {"", "Unknown"}, {"e", "Exit"}, {"n", "Next"}, {"b", "Back"}, {"t", "Take"}, {"d", "Drop"}, {"l", "Left"}, {"r", "Right"}, {"a", "Attack"}, {"c", "Chat"}};
 
 /*command_create creates the structure of command initializing its members*/
 Command * command_create(){

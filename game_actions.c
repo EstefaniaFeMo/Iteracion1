@@ -94,15 +94,15 @@ Status game_actions_drop(Game *game);
 Status game_actions_left(Game *game);
 
 /**
- * @brief recives a pointer to Game in the case that the command that the function that calls this one is rigth,
- * and calls to a function that reads which is the space located at the rigth and sends the player there.
+ * @brief recives a pointer to Game in the case that the command that the function that calls this one is right,
+ * and calls to a function that reads which is the space located at the right and sends the player there.
  * @author Carmen Gómez Escobar
  *
  * @param game a pointer to the struct called Game.
  * @return OK, if everything goes well or ERROR in case there was some mistake
  */
 
-Status game_actions_rigth(Game *game);
+Status game_actions_right(Game *game);
 
 /**
  * @brief recives a pointer to Game in the case that the command that the function that calls this one is attack,
@@ -138,8 +138,8 @@ Status game_actions_update(Game *game, Command *command)
   CommandNum cmd = command_get_cmd(command);
   char *args = command_get_args(command);
   char *token = NULL;
-  Bool take_arg;
-  Status cmd_status;
+  Bool take_arg = FALSE;
+  Status cmd_status = ERROR;
 
   switch (cmd)
   {
@@ -148,7 +148,6 @@ Status game_actions_update(Game *game, Command *command)
     break;
 
   case EXIT:
-    game_set_finished(game, TRUE);
     cmd_status = game_actions_exit(game);
     break;
 
@@ -195,8 +194,8 @@ Status game_actions_update(Game *game, Command *command)
     cmd_status = game_actions_left(game);
     break;
 
-  case RIGTH:
-    cmd_status = game_actions_rigth(game);
+  case RIGHT:
+    cmd_status = game_actions_right(game);
     break;
 
   case ATTACK:
@@ -225,7 +224,9 @@ Status game_actions_unknown(Game *game) { return OK; }
 
 /** game_actions_exit recives a pointer to Game in the case that the command that the function that calls this one is exit.
  */
-Status game_actions_exit(Game *game) { return OK; }
+Status game_actions_exit(Game *game) { 
+  game_set_finished(game, TRUE);
+  return OK; }
 
 /** game_actions_next recives a pointer to Game in the case that the command that the function that calls this one is next,
  * and calls to a function that reads which is the sapce below and sends the player there.
@@ -286,7 +287,7 @@ Status game_actions_take(Game *game, Id object)
     return ERROR;
   }
   
-  if(player_get_object(game->player) != NO_ID){
+  if(player_get_object(game_get_player(game)) != NO_ID){
     return ERROR;
   }
 
@@ -298,7 +299,7 @@ Status game_actions_take(Game *game, Id object)
     return ERROR;
   }
 
-  player_set_object(game->player, object);
+  player_set_object(game_get_player(game), object);
   space_del_object(s, object);
 
   return OK;
@@ -307,7 +308,7 @@ Status game_actions_take(Game *game, Id object)
 Status game_actions_drop(Game *game)
 {
   Id player_location = game_get_player_location(game);
-  Id object = player_get_object(game->player);
+  Id object = player_get_object(game_get_player(game));
   if (object == NO_ID)
   {
     return ERROR;
@@ -316,7 +317,7 @@ Status game_actions_drop(Game *game)
   {
     return ERROR;
   }
-  player_set_object(game->player, NO_ID);
+  player_set_object(game_get_player(game), NO_ID);
 
   return OK;
 }
@@ -346,9 +347,9 @@ Status game_actions_left(Game *game)
   return OK;
 }
 
-/** game_actions_rigth recives a pointer to Game in the case that the command that the function that calls this one is rigth,
- * and calls to a function that reads which is the space located at the rigth and sends the player there.*/
-Status game_actions_rigth(Game *game)
+/** game_actions_right recives a pointer to Game in the case that the command that the function that calls this one is right,
+ * and calls to a function that reads which is the space located at the right and sends the player there.*/
+Status game_actions_right(Game *game)
 {
   Id current_id = NO_ID;
   Id space_id = NO_ID;
@@ -399,18 +400,18 @@ Status game_actions_attack(Game *game)
     if(character_get_friendly(c) == FALSE){
 
       num= rand() % (MAX_RAND - MIN_RAND + 1) + MIN_RAND;
-      if (num < 1)
+      if (num < 5)
       {
-        player_set_health(game->player, player_get_health(game->player) - 1);
+        player_set_health(game_get_player(game), player_get_health(game_get_player(game)) - 1);
       }
-      else if (num >= 1)
+      else if (num >= 5)
       {
         character_set_health(c, character_get_health(c) - 1);
       }
     }
   }
 
-  if(player_get_health(game->player) <= 0)
+  if(player_get_health(game_get_player(game)) <= 0)
   {
     game_set_finished(game, TRUE);
   }

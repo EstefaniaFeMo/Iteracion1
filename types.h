@@ -21,7 +21,6 @@
  */
 #define NO_ID -1
 
-#define SCREEN_LIMIT 15
 /**
  * @brief Declaration of the type of ID
  */

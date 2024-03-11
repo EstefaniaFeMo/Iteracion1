@@ -43,7 +43,7 @@ typedef enum
     TAKE,
     DROP, 
     LEFT, 
-    RIGTH,
+    RIGHT,
     ATTACK,
     CHAT
 } CommandNum;
@@ -68,7 +68,7 @@ Command * command_create();
 Command *command_get_user_input();
 
 /**
- * @brief  It gest the type of command of the list.
+ * @brief  It gets the type of command of the list.
  * @author Estefanía Fenoy Montes
  * @param command the command structure with its information.
  * @return  command->cmd, the command of the list of commands that will be executed.
@@ -76,7 +76,7 @@ Command *command_get_user_input();
 CommandNum command_get_cmd(Command *command);
 
 /**
- * @brief  It gest the argument which goes with command of the list.
+ * @brief  It gets the argument which goes with command of the list.
  * @author Estefanía Fenoy Montes
  * @param command the command structure with its information.
  * @return  command->args, the argument that goes with the cmd.
@@ -84,10 +84,10 @@ CommandNum command_get_cmd(Command *command);
 char* command_get_args(Command* command);
 
 /**
- * @brief  It gest the status of the command of the list to indicate whether or not it will be excuted.
+ * @brief  It gets the status of the command of the list to indicate whether or not it will be excuted.
  * @author Estefanía Fenoy Montes
  * @param command the command structure with its information.
- * @return  command->stuts, the status of the command if it is ERROR the cmd won't be executed otherwisi it is OK it will be executed.
+ * @return  command->status, the status of the command if it is ERROR the cmd won't be executed otherwise it is OK it will be executed.
  */
 Status command_get_cmd_status(Command *command);
 /**

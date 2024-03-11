@@ -16,6 +16,9 @@
 
 #define MAX_STRING 255 /*!<Indicates the maximum number of characters*/
 
+#define SCREEN_LIMIT 15 /*!<Indicates the maximum number of chars that fits in the area */
+
+#define THREE_DIGITS 100/*!<Indicates the first number of 3 digits*/
 /**
  * @brief Graphic_engine
  *

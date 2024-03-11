@@ -164,6 +164,8 @@ Status game_set_object_location(Game *game, Id space, Id object);
  */
 Character *game_get_character(Game *game, Id id);
 
+Id game_get_character_id_at(Game *game, int position);
+
 /**
  * @brief The function returns the Id of the space in which is the given character
  * @author Estefanía Fenoy Montes
@@ -173,6 +175,8 @@ Character *game_get_character(Game *game, Id id);
  * @return the id of the space in which the given character is
  */
 Id game_get_character_location(Game *game, Id character);
+
+int game_get_n_characters(Game *game);
 
 /**
  * @brief It sets the given character in the given space
