@@ -2,7 +2,7 @@
  * @brief It defines the game loop
  *
  * @file game_loop.c
- * @author Profesores PPROG, Carmen Gómez Escobar
+ * @author Profesores PPROG, Carmen Gómez Escobar, Estefanía Fenoy Montes
  * @version 3.5
  * @date 07-02-2024
  * @copyright GNU Public License
@@ -20,7 +20,7 @@
 /**
  * @brief It starts the game, this function checks if the file has been read correctly and if the memory reserve of the pointer
  *  gengine has been done and if everything worked, the game starts.
- * @author Profesores PPROG, Carmen Gómez Escobar
+ * @author Profesores PPROG
  *
  * @param game a pointer to the struct called Game.
  * @param gengine a matix to the structure Graphic_engine.
@@ -33,7 +33,7 @@ int game_loop_init(Game *game, Graphic_engine **gengine, char *file_name);
 /**
  * @brief It is the loop that makes the game keep going until the exit command is recived by the user input or tha function that
  *  indicates that the game is finished returns a TRUE value.
- * @author Profesores PPROG, Carmen Gómez Escobar
+ * @author Estefanía Fenoy Montes
  *
  * @param game a type Game variable.
  * @param gengine a pointer to Graphic_engine.
@@ -42,7 +42,7 @@ void game_loop_run(Game game, Graphic_engine *gengine);
 
 /**
  * @brief It is the function that ends the game, calling to the functions that destroy the spaces and the structures.
- * @author Profesores PPROG, Carmen Gómez Escobar
+ * @author Profesores PPROG
  *
  * @param game a type Game variable.
  * @param gengine a pointer to Graphic_engine.

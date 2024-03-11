@@ -20,15 +20,13 @@
 
 
 #define MAX_SPACES 100 /*!<Macro with the maximum number of spaces*/
-
-#define ID_PLAYER 0 /*!<Macro with the id of player */
-#define ID_OBJECT 0 /*!<Macro with the id of the object when it is initialized*/
+#define ID_PLAYER 0 /*!<Macro with the id of the player when it is initialized*/
 #define ID_CHARACTER1 0 /*!<Macro with the id of the character when it is initialized*/
 #define ID_CHARACTER2 1 /*!<Macro with the id of the character when it is initialized*/
 #define LOC_CHARACTER1 122 /*!<Macro with the location of the character when it is initialized*/
 #define LOC_CHARACTER2 13 /*!<Macro with the location of the character when it is initialized*/
 
-#define MAX_OBJECTS 5 /*!<Macro with the maximum number of objects*/
+#define MAX_OBJECTS 7 /*!<Macro with the maximum number of objects*/
 
 #define MAX_CHARACTERS 2 /*!<Macro with the maximum number of players*/
 
@@ -161,14 +159,11 @@ Id game_get_object_location(Game *game, Id object);
 Status game_set_object_location(Game *game, Id space, Id object);
 
 /**
- * @brief It gets as arguments the current game session and an ID, which is used to get the position
- * of the ID. First, it checks if the given ID is initialized but not set, if this is the case returns NULL.
- * If not, it compares every characters ID from the array game->characters[] with the given ID. In case it matches,
- * the function returns the value of the characters. If the ID doesn't match with any ID, returns NULL.
- * @author Profesores PPROG
+ * @brief It gets the character of the game by the given ID
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct that contains the information of the current game session
- * @param id the id that will be searched
+ * @param id the identifier of the character we want to get
  * @return NULL if the ID is not declared, or doesn't match with any of the ID of the characters. 
  * @return game->characters[i] if the characters[i] ID match with the given ID.
  */
@@ -176,7 +171,7 @@ Character *game_get_character(Game *game, Id id);
 
 /**
  * @brief It gives the ID of the character of the given position
- * @author Estefanía Fenoy
+ * @author Estefanía Fenoy Montes
  *
  * @param game a pointer to the struct, Game and it uses it to get access to the game->spaces IDs
  * @param position the position in which the character that we want to get the id is
@@ -194,7 +189,23 @@ Id game_get_character_id_at(Game *game, int position);
  */
 Id game_get_character_location(Game *game, Id character);
 
+/**
+ * @brief It obtains the number of characters that are in the current game session
+ * @author Estefanía Fenoy Montes
+ *
+ * @param game a pointer to the struct that contains the information of the current game session 
+ * @return game->n_character an int with the number of characters
+ */
 int game_get_n_characters(Game *game);
+
+/**
+ * @brief It obtains the number of objects that are in the current game session
+ * @author Estefanía Fenoy Montes
+ *
+ * @param game a pointer to the struct that contains the information of the current game session 
+ * @return game->n_objects an int with the number of objects
+ */
+int game_get_n_objects(Game *game);
 
 /**
  * @brief It sets the given character in the given space

@@ -396,7 +396,7 @@ Status game_actions_attack(Game *game)
 
     if(character_get_friendly(c) == FALSE){
 
-      num= rand() % (MAX_RAND - MIN_RAND + 1) + MIN_RAND;
+      num= rand() % ((MAX_RAND - MIN_RAND + 1) + MIN_RAND);
       if (num < 5)
       {
         player_set_health(game_get_player(game), player_get_health(game_get_player(game)) - 1);

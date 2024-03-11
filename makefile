@@ -1,6 +1,6 @@
 EXE=anthill
 
-CFLAGS=-Wall -ansi -pedantic -g -DDEBUG
+CFLAGS=-Wall -ansi -pedantic -g -DDEBUG 
 
 CC=gcc
 
@@ -21,28 +21,27 @@ set_test: set_test.o set.o
 
 character_test: character_test.o character.o
 	$(CC) -o $@ $^
-
 #...............................................................................................#
 
-game_loop.o: game_loop.c command.h game.h space.h types.h game_actions.h graphic_engine.h object.h player.h game_reader.h
+game_loop.o: game_loop.c command.h types.h game.h space.h set.h object.h player.h character.h game_actions.h graphic_engine.h
 	$(CC) $(CFLAGS) -c $<
 
-command.o: command.c command.h
+command.o: command.c command.h types.h
 	$(CC) $(CFLAGS) -c $<
 
-game.o: game.c game.h game_reader.h command.h space.h types.h object.h player.h
+game.o: game.c game.h command.h types.h space.h set.h object.h player.h character.h game_reader.h
 	$(CC) $(CFLAGS) -c $<
 
-game_actions.o: game_actions.c game_actions.h command.h game.h space.h types.h object.h player.h game_reader.h
+game_actions.o: game_actions.c game_actions.h command.h types.h game.h space.h set.h object.h player.h character.h
 	$(CC) $(CFLAGS) -c $<
 
-graphic_engine.o: graphic_engine.c graphic_engine.h game.h command.h space.h types.h libscreen.h object.h player.h game_reader.h set.h
+graphic_engine.o: graphic_engine.c graphic_engine.h game.h command.h types.h space.h set.h object.h player.h character.h libscreen.h
 	$(CC) $(CFLAGS) -c $<
 
 space.o: space.c space.h types.h set.h
 	$(CC) $(CFLAGS) -c $<
 
-game_reader.o: game_reader.c game_reader.h game.h types.h command.h space.h object.h player.h
+game_reader.o: game_reader.c game_reader.h game.h command.h types.h space.h set.h object.h player.h character.h
 	$(CC) $(CFLAGS) -c $<
 
 object.o: object.c object.h types.h
@@ -54,16 +53,16 @@ player.o: player.c player.h types.h
 character.o: character.c character.h types.h
 	$(CC) $(CFLAGS) -c $<
 
-space_test.o: space_test.c space_test.h test.h space.h types.h set.h
+space_test.o: space_test.c space.h types.h set.h space_test.h test.h
 	$(CC) $(CFLAGS) -c $<
 
 set.o: set.c set.h types.h
 	$(CC) $(CFLAGS) -c $<
 
-set_test.o: set_test.c set_test.h test.h set.h types.h
+set_test.o: set_test.c set.h types.h set_test.h test.h
 	$(CC) $(CFLAGS) -c $<
 
-character_test.o: character_test.c character_test.h test.h types.h
+character_test.o: character_test.c character.h types.h character_test.h test.h
 	$(CC) $(CFLAGS) -c $<
 #...............................................................................................#
 clean_objects:

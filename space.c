@@ -4,7 +4,7 @@
  * @file space.c
  * @author Profesores PPROG, Estefanía Fenoy Montes, Carmen Gómez Escobar
  * @version 3.5
- * @date 26-01-2024
+ * @date 04-03-2024
  * @copyright GNU Public License
  */
 

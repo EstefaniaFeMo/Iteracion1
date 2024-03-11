@@ -4,7 +4,7 @@
  * @file space.h
  * @author Profesores PPROG, Estefanía Fenoy Montes
  * @version 3.5
- * @date 12-02-2024
+ * @date 04-03-2024
  * @copyright GNU Public License
  */
 
@@ -141,7 +141,7 @@ Id space_get_west(Space *space);
 
 /**
  * @brief It sets the ID of an object in the set of objects of space
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param space a pointer to the space
  * @param object an identifier of the object that will be added in the set of objects of space
@@ -151,7 +151,7 @@ Status space_set_object(Space *space, Id object);
 
 /**
  * @brief It deletes the ID of an object in the set of objects of space
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param space a pointer to the space
  * @param object an identifier of the object that will be deleted in the set of objects of space
@@ -161,7 +161,7 @@ Status space_del_object(Space *space, Id object);
 
 /**
  * @brief It obtains the set of objets in the given space
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param space a pointer to the space
  * @return space->objects, the set of objects in the space
@@ -171,7 +171,7 @@ Set *space_get_objects(Space *space);
 /**
  * @brief It sets the ID of a particular object which is in the set of objects of the given space
  * by its position
- * @author Profesores PPROG, Estefanía Fenoy Montes
+ * @author Estefanía Fenoy Montes
  *
  * @param space a pointer to the space
  * @param position an int that indicates the position in the array of objects of the given space
@@ -207,11 +207,11 @@ Status space_set_character(Space *space, Id character);
  * @return OK, if everything goes well or ERROR if there was some mistake
  */
 Status space_print(Space *space);
+
 /**
  * @brief It checks if the given object is in the given space
  * @author Estefanía Fenoy Montes
  *
- * 
  * @param space a pointer to the space
  * @param object the identifier of the object that will be checked if it is in the space
  * @return TRUE, if the given object is in the space, FALSE in case of error or if the object is not 

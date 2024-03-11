@@ -149,7 +149,7 @@ Id player_get_object(Player *player)
     }
     return player->object;
 }
-
+/** player_set_health sets the health of the player*/
 Status player_set_health(Player *player, int health)
 {
     if(!player || health<0){
@@ -159,6 +159,7 @@ Status player_set_health(Player *player, int health)
     return OK;
 }
 
+/** player_get_health gets the health of the player.*/
 int player_get_health(Player *player)
 {
     if(!player){

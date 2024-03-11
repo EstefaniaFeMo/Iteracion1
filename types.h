@@ -4,22 +4,18 @@
  * @file types.h
  * @author Profesores PPROG, Estefanía Fenoy Montes, Carmen Gómez Escobar
  * @version 3.5
- * @date 06-02-2024
+ * @date 22-02-2024
  * @copyright GNU Public License
  */
 
 #ifndef TYPES_H
 #define TYPES_H
 
-/**
- * @brief Maximum size allowed for a word
- */
-#define WORD_SIZE 1000
 
-/**
- * @brief Default ID
- */
-#define NO_ID -1
+#define WORD_SIZE 1000 /*!<Macro with the maximum size allowed for a word*/
+
+
+#define NO_ID -1 /*!<Macro with the default ID*/
 
 /**
  * @brief Declaration of the type of ID

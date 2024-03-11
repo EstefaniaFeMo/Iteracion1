@@ -72,7 +72,7 @@ Status game_create_from_file(Game *game, char *filename)
     return ERROR;
   }
 
-  /* Creates the player, all the objects and the characters with the id 0 */
+  /* Creates the player with the id 0 */
   game->player = player_create(ID_PLAYER);
 
   if (game->player == NULL)
@@ -80,7 +80,7 @@ Status game_create_from_file(Game *game, char *filename)
     return ERROR;
   }
 
-  /*Puede que haya que verlo en función de lo que se haga en gamer_reader*/
+  
   if (game->n_characters <= MAX_CHARACTERS)
   {
     game->characters[game->n_characters] = game_create_predesigned_characters(game, LOC_CHARACTER1, TRUE, ID_CHARACTER1, "Ant", "Hi ant!");
@@ -138,21 +138,21 @@ Space *game_get_space(Game *game, Id id)
   return NULL;
 }
 
-/*game_get_player returns a pionter to the player
+/**game_get_player returns a pionter to the player
  */
 Player *game_get_player(Game *game)
 {
   return game->player;
 }
 
-/*game_get_player_location returns the value of the variable player_location of the current game
+/**game_get_player_location returns the value of the variable player_location of the current game
  */
 Id game_get_player_location(Game *game)
 {
   return player_get_location(game->player);
 }
 
-/*game_set_player_location sets the value of the variable player_location with the given ID.
+/**game_set_player_location sets the value of the variable player_location with the given ID.
  */
 Status game_set_player_location(Game *game, Id id)
 {
@@ -170,15 +170,15 @@ Status game_set_player_location(Game *game, Id id)
   return OK;
 }
 
-/*game_get_object_at gets an object of the array of object of the game session by its position*/
+/**game_get_object_at gets an object of the array of object of the game session by its position*/
 Object * game_get_object_at(Game *game, int position){
-  if(position<=0 || position>=game->n_objects){
+  if(position<0 || position>=game->n_objects){
     return NULL;
   }
   return game->objects[position];
 }
 
-/*game_get_object_location returns the value of the ID location of a given object in the current game
+/**game_get_object_location returns the value of the ID location of a given object in the current game
  */
 Id game_get_object_location(Game *game, Id object)
 {
@@ -239,7 +239,7 @@ Character *game_get_character(Game *game, Id id)
   /*If the ID is not equal to any space, return NULL*/
   return NULL;
 }
-
+/*game_get_character_id_at gets the identifier of the character by its position*/
 Id game_get_character_id_at(Game *game, int position)
 {
   /*Error control*/
@@ -270,7 +270,11 @@ Id game_get_character_location(Game *game, Id character)
   return NO_ID;
 }
 
+/*game_get_n_character gets the number of character that are in the current game session*/
 int game_get_n_characters(Game *game){return game->n_characters;}
+
+/*game_get_n_objects gets the number of character that are in the current game session*/
+int game_get_n_objects(Game *game){return game->n_objects;}
 
 /*game_set_character_location sets the value of the variable character_location with the given ID in the given space.
  */
@@ -388,6 +392,7 @@ Status game_add_object(Game *game, Object *object)
 {
   if (game->objects == NULL || game->n_objects < 0 || game->n_objects >= MAX_OBJECTS)
   {
+    object_destroy(object);
     return ERROR;
   }
 

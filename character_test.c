@@ -17,7 +17,7 @@
 #include "character_test.h"
 #include "test.h"
 
-#define MAX_TESTS 28
+#define MAX_TESTS 28 /*!<Macro with the maximum number of tests*/
 
 /**
  * @brief Main function for CHARACTER unit tests.

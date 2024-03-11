@@ -2,7 +2,7 @@
  * @brief It defines a textual graphic engine
  *
  * @file graphic_engine.c
- * @author Profesores PPROG, Carmen Gómez Escobar
+ * @author Profesores PPROG, Carmen Gómez Escobar, Estefanía Fenoy Montes
  * @version 3.5
  * @date 07-02-2024
  * @copyright GNU Public License
@@ -19,13 +19,13 @@
 #include "space.h"
 #include "types.h"
 
-#define WIDTH_MAP 48
-#define WIDTH_DES 29
-#define WIDTH_BAN 23
-#define HEIGHT_MAP 15
-#define HEIGHT_BAN 1
-#define HEIGHT_HLP 2
-#define HEIGHT_FDB 3
+#define WIDTH_MAP 48 /*!<Macro that indicates the gaps of the width of the map in which the path is*/
+#define WIDTH_DES 29 /*!<Macro that indicates the gaps of the width of the description*/
+#define WIDTH_BAN 23 /*!<Macro that indicates the gaps of the width of the banner*/
+#define HEIGHT_MAP 15 /*!<Macro that indicates the gaps of the height of the map in which the path is*/
+#define HEIGHT_BAN 1 /*!<Macro that indicates the gaps of the height of the banner*/
+#define HEIGHT_HLP 2 /*!<Macro that indicates the gaps of the height of the help*/
+#define HEIGHT_FDB 3 /*!<Macro that indicates the gaps of the height of the feedback*/
 
 /**
  * @brief Graphic_engine
@@ -35,11 +35,11 @@
  */
 struct _Graphic_engine
 {
-  Area *map, *descript, *banner, *help, *feedback;
+  Area *map, *descript, *banner, *help, *feedback; /*!<Pointers to the different areas of the graphic game*/
 };
 
-/** graphic_engine_create reserves di¡ynamic memeory for the structure called Graphic_engine if it hasn't been previously done
- *  it also reserves dynamic memory for the variables contained in it such as map, descript, banner, help and feedback
+/** graphic_engine_create reserves dynamic memeory for the structure called Graphic_engine if it hasn't been previously done
+ *  it also reserves dynamic memory for the variables contained on it such as map, descript, banner, help and feedback
  */
 Graphic_engine *graphic_engine_create()
 {
@@ -66,7 +66,7 @@ Graphic_engine *graphic_engine_create()
   return ge;
 }
 
-/** graphic_engine_destroy checks if the dynamic memory reserve has been done correctly, and if not, destroys al the areas
+/** graphic_engine_destroy checks if the dynamic memory reserve has been done correctly, and if it's been done, destroys al the areas
  *  and frees the memory of the structure
  */
 void graphic_engine_destroy(Graphic_engine *ge)
@@ -88,8 +88,8 @@ void graphic_engine_destroy(Graphic_engine *ge)
  */
 void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 {
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, obj_loc = NO_ID, char_loc = NO_ID;
-  int i, blankcounter, hp;
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID;
+  int i;
   Space *space_act = NULL;
   char *obj, *charac;
   char str[MAX_STRING];
@@ -120,11 +120,11 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
       {
         if ((int)id_back >= THREE_DIGITS)
         {
-          sprintf(str, "<< | m0^  %s%2d|", charac, (int)id_back);
+          sprintf(str, "<< |      %s%2d|", charac, (int)id_back);
         }
         else
         {
-          sprintf(str, "<< | m0^  %s %2d|", charac, (int)id_back);
+          sprintf(str, "<< |     %s %2d|", charac, (int)id_back);
         }
       }
       else if (space_get_east(game_get_space(game, id_back)) != NO_ID && space_get_west(game_get_space(game, id_back)) == NO_ID)
@@ -142,11 +142,11 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
       {
         if ((int)id_back >= THREE_DIGITS)
         {
-          sprintf(str, "<< |     %s%2d| >>", charac, (int)id_back);
+          sprintf(str, "<< |      %s%2d| >>", charac, (int)id_back);
         }
         else
         {
-          sprintf(str, "<< |     %s %2d| >>", charac, (int)id_back);
+          sprintf(str, "<< |      %s %2d| >>", charac, (int)id_back);
         }
       }
       else if (space_get_east(game_get_space(game, id_back)) == NO_ID && space_get_west(game_get_space(game, id_back)) == NO_ID)
@@ -171,6 +171,10 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
       screen_area_puts(ge->map, str);
       free(charac);
       free(obj);
+    }else{
+      for(i = 0; i<SCREEN_CENTER; i++){
+        screen_area_puts(ge->map, " ");
+      }
     }
 
     if (id_act != NO_ID)
@@ -273,7 +277,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
         }
         else
         {
-          sprintf(str, "   |     %s %2d| >>", charac, (int)id_next);
+          sprintf(str, "   |      %s %2d| >>", charac, (int)id_next);
         }
       }
       else if (space_get_east(game_get_space(game, id_next)) != NO_ID && space_get_west(game_get_space(game, id_next)) != NO_ID)
@@ -284,7 +288,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
         }
         else
         {
-          sprintf(str, "<< |     %s %2d| >>", charac, (int)id_next);
+          sprintf(str, "<< |      %s %2d| >>", charac, (int)id_next);
         }
       }
       else if (space_get_east(game_get_space(game, id_next)) == NO_ID && space_get_west(game_get_space(game, id_next)) == NO_ID)
@@ -310,65 +314,14 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
 
   /* Paint in the description area */
   screen_area_clear(ge->descript);
-
+  if(game_get_player(game) != NULL){
   sprintf(str, "  Objects:");
   screen_area_puts(ge->descript, str);
-
-  for (i = blankcounter = 0; i < MAX_OBJECTS; i++)
-  {
-    if ((obj_loc = game_get_object_location(game, object_get_id(game_get_object_at(game, i)))) != NO_ID)
-    {
-      blankcounter++;
-      sprintf(str, "    O%d: %d", (int)object_get_id(game_get_object_at(game, i)), (int)obj_loc);
-      screen_area_puts(ge->descript, str);
-    }
-  }
-  for (i = 0; i < MAX_OBJECTS - blankcounter; i++)
-  {
-    screen_area_puts(ge->descript, " ");
-  }
+  graphic_engine_print_object_desc(game, ge);
 
   sprintf(str, "  Characters:");
   screen_area_puts(ge->descript, str);
-
-  for (i = blankcounter = 0; i < game_get_n_characters(game); i++)
-  {
-    if ((char_loc = game_get_character_location(game, game_get_character_id_at(game, i))) != NO_ID)
-    {
-      blankcounter++;
-      hp = character_get_health(game_get_character(game, game_get_character_id_at(game, i)));
-      if (character_get_friendly(game_get_character(game, game_get_character_id_at(game, i))) == TRUE)
-      {
-        if (hp <= 0)
-        {
-          sprintf(str, "     ^0m  : %d (DEAD)", (int)char_loc);
-        }
-        else
-        {
-          sprintf(str, "     ^0m  : %d (%d)", (int)char_loc, hp);
-        }
-        screen_area_puts(ge->descript, str);
-      }
-      else if (character_get_friendly(game_get_character(game, game_get_character_id_at(game, i))) == FALSE)
-      {
-        if (hp <= 0)
-        {
-          sprintf(str, "     /\\oo/\\: %d (DEAD)", (int)char_loc);
-        }
-        else
-        {
-          sprintf(str, "     /\\oo/\\: %d (%d)", (int)char_loc, hp);
-        }
-        screen_area_puts(ge->descript, str);
-      }
-    }
-  }
-
-  for (i = 0; i < MAX_CHARACTERS - blankcounter; i++)
-  {
-    screen_area_puts(ge->descript, " ");
-  }
-  screen_area_puts(ge->descript, " ");
+  graphic_engine_print_character_desc(game, ge);
 
   if ((id_act = game_get_player_location(game)) != NO_ID)
   {
@@ -433,7 +386,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
   if (game_get_finished(game) == FALSE)
     printf("prompt:> ");
 }
-
+}
 /* graphic_engine_print_objects paints all the objects in a determinated space
  */
 char *graphic_engine_print_objects(Set *set)
@@ -548,4 +501,86 @@ char *graphic_engine_print_characters(Game *game, Id id_location)
     }
   }
   return print;
+}
+
+/* graphic_engine_print_object_desc prints all the objects in the description area
+ */
+void graphic_engine_print_object_desc(Game *game, Graphic_engine *ge){
+  int i, blank_counter, objs_at_map;
+  Id obj_loc = NO_ID;
+  char str[MAX_STRING];
+
+  for (i = blank_counter = objs_at_map = 0; i < game_get_n_objects(game); i++)
+  {
+    if ((obj_loc = game_get_object_location(game, object_get_id(game_get_object_at(game, i)))) != NO_ID)
+    {
+      objs_at_map++;
+      if (blank_counter < MAX_OBJECTS_DESC - 1)
+      {
+        blank_counter++;
+        sprintf(str, "    O%d: %d", (int)object_get_id(game_get_object_at(game, i)), (int)obj_loc);
+        screen_area_puts(ge->descript, str);
+      }
+    }
+  }
+  if(objs_at_map == MAX_OBJECTS_DESC){
+    sprintf(str, "    O%d: %d", (int)object_get_id(game_get_object_at(game, i-1)), (int)obj_loc);
+    screen_area_puts(ge->descript, str);
+    blank_counter++;
+  }else if(objs_at_map > MAX_OBJECTS_DESC){
+    screen_area_puts(ge->descript, "    More...");
+    blank_counter++;
+  }
+
+  for (i = 0; i < MAX_OBJECTS_DESC - blank_counter; i++)
+  {
+    screen_area_puts(ge->descript, " ");
+  }
+}
+
+/* graphic_engine_print_character_desc prints all the characters in the description area
+ */
+void graphic_engine_print_character_desc(Game *game, Graphic_engine *ge){
+  int i, blank_counter, hp;
+  Id char_loc = NO_ID;
+  char str[MAX_STRING];
+
+  for (i = blank_counter = 0; i < game_get_n_characters(game); i++)
+  {
+    if ((char_loc = game_get_character_location(game, game_get_character_id_at(game, i))) != NO_ID)
+    {
+      blank_counter++;
+      hp = character_get_health(game_get_character(game, game_get_character_id_at(game, i)));
+      if (character_get_friendly(game_get_character(game, game_get_character_id_at(game, i))) == TRUE)
+      {
+        if (hp <= 0)
+        {
+          sprintf(str, "     ^0m  : %d (DEAD)", (int)char_loc);
+        }
+        else
+        {
+          sprintf(str, "     ^0m  : %d (%d)", (int)char_loc, hp);
+        }
+        screen_area_puts(ge->descript, str);
+      }
+      else if (character_get_friendly(game_get_character(game, game_get_character_id_at(game, i))) == FALSE)
+      {
+        if (hp <= 0)
+        {
+          sprintf(str, "     /\\oo/\\: %d (DEAD)", (int)char_loc);
+        }
+        else
+        {
+          sprintf(str, "     /\\oo/\\: %d (%d)", (int)char_loc, hp);
+        }
+        screen_area_puts(ge->descript, str);
+      }
+    }
+  }
+
+  for (i = 0; i < MAX_CHARACTERS - blank_counter; i++)
+  {
+    screen_area_puts(ge->descript, " ");
+  }
+  screen_area_puts(ge->descript, " ");
 }

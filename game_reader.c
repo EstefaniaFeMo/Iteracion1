@@ -72,19 +72,25 @@ Status game_reader_load_spaces(Game *game, char *filename)
       }
     }
   }
+  /*Error control of the content of the file*/
+  if(toks==NULL){
+    return ERROR;
+  }
 
   /* Error control of the file */
   if (ferror(file))
   {
     status = ERROR;
   }
+
   /*Close the file*/
   fclose(file);
+
   /*Indicate that the function has worked correctly with OK or if there has been a problem
   returning ERROR*/
   return status;
-}
 
+}
 /*game_reader_load_objects downloads the objects defined in a file */
 Status game_reader_load_objects(Game *game, char *filename)
 {
@@ -120,19 +126,23 @@ Status game_reader_load_objects(Game *game, char *filename)
       strcpy(name, toks);
       toks = strtok(NULL, "|");
       location = atol(toks);
-    }
+    
 #ifdef DEBUG
     printf("Leido: %ld|%s|%ld\n", id, name, location);
 #endif
     /*Create an object with the constructor with the given id*/
     object = object_create(id);
 
-    if (object != NULL)
+    if (object != NULL && game_get_n_objects(game)<MAX_OBJECTS)
     {
       /*Set the values saved on the variables before*/
       object_set_name(object, name);
       game_set_object_location(game, location, id);
       game_add_object(game, object);
+    }
+    else{
+      object_destroy(object);
+    }
     }
   }
 
