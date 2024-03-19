@@ -169,7 +169,7 @@ Status space_del_object(Space *space, Id object);
 Set *space_get_objects(Space *space);
 
 /**
- * @brief It sets the ID of a particular object which is in the set of objects of the given space
+ * @brief It gets the ID of a particular object which is in the set of objects of the given space
  * by its position
  * @author Estefanía Fenoy Montes
  *

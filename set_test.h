@@ -1,6 +1,6 @@
-/**
+/** 
  * @brief It declares the tests for the space module
- *
+ * 
  * @file space_test.h
  * @author Estefanía Fenoy Montes
  * @version 2.0 
@@ -42,8 +42,8 @@ void test2_set_destroy();
 
 /**
  * @test Test function for set_add settings
- * @pre pointer to set and the ID of what is going to be added
- * @post Output== OK
+ * @pre NULL pointer to set
+ * @post Output== ERROR
  */
 void test1_set_add();
 
@@ -56,36 +56,36 @@ void test2_set_add();
 
 /**
  * @test Test function for set_return_id setting
- * @pre pointer to set and the position of the id returned
- * @post Output== 4
+ * @pre NULL pointer to set
+ * @post Output== ERROR
  */
 void test1_set_return_id();
 
 /**
  * @test Test function for set_return_id setting
  * @pre NULL pointer to set
- * @post Output== NO_ID
+ * @post Output== ERROR
  */
 void test2_set_return_id();
 
 /**
  * @test Test function for set_return_id setting
- * @pre pointer to set and invalid position of the id returned
- * @post Output== NO_ID
+ * @pre NULL pointer to set
+ * @post Output== ERROR
  */
 void test3_set_return_id();
 
 /**
  * @test Test function for set_del setting
- * @pre pointer to set and the position of the element which will be deleted
- * @post Output== OK
+ * @pre NULL pointer to set
+ * @post Output== ERROR
  */
 void test1_set_del();
 
 /**
  * @test Test function for set_del setting
- * @pre pointer to set and the position of the element which will be deleted
- * @post Output== OK
+ * @pre NULL pointer to set
+ * @post Output== ERROR
  */
 void test2_set_del();
 
@@ -98,22 +98,22 @@ void test3_set_del();
 
 /**
  * @test Test function for set_del setting
- * @pre pointer to set and an unvalid position of the element which will be deleted
+ * @pre NULL pointer to set
  * @post Output== ERROR
  */
 void test4_set_del();
 
 /**
  * @test Test function for set_check_id setting
- * @pre a pointer to set and a position of it
+ * @pre NULL pointer to set
  * @post Output== ERROR
  */
 void test1_set_check_id();
 
 /**
  * @test Test function for set_check_id setting
- * @pre a pointer to set and anon added position of it
- * @post Output== FALSE
+ * @pre NULL pointer to set
+ * @post Output== ERROR
  */
 void test2_set_check_id();
 
@@ -126,14 +126,14 @@ void test3_set_check_id();
 
 /**
  * @test Test function for set_print setting
- * @pre a pointer to set
- * @post Output== OK
+ * @pre NULL pointer to set
+ * @post Output== ERROR
  */
 void test1_set_print();
 
 /**
  * @test Test function for set_print setting
- * @pre a pointer to set, but empty
+ * @pre NULL pointer to set
  * @post Output== ERROR
  */
 void test2_set_print();
@@ -147,15 +147,15 @@ void test3_set_print();
 
 /**
  * @test Test function for set_get_n_ids setting
- * @pre a pointer to set and an element added in it
- * @post Output== 1
+ * @pre NULL pointer to set
+ * @post Output== ERROR
  */
 void test1_set_get_n_ids();
 
 /**
  * @test Test function for set_get_n_ids setting
  * @pre NULL pointer to set
- * @post Output== -1
+ * @post Output== ERROR
  */
 void test2_set_get_n_ids();
 

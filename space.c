@@ -217,7 +217,7 @@ Status space_del_object(Space *space, Id object)
   }
   return OK;
 }
-/** space_get_object obtains the set of objets in the given space space*/
+/** space_get_object obtains the set of objets in the given space*/
 Set *space_get_objects(Space *space){
   if(!space){
     return NULL;
